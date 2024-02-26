@@ -1,4 +1,4 @@
-import React from 'react'
+
 import './CategorySub.css'
 
 export default function () {
