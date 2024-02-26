@@ -3,6 +3,7 @@ import styles from './PropertyForm.module.css'
 import {  useState } from 'react';
 import { Button } from 'antd';
 import { MdOutlineCheck } from "react-icons/md";
+import MinMAxFormArea from '../MinMAxFormArea/MinMAxFormArea';
 const PropertyForm = () => {
     const { register, handleSubmit } = useForm({ mode: 'onChange' });
     const findProperty = (data) => {
@@ -13,9 +14,7 @@ const PropertyForm = () => {
     const [checkMarkBath, setCheckMarkBath] = useState([false, false, false, false, false])
     const [bed, setBed] = useState([])
     const [bath, setBath] = useState([])
-    const [formArea, setFormArea] = useState(false)
-    const [selectedMaxArea, setSelectedMaxArea] = useState('Any')
-    const [selectedMinArea, setSelectedMinArea] = useState(0)
+    
 
     const showForm = () => {
         (formApear == false) ? setformApear(true) : setformApear(false)
@@ -57,18 +56,9 @@ const PropertyForm = () => {
         setBath([])
         setBed([])
     }
-    const showFormArea = () => {
-        (formArea == false) ? setFormArea(true) : setFormArea(false)
-    }
-    const areaMaximum = (element)=>{
-        setSelectedMaxArea(element)
-    }
-    const areaMinimum = (element)=>{
-        setSelectedMinArea(element)
-    }
 
     return (
-        <form onSubmit={handleSubmit(findProperty)} className='flex flex-wrap' style={{ width: '70vw' }}>
+        <form onSubmit={handleSubmit(findProperty)} className='flex flex-wrap' style={{ width: '73vw' }}>
             <div className='flex flex-col w-1/4 px-1' >
                 <label className='form-label text-left'>Purpose</label>
                 <select {...register('purpose')} className={styles.formControl} >
@@ -123,38 +113,14 @@ const PropertyForm = () => {
                     </div>
                 </div>}
             </div>
-            <div className='flex flex-col w-1/4  px-1 relative' >
-                <label className='form-label text-left'>Area</label>
-
-                <input type='text'{...register('Area')} value={`${selectedMinArea}-${selectedMaxArea}(m²)`} className={`${styles.formControl} `} onClick={showFormArea} />
-
-                {formArea && <div className='absolute top-24  p-4 bg-white right-1 text-black' style={{ width: '20vw', borderRadius: "8px" }}>
-                    <div className='bed text-black text-left'>
-                        <div className='flex gap-2'>
-                            <div className='w-3/6'>
-                                <p className='text-sm'>Minimum</p>
-                                <select  className='border border-gray-400 w-full p-2 rounded-lg' onChange={(e)=>{areaMinimum(e.target.value)}}>
-                                    {[40,50,100,150,200].map((element,index)=>(
-                                        <option key={index} value={element} >{element}</option>
-                                    ))}
-                                </select>
-                            </div>
-                            <div  className='w-3/6'>
-                                <p className='text-sm'>Maximum</p>
-                                <select  className='border border-gray-400 w-full p-2 rounded-lg ' onChange={(e)=>{areaMaximum(e.target.value)}}>
-                                {['Any','1,000','2,000','3,000','4,000','5,000'].map((element,index)=>(
-                                        <option key={index} value={element}>{element}</option>
-                                    ))}
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='flex gap-2 mt-4'>
-                        <div className='w-3/6 border border-red-500 p-2 hover:bg-slate-50 hover:cursor-pointer rounded-md font-bold text-sm' size='large' onClick={resetFunc}>Reset</div>
-                        <div className='w-3/6 text-white p-2 hover:bg-red-700 hover:cursor-pointer bg-red-600 rounded-md font-bold text-sm' size='large'>Apply</div>
-                    </div>
-                </div>}
+            <div className='w-1/4 '>
+            <MinMAxFormArea name="Area" missure="m²" minOption={[40,50,100,150,200]} maxOption={['Any','1,000','2,000','3,000','4,000','5,000']}/>
             </div>
+            <div className='w-1/4'>
+            <MinMAxFormArea name="Price" missure="EGP" minOption={['1,000','5,000','10,000','50,000','100,000','500,000','1,000,000','5,000,000','10,000,000']} 
+            maxOption={['10,000','50,000','100,000','500,000','1,000,000','5,000,000','10,000,000','50,000,000','100,000,000','500,000,000']}/>
+            </div>
+            <button type='submit' className='w-1/4 text-md bg-red-500 mt-6 rounded-lg hover:bg-red-600'>Find</button>
         </form>
 
     );
