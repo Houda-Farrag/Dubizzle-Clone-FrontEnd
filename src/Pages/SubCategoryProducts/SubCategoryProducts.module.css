@@ -1,0 +1,12 @@
+.btnSaveSearch{
+    border: 1px solid rgba(255, 0, 0, 0.826);
+    padding: 12px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 15px; 
+    font-weight: bold;
+    width: 11%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

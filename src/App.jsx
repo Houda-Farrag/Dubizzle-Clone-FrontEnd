@@ -5,9 +5,13 @@ import Home from './Pages/Home/Home'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import AppLayout from './AppLayout'
 import Property from './Pages/Property/Property'
+
 import { Provider } from 'react-redux'
 import StroeConfig from './Store/Store'
 import Favorite from './Pages/Favorite/Favorite'
+
+
+import SubCategoryProducts from './Pages/SubCategoryProducts/SubCategoryProducts'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -15,9 +19,16 @@ function App() {
   const routesPage = createBrowserRouter([{
     path: '/', element: <AppLayout></AppLayout>, children: [
       { index: true, element: <Home /> },
-      { path: 'favorite', element: <Favorite /> }
+
+      { path: 'favorite', element: <Favorite /> },
+      { path: '/subCategoryProducts', element: <SubCategoryProducts /> }
     ]
   }, { path: '/property', element: <Property /> }])
+
+
+
+
+
 
   return <>
     <Provider store={StroeConfig} >

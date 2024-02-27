@@ -1,16 +1,17 @@
 
 import { Carousel } from 'antd';
-import slideImage from '../../assets/images/dubbizleSlider.jpg'
-const DubbizleSlider = () => {
+
+const DubbizleSlider = (props) => {
+
 
     return (
         <>
-            <Carousel autoplay dotWidth={3} autoplaySpeed={7000} className=''> { /* change the name of conatear*/}
+            <Carousel autoplay autoplaySpeed={7000} className=''> { /* change the name of conatear*/}
                 <div >
-                    <img className='w-full' src={slideImage} />
+                    <img className='w-full' src={props.img} />
                 </div>
                 <div>
-                    <img className='w-full' src={slideImage} />
+                    <img className='w-full' src={props.img} />
                 </div>
             </Carousel>
         </>

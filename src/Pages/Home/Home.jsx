@@ -5,9 +5,9 @@ import CategorySub from '../../Components/CategorySubComp/CategorySub'
 import DubbizleSlider from '../../Components/DubbizleSlider/DubbizleSlider'
 import PopularCategories from '../../Components/popularCategories/PopularCategories'
 import CategoriesCard from '../../Components/CategoriesCard/CategoriesCard'
-import DropDownList from '../../Components/DropDownListComp/DropDownList'
 import ProductHomeCardComp from '../../Components/ProductHomeCardComp/ProductHomeCardComp'
 import { useEffect, useState } from 'react'
+import slideImage from '../../assets/images/dubbizleSlider.jpg'
 
 export default function Home() {
 
@@ -50,19 +50,20 @@ export default function Home() {
         getCategory()
         getProducts()
     }, [])
+    const aut = 'autoplay'
     return <>
 
         <div style={{ top: '18vh', position: 'relative', marginBottom: '200px' }}  >
 
             <CategorySub></CategorySub>
-            <DubbizleSlider></DubbizleSlider>
+            <DubbizleSlider name="home" img= {slideImage}/>
             <PopularCategories></PopularCategories>
 
             <CategoriesCard catName={"Villas For Sale"} dataProd={products}> </CategoriesCard>
 
 
             <ProductHomeCardComp></ProductHomeCardComp>
-        </div >
+        </div>
 
     </>
 }
