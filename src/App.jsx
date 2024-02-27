@@ -20,7 +20,7 @@ function App() {
     path: '/', element: <AppLayout></AppLayout>, children: [
       { index: true, element: <Home /> },
 
-      { path: 'favorite', element: <Favorite /> },
+      { path: '/favorite', element: <Favorite /> },
       { path: '/subCategoryProducts', element: <SubCategoryProducts /> }
     ]
   }, { path: '/property', element: <Property /> }])
