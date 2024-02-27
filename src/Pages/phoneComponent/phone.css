@@ -1,0 +1,13 @@
+
+  /* Remove increment and decrement arrows */
+  .number-input::-webkit-outer-spin-button,
+  .number-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  .number-input[type=number] {
+    -moz-appearance: textfield;
+  }
+
