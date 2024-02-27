@@ -10,3 +10,14 @@
     justify-content: center;
     align-items: center;
 }
+.formControl{
+    /* text-black form-control p-3 outline-none border border-slate-500 rounded-md */
+    color:black;
+    padding: 12px;
+    outline: none;
+    border: 1px solid gainsboro;
+    border-radius: 8px;
+    width: 90%;
+    margin-top: 20px;
+    margin-left: 5%;
+}

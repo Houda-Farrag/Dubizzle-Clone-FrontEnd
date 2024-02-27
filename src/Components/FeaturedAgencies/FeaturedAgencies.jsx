@@ -8,24 +8,19 @@ import { Carousel } from 'antd';
 
 const FeaturedAgencies = () => {
     return (
-        <div className='p-4'>
+        <div className='p-4 bg-gray-100'>
             <p className='text-2xl mb-3 font-bold'>Explore Featured Agencies</p>
             <p className='text-md mb-2 text-gray-600'>Explore our trusted agencies</p>
-            
-            <Carousel className=''> 
-                <div >
-                    <img className='w-1/4' src={feature1} />
-                </div>
-                <div>
-                    <img className='w-1/4' src={featureHH} />
-                </div>
-                <div >
-                    <img className='w-1/4' src={feature3} />
-                </div>
-                <div >
-                    <img className='w-1/4' src={feature4} />
-                </div>
-            </Carousel>
+
+            <div className='flex gap-4'>
+                <div className='w-1/4  bg-white text-center'><img className='img-fluid mb-3' src={feature1} /><p className='text-lg font-bold'>Smart Group Development</p></div>
+                <div className='w-1/4  bg-white text-center'><img className='img-fluid mb-3' src={featureHH} /><p className='text-lg font-bold'>Imkan Investment</p></div>
+                <div className='w-1/4  bg-white text-center'><img className='img-fluid mb-3' src={feature3} /><p className='text-lg font-bold'>4 C</p></div>
+                <div className='w-1/4  bg-white text-center'><img className='img-fluid mb-3' src={feature4} /><p className='text-lg font-bold'>Value real estate development</p></div>
+            </div>
+            <p className='text-xl mt-3 font-bold'>Become a trusted Agency ?</p>
+            <p className='text-lg mt-4'>Join our ever growing group of brokers covering all of Egypt</p>
+
         </div>
     );
 }
