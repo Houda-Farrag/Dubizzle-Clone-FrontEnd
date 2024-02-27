@@ -3,7 +3,6 @@ import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 // import { FaAngleUp, FaAngleDown } from "react-icons/fa6";
 import { FaAngleUp, FaAngleDown } from "react-icons/fa6";
-import { useNavigate } from 'react-router-dom';
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -20,7 +19,6 @@ export default function DropDownList({ props }) {
     const showProfileDetials = () => {
         setIsOpen1(!isOpen1)
     }
-    const navigate = useNavigate()
 
     return (
         <div className='w-full'>
@@ -43,9 +41,60 @@ export default function DropDownList({ props }) {
                 >
                     <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                         <div className="py-1">
-                            <div>
-                            </div>
-
+                            <Menu.Item>
+                                {({ active }) => (
+                                    <a
+                                        href="/favorite"
+                                        className={classNames(
+                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                            'block px-4 py-2 text-sm'
+                                        )}
+                                    >
+                                        favorites
+                                    </a>
+                                )}
+                            </Menu.Item>
+                            <Menu.Item>
+                                {({ active }) => (
+                                    <a
+                                        href="#"
+                                        className={classNames(
+                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                            'block px-4 py-2 text-sm'
+                                        )}
+                                    >
+                                        Support
+                                    </a>
+                                )}
+                            </Menu.Item>
+                            <Menu.Item>
+                                {({ active }) => (
+                                    <a
+                                        href="#"
+                                        className={classNames(
+                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                            'block px-4 py-2 text-sm'
+                                        )}
+                                    >
+                                        License
+                                    </a>
+                                )}
+                            </Menu.Item>
+                            <form method="POST" action="#">
+                                <Menu.Item>
+                                    {({ active }) => (
+                                        <button
+                                            type="submit"
+                                            className={classNames(
+                                                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                'block w-full px-4 py-2 text-left text-sm'
+                                            )}
+                                        >
+                                            Sign out
+                                        </button>
+                                    )}
+                                </Menu.Item>
+                            </form>
                         </div>
                     </Menu.Items>
                 </Transition>
