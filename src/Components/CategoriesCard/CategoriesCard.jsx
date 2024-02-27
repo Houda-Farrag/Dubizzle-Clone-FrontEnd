@@ -105,7 +105,6 @@ export default function CategoriesCard({ catName, dataProd }) {
                             <p>{catData.price}</p>
                             <button onClick={(e) => {
                                 e.stopPropagation()
-
                                 addToFav(catData)
                                 console.log("ttt", Favorit)
                             }}>
