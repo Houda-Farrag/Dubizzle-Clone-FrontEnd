@@ -1,44 +1,25 @@
-import { useState } from 'react'
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { ProductDetails } from "./Pages/ProductDetails";
+import { PropertyDetails } from "./Pages/PropertyDetails";
+import { SellPage } from "./Pages/SellPage";
+import { SellFormPage } from "./Pages/SellFormPage";
+import { MenuSelectionProvider } from "./Context/MenuSelectionContext";
 
-import './App.css'
-import Home from './Pages/Home/Home'
-import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import AppLayout from './AppLayout'
-import Property from './Pages/Property/Property'
+const App = () => {
+  return (
+    <div>
+      <BrowserRouter>
+          <MenuSelectionProvider>
+        <Routes>
+          <Route path="/" element={<ProductDetails />} />
+          <Route path="property" element={<PropertyDetails />} />
+          <Route path="/sell" element={<SellPage/>}/>
+          <Route path="/sellform" element={<SellFormPage />} />
+        </Routes>
+          </MenuSelectionProvider>
+      </BrowserRouter>
+    </div>
+  );
+};
 
-import { Provider } from 'react-redux'
-import StroeConfig from './Store/Store'
-import Favorite from './Pages/Favorite/Favorite'
-
-
-import SubCategoryProducts from './Pages/SubCategoryProducts/SubCategoryProducts'
-
-function App() {
-  const [count, setCount] = useState(0)
-
-  const routesPage = createBrowserRouter([{
-    path: '/', element: <AppLayout></AppLayout>, children: [
-      { index: true, element: <Home /> },
-
-      { path: '/favorite', element: <Favorite /> },
-      { path: '/subCategoryProducts', element: <SubCategoryProducts /> }
-    ]
-  }, { path: '/property', element: <Property /> }])
-
-
-
-
-
-
-  return <>
-    <Provider store={StroeConfig} >
-
-      <RouterProvider router={routesPage}>
-
-      </RouterProvider>
-    </Provider>
-
-  </>
-}
-
-export default App
+export default App;
