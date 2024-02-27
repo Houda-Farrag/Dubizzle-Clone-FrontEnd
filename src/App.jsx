@@ -15,7 +15,7 @@ function App() {
   const routesPage = createBrowserRouter([{
     path: '/', element: <AppLayout></AppLayout>, children: [
       { index: true, element: <Home /> },
-      { path: 'favorite', element: <Favorite /> }
+      { path: '/favorite', element: <Favorite /> }
     ]
   }, { path: '/property', element: <Property /> }])
 
