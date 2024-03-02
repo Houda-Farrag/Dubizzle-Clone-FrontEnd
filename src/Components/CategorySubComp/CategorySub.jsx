@@ -1,7 +1,7 @@
 
 import './CategorySub.css'
 
-export default function () {
+export default function CategorySub() {
     let cat = ['Vehicles', 'Properties', 'Mobiles & Tablets', 'Jobs', 'Electronics & Appliances', 'Furniture & Decor', 'More Categories']
     let objarr = [
         { id: 1, name: 'sub 1', mliv: ['multi 1', 'multi 2', 'multi 3', 'multi 4'] },

@@ -1,37 +1,44 @@
-import img_1 from "../../assets/1.jpg";
-import img_2 from "../../assets/2.jpg";
-import img_3 from "../../assets/3.jpg";
-// import img_4 from '../../assets/4.jpg'
-// import img_5 from '../../assets/5.jpg'
+import { useEffect, useState } from "react";
 
-export const ProductDisplay = () => {
+export const ProductDisplay = ({ product }) => {
+  const [Images, setImages] = useState([]);
+
+  useEffect(() => {
+    setImages(product?.images); 
+  }, [product]);
+
   return (
     <div className="max-w-2xl mx-28 my-12 relative">
       <div id="default-carousel" className="relative" data-carousel="static">
         <div className="overflow-hidden relative h-96 rounded-lg sm:h-64 xl:h-80 2xl:h-96">
           <div className="hidden duration-700 ease-in-out" data-carousel-item>
-            <span className="absolute top-1/2 left-1/2 text-2xl font-semibold text-white -translate-x-1/2 -translate-y-1/2 sm:text-3xl dark:text-gray-800">
-              First Slide
-            </span>
-            <img
-              src={img_1}
-              className="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2"
-              alt="..."
-            />
+            {Images?.map((image, index) => (
+              <div
+                key={index}
+                className={`hidden duration-700 ease-in-out ${
+                  index === 0 ? "block" : ""
+                }`}
+                data-carousel-item
+              >
+                <img
+                  src={image}
+                  className="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2"
+                  alt={`Slide ${index + 1}`}
+                />
+              </div>
+            ))}
           </div>
           <div className="hidden duration-700 ease-in-out" data-carousel-item>
-            <img
-              src={img_2}
-              className="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2"
-              alt="..."
-            />
-          </div>
-          <div className="hidden duration-700 ease-in-out" data-carousel-item>
-            <img
-              src={img_3}
-              className="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2"
-              alt="..."
-            />
+            {Images?.map((_, index) => (
+              <button
+                key={index}
+                type="button"
+                className="w-3 h-3 rounded-full"
+                aria-current="false"
+                aria-label={`Slide ${index + 1}`}
+                data-carousel-slide-to={index}
+              />
+            ))}
           </div>
         </div>
         <div className="flex absolute bottom-5 left-1/2 z-30 space-x-3 -translate-x-1/2">
