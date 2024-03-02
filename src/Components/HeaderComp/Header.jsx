@@ -16,6 +16,7 @@ export default function Header() {
 
 
   const navigate = useNavigate()
+
   const togglebutton = () => {
     setIsOpen(!isOpen);
   };
@@ -55,12 +56,7 @@ export default function Header() {
                   </button>}>
 
               </DropDownList>
-              {/* <button onClick={togglebutton} className='grid items-center grid-flow-col w-full border h-14 hover:shadow-md rounded-lg text-red-500 font-bold justify-evenly max-w-full'>
-                <IoLocation className='text-red-500' />
-                egypt
-                {(isOpen) ? <FaAngleDown /> : <FaAngleUp />}
 
-              </button> */}
             </div>
 
             <div className='flex col-span-2'>
@@ -93,7 +89,7 @@ export default function Header() {
               </div>
 
 
-              <button className='col-span-5 h-14 border bg-red-500 hover:bg-red-600 rounded-lg text-white font-bold'>Sell</button>
+              <button onClick={() => { navigate("/sell") }} className='col-span-5 h-14 border bg-red-500 hover:bg-red-600 rounded-lg text-white font-bold'>Sell</button>
             </div>
           </div>
         </div>
