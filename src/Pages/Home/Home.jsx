@@ -37,9 +37,8 @@ export default function Home() {
                 return res.json()
             })
             .then(({ products }) => {
-
+                console.log(products)
                 setProducts(products)
-
 
             })
             .catch((err) => {
@@ -53,14 +52,13 @@ export default function Home() {
     const aut = 'autoplay'
     return <>
 
-        <div style={{ top: '18vh', position: 'relative', marginBottom: '200px' }}  >
+        <div style={{ position: 'relative', marginBottom: '200px' }} className='mt-36'  >
 
             <CategorySub></CategorySub>
             <DubbizleSlider name="home" img= {slideImage}/>
             <PopularCategories></PopularCategories>
 
             <CategoriesCard catName={"Villas For Sale"} dataProd={products}> </CategoriesCard>
-
 
             <ProductHomeCardComp></ProductHomeCardComp>
         </div>

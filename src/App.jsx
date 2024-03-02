@@ -9,6 +9,11 @@ import Property from './Pages/Property/Property'
 import { Provider } from 'react-redux'
 import StroeConfig from './Store/Store'
 import Favorite from './Pages/Favorite/Favorite'
+import { SellPage } from './Pages/Sell/SellPage'
+import { SellFormPage } from './Pages/SellForm/SellFormPage'
+import { MenuSelectionProvider } from './Context/MenuSelectionContext'
+import { ProductDetails } from './Pages/ProductDetails/ProductDetails'
+import { PropertyDetails } from './Pages/PropertyDetails/PropertyDetails'
 
 
 import SubCategoryProducts from './Pages/SubCategoryProducts/SubCategoryProducts'
@@ -21,23 +26,27 @@ function App() {
       { index: true, element: <Home /> },
 
       { path: 'favorite', element: <Favorite /> },
-      { path: '/subCategoryProducts', element: <SubCategoryProducts /> }
+      { path: '/subCategoryProducts', element: <SubCategoryProducts /> },
+      { path: '/sell', element: < SellPage /> },
+      { path: '/sellform', element: <SellFormPage /> },
     ]
-  }, { path: '/property', element: <Property /> }])
+  },
+  { path: '/property', element: <Property /> },
+  { path: '/product-details', element: <ProductDetails /> },
+  { path: '/property-details', element: <PropertyDetails /> }
 
-
-
-
+  ])
 
 
   return <>
-    <Provider store={StroeConfig} >
+    <MenuSelectionProvider>
+      <Provider store={StroeConfig} >
 
-      <RouterProvider router={routesPage}>
+        <RouterProvider router={routesPage}>
 
-      </RouterProvider>
-    </Provider>
-
+        </RouterProvider>
+      </Provider>
+    </MenuSelectionProvider>
   </>
 }
 
