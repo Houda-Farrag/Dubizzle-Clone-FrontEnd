@@ -8,7 +8,7 @@ export const ProductDisplay = ({ product }) => {
   }, [product]);
 
   return (
-    <div className="max-w-2xl mx-28 my-12 relative">
+    <div className="mx-28 my-12 relative">
       <div id="default-carousel" className="relative" data-carousel="static">
         <div className="overflow-hidden relative h-96 rounded-lg sm:h-64 xl:h-80 2xl:h-96">
           <div className="hidden duration-700 ease-in-out" data-carousel-item>

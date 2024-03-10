@@ -12,7 +12,7 @@ export const SellerData = ({product}) => {
     setProductDate(product)
   },[product])
   return (
-    <div className="flex-col absolute right-48 top-28 space-y-6 w-2/6 col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow">
+    <div className="flex-col absolute right-48 w-[512px] top-28 space-y-6 col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow">
       <div className="flex w-full items-center justify-between space-x-6 p-6">
         <NavLink to="/property">
           <div className="flex-1 truncate">

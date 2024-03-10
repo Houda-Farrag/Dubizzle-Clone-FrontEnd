@@ -7,8 +7,8 @@ export const Details = ({ product }) => {
     setProductDate(product);
   }, [product]);
   return (
-    <div className="my-10">
-      <div className="relative left-28 flex flex-col rounded-xlspace-y-6 w-5/12 col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow">
+    <div className="w-[650px] my-10">
+      <div className="relative left-28 flex flex-col rounded-xlspace-y-6 col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow">
         <div className="p-6">
           <h1 className="mb-2 block font-sans text-3xl font-bold leading-snug tracking-normal text-red-600 antialiased">
             EGP {productData?.price}
@@ -40,7 +40,7 @@ export const Details = ({ product }) => {
           </span>
         </div>
       </div>
-      <div className="relative left-28 top-10 flex flex-col rounded-xlspace-y-6 w-5/12 col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow">
+      <div className="relative left-28 top-10 flex flex-col rounded-xlspace-y-6 col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow">
         <div className="p-6">
           <h1 className="mb-2 block font-sans text-3xl font-bold leading-snug tracking-normal text-black antialiased">
             Details
@@ -67,7 +67,7 @@ export const Details = ({ product }) => {
           </div>
         </div>
       </div>
-      <div className="relative left-28 top-12 flex flex-col rounded-xlspace-y-6 w-5/12 col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow">
+      <div className="relative left-28 top-12 flex flex-col rounded-xlspace-y-6 col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow">
         <div className="p-6">
           <h1 className="mb-2 block font-sans text-3xl font-bold leading-snug tracking-normal text-black antialiased">
             Description
@@ -75,7 +75,7 @@ export const Details = ({ product }) => {
           <p>{productData?.description}</p>
         </div>
       </div>
-      <div className="relative left-28 top-16 flex flex-col rounded-xlspace-y-6 w-5/12 col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow">
+      <div className="relative left-28 top-16 flex flex-col rounded-xlspace-y-6 col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow">
         <h1 className="mb-2 block font-sans text-3xl font-bold leading-snug tracking-normal text-black antialiased">
           Location
         </h1>
@@ -93,13 +93,13 @@ export const Details = ({ product }) => {
           </iframe>
         </div>
       </div>
-      <div className="relative left-28 top-24 rounded-xlspace-y-6 w-5/12 col-span-1 ">
+      <div className="relative left-28 top-24 rounded-xlspace-y-6 col-span-1 ">
         <p>AD ID {productData?.id}</p>
         <p className="font-bold absolute right-0 top-0 hover:underline cursor-pointer ">
           Report this ad
         </p>
       </div>
-      <hr className="relative left-28 top-24 w-5/12 border-1 border-black" />
+      <hr className="relative left-28 top-24 border-1 border-black" />
     </div>
   );
 };

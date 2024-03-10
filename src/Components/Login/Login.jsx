@@ -1,44 +1,57 @@
 import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { LoginSocialFacebook } from "reactjs-social-login";
 import { FacebookLoginButton } from "react-social-login-buttons";
+import useLogin from "../../Hooks/useLogin";
 
-function Login() {
+function Login({ setFacebook, setGoogle , login , setEmail}) {
+  const [googleProfile, setGoogleProfile] = useState("");
+  const [facebookProfile, setFacebookProfile] = useState("");
+
   const [showLogin, setShowLogin] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [profile, setProfile] = useState(null);
-
+  
   const openLogin = () => {
-    setShowLogin(true);
+    if (!isLoggedIn) {
+      setShowLogin(true);
+    } else {
+      setIsLoggedIn(!isLoggedIn);
+      setShowLogin(false);
+      setFacebookProfile(null);
+      setGoogleProfile(null);
+    }
   };
-
+  
   const closeLogin = () => {
     setShowLogin(false);
   };
-
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-    setProfile(null);
-  };
-
-  const handleGoogleSuccess = (credentialResponse) => {
+  
+  const handleGoogleSuccess = async (credentialResponse) => {
     const decoded = jwtDecode(credentialResponse?.credential);
-    console.log(decoded.email);
+    setGoogleProfile(decoded);
     setIsLoggedIn(true);
+    setShowLogin(false);
+    await setGoogle(decoded);
+    setEmail(decoded.email)
+    login()
+  
   };
-
-  const handleFacebookSuccess = (response) => {
-    setProfile(response.data);
-    console.log(response);
+  
+  const handleFacebookSuccess = async (response) => {
+    setFacebookProfile(response.data);
     setIsLoggedIn(true);
-  };
+    setShowLogin(false);
+    await setFacebook(response.data);
+    setEmail(response.data.email);
+    login()
+  };  
+  
+  
 
   return (
-    <div>
-      <button onClick={openLogin} disabled={isLoggedIn}>
-        {isLoggedIn ? "Logout" : "Login"}
-      </button>
+    <div className="relative top-4">
+      <button onClick={openLogin}>{isLoggedIn ? "Logout" : "Login"}</button>
       {showLogin && (
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
           <div className="bg-white shadow rounded-lg lg:w-1/3 md:w-1/2 w-full p-10">
@@ -63,9 +76,9 @@ function Login() {
                 </svg>
               </button>
             </div>
-            <p className="text-2xl font-extrabold leading-6 text-gray-800">
+            <p className="text-2xl font-extrabold leading-6 justify-center text-gray-800">
               Login to{" "}
-              <span className="text-red-500 text-2xl">
+              <span className="text-red-500 text-3xl">
                 D<span className="text-black">ubizzle</span>
               </span>
             </p>
@@ -79,7 +92,7 @@ function Login() {
             </div>
 
             <div>
-              {!profile ? (
+              {!facebookProfile ? (
                 <LoginSocialFacebook
                   appId="757792036288625"
                   onResolve={handleFacebookSuccess}
@@ -94,14 +107,8 @@ function Login() {
               )}
             </div>
 
-            {isLoggedIn && (
-              <div className="flex justify-center">
-                <button onClick={handleLogout}>Logout</button>
-              </div>
-            )}
-
             <div>
-              {profile ? (
+              {facebookProfile && isLoggedIn ? (
                 <div className="flex justify-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -112,8 +119,7 @@ function Login() {
                   >
                     <path d="M512 256C512 114.6 397.4 0 256 0S0 114.6 0 256C0 376 82.7 476.8 194.2 504.5V334.2H141.4V256h52.8V222.3c0-87.1 39.4-127.5 125-127.5c16.2 0 44.2 3.2 55.7 6.4V172c-6-.6-16.5-1-29.6-1c-42 0-58.2 15.9-58.2 57.2V256h83.6l-14.4 78.2H287V510.1C413.8 494.8 512 386.9 512 256h0z" />
                   </svg>
-
-                  <span>{profile.name}</span>
+                  <span>{facebookProfile.name}</span>
                 </div>
               ) : (
                 ""
