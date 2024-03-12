@@ -1,8 +1,10 @@
 import { useEffect } from "react";
 import useLogin from "./useLogin";
+import useRegister from "./useRegister";
 
 const useLogout = () => {
   const { token, setToken } = useLogin();
+  const {setData} = useRegister()
 
   useEffect(() => {
     async function readingToken(){
@@ -25,6 +27,7 @@ const useLogout = () => {
       if (response) {
         localStorage.removeItem("jwt");
         setToken(null);
+        setData(null);
         console.log(token);
       } else {
         console.error("Logout failed:", response.statusText);

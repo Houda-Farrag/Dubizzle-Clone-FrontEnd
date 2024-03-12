@@ -9,7 +9,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function DropDownList({ props, setGoogle , setFacebook }) {
+export default function DropDownList({ props, setGoogle , setFacebook , setData}) {
   const {logout} = useLogout()
   const [isOpen, setIsOpen] = useState(false);
   const [isOpen1, setIsOpen1] = useState(false);
@@ -26,6 +26,7 @@ export default function DropDownList({ props, setGoogle , setFacebook }) {
     await logout()
     setGoogle(null);
     setFacebook(null);
+    setData(null)
   };
 
   return (
@@ -82,10 +83,10 @@ export default function DropDownList({ props, setGoogle , setFacebook }) {
                 )}
               </Menu.Item>
 
-              <Menu.Item>
+              <Menu.Item className="w-full">
                   <button
                     onClick={handleLogout}
-                    className="flex justify-center items-center text-center"
+                    className="text-gray-700 black px-4 py-2 text-sm "
                     >
                     logout
                   </button>
