@@ -1,8 +1,7 @@
 import upload_area from "../../assets/upload_area.svg";
-
 import { useEffect, useState } from "react";
 import { BreadCrumb } from "../BreadCrumb/BreadCrumb";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Select from "react-select";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
@@ -27,6 +26,10 @@ const SellForm = () => {
   const [selectedLocation, setSelectedLocation] = useState("");
   const [priceType, setPriceType] = useState("");
   const [isproperty, setIsProperty] = useState(false);
+  const [isVehicle, setIsVehicle] = useState(false);
+  // const [isMobile, setIsMobile] = useState(false);
+  const [brands, setBrands] = useState([]);
+  const [isPhone, setIsPhone] = useState(false);
   const [productDetails, setProductDetails] = useState({
     name: "",
     description: "",
@@ -42,6 +45,7 @@ const SellForm = () => {
     subCategory: "",
     contact_type: "",
   });
+
 
   const imageHandler = (e) => {
     setImage(e.target.files[0]);
@@ -64,14 +68,6 @@ const SellForm = () => {
       }));
     }
   };
-
-  const brands = [
-    { value: "Apple", label: "Apple" },
-    { value: "Samsung", label: "Samsung" },
-    { value: "LG", label: "LG" },
-    { value: "HP", label: "HP" },
-    { value: "Redmi", label: "Redmi" },
-  ];
 
   const addProduct = async () => {
     let responseData;
@@ -188,10 +184,13 @@ const SellForm = () => {
   const handleContactMethodChange = (method) => {
     if (method === "phone") {
       setContactMethod("phone");
+      setIsPhone(true);
     } else if (method === "chat") {
       setContactMethod("chat");
+      setIsPhone(false);
     } else if (method === "both") {
       setContactMethod("both");
+      setIsPhone(true);
     }
   };
 
@@ -210,13 +209,52 @@ const SellForm = () => {
     await addProduct();
   };
 
+  const navigate = useNavigate()
+
   useEffect(() => {
+    const handlePageRefresh = () => {
+      if (performance.navigation.type === 1) {
+        navigate("/sell")
+      }
+    };
+    window.addEventListener("load", handlePageRefresh);
+
     const isPropertySelected = async () => {
       if (selectedCategory == "Properties") {
         setIsProperty(true);
       }
     };
+    const isVehicleSelected = async () => {
+      if (selectedCategory == "Vehicles") {
+        setIsVehicle(true);
+        setBrands([
+          { value: "Mercedes-Benz", label: "Mercedes-Benz" },
+          { value: "Hyundai", label: "Hyundai" },
+          { value: "BMW", label: "BMW" },
+          { value: "Audi", label: "Audi" },
+          { value: "BYD", label: "BYD" },
+          { value: "Chevrolet", label: "Chevrolet" },
+          { value: "Daewoo", label: "Daewoo" },
+          { value: "Peugeot", label: "Peugeot" },
+          { value: "Bentley", label: "Bentley" },
+          { value: "Toyota", label: "Toyota" },
+          { value: "Tesla", label: "Tesla" },
+        ]);
+      }
+    };
+    
+    const isMobileSelected = async () => {
+      // setIsMobile(true);
+      setBrands([
+        { value: "Apple", label: "Apple" },
+        { value: "Samsung", label: "Samsung" },
+        { value: "Other", label: "Other" },
+      ]);
+    };
+    isMobileSelected();
+    isVehicleSelected();
     isPropertySelected();
+    return () => window.removeEventListener("load", handlePageRefresh);
   }, [setIsProperty, selectedCategory]);
 
   return (
@@ -271,6 +309,20 @@ const SellForm = () => {
                   className="w-full bg-gray-50"
                   required
                 />
+              </div>
+            )}
+            {isVehicle && (
+              <div className="mb-4">
+                <label className="block mb-1">Model:</label>
+                <input
+                  type="text"
+                  className="border px-3 py-2 w-full rounded"
+                  required
+                />
+                <p>
+                  Please,Write specific model of your item such as (C180 or E200
+                  ... etc )
+                </p>
               </div>
             )}
             {isproperty && (
@@ -447,7 +499,7 @@ const SellForm = () => {
               </div>
             </div>
 
-            <div className="mb-4 flex gap-5">
+            <div className="mb-6 flex gap-5">
               <div className="p-2 border w-fit flex justify-center items-center">
                 <input
                   type="checkbox"
@@ -460,42 +512,45 @@ const SellForm = () => {
                   Negotiable
                 </label>
               </div>
-              {!isproperty && (
-
-              <div className="p-2 border w-fit flex justify-center items-center">
-                <input
-                  type="checkbox"
-                  id="exchange"
-                  checked={exchange}
-                  onChange={handleExchangeChange}
-                  className="circle appearance-none border border-black rounded-full w-4 h-4 checked:bg-red-500 checked:border-transparent"
-                />
-                <label htmlFor="exchange" className="mx-3 relative top-1">
-                  Exchange
-                </label>
-              </div>
+              {!isproperty && !isVehicle && (
+                <div className="p-2 border w-fit flex justify-center items-center">
+                  <input
+                    type="checkbox"
+                    id="exchange"
+                    checked={exchange}
+                    onChange={handleExchangeChange}
+                    className="circle appearance-none border border-black rounded-full w-4 h-4 checked:bg-red-500 checked:border-transparent"
+                  />
+                  <label htmlFor="exchange" className="mx-3 relative top-1">
+                    Exchange
+                  </label>
+                </div>
               )}
-              {!isproperty && (
-              <div className="p-2 border w-fit flex justify-center items-center">
-                <input
-                  type="checkbox"
-                  id="free"
-                  checked={free}
-                  onChange={handleFreeChange}
-                  className="circle bg-white appearance-none border border-black rounded-full w-4 h-4 checked:bg-red-500"
-                />
-                <label htmlFor="free" className="mx-3 relative top-1">
-                  Free
-                </label>
-              </div>
+              {!isproperty && !isVehicle && (
+                <div className="p-2 borde w-fit flex justify-center items-center">
+                  <input
+                    type="checkbox"
+                    id="free"
+                    checked={free}
+                    onChange={handleFreeChange}
+                    className="circle bg-white appearance-none border border-black rounded-full w-4 h-4 checked:bg-red-500"
+                  />
+                  <label htmlFor="free" className="mx-3 relative top-1">
+                    Free
+                  </label>
+                </div>
               )}
             </div>
+            <hr className="mb-3 w-full" />
 
             <div className="add-product-itemfield">
+              <label className="text-2xl font-bold mb-5">
+                Upload Up to 5 Photos
+              </label>
               <label htmlFor="file-input">
                 <img
                   src={image ? URL.createObjectURL(image) : upload_area}
-                  className="add-product-thumnail-img"
+                  className="w-36 my-4"
                   alt=""
                 />
               </label>
@@ -507,16 +562,19 @@ const SellForm = () => {
                 hidden
               />
             </div>
-              <hr className="w-full mt-3"/>
-            <div className="mb-6">
-              <label htmlFor="location" className="block mb-6 mt-5 text-2xl font-bold">
+            <hr className="w-full mt-3" />
+            <div className="mb-6 w-fit">
+              <label
+                htmlFor="location"
+                className="block mb-6 mt-5 text-2xl font-bold"
+              >
                 Location:
               </label>
-              <div className="relative border p-4">
+              <div className="relative border flex justify-between z-50 p-4">
                 <button
                   onClick={toggleDropdownLocation}
                   type="button"
-                  className="text-gray-500 group inline-flex items-center rounded-md bg-white text-base font-medium hover:text-gray-900"
+                  className="text-gray-500 flex justify-between group items-center rounded-md bg-white text-base font-medium hover:text-gray-900"
                   aria-expanded={isDropdownLocation}
                 >
                   <span className="text-red-600 font-semibold">
@@ -565,76 +623,60 @@ const SellForm = () => {
             </div>
 
             <div className="mb-4">
-              <label htmlFor="reviewProfile" className="block mb-1">
-                Review Profile:
-              </label>
-              <img
-                src="user-image.jpg"
-                alt="User Image"
-                className="w-12 h-12 rounded-full"
-              />
-              <input
-                type="text"
-                id="userName"
-                value={productDetails.sellerData.userName}
-                onChange={changeHandler}
-                name="userName"
-                placeholder="Name"
-                className="border rounded px-3 py-2 w-full"
-                required
-              />
-              <input
-                type="tel"
-                id="phoneNumber"
-                value={productDetails.sellerData.phoneNumber}
-                onChange={changeHandler}
-                name="phoneNumber"
-                placeholder="Phone Number"
-                className="border rounded px-3 py-2 w-full mt-2"
-                required
-              />
               <div className="mt-2 gap-5 flex">
                 <label className="text-lg">Contact Type:</label>
                 <div className="flex justify-center items-center w-fit border">
-                <input
-                  type="checkbox"
-                  id="phone"
-                  value="phone"
-                  checked={contactMethod.includes("phone")}
-                  onChange={() => handleContactMethodChange("phone")}
-                  className="circle appearance-none border border-black rounded-full w-4 h-4 checked:bg-red-500 checked:border-transparent"
-                />
-                <label htmlFor="phone" className="mx-3 relative top-1">
-                  Phone
-                </label>
+                  <input
+                    type="checkbox"
+                    id="phone"
+                    value="phone"
+                    checked={contactMethod.includes("phone")}
+                    onChange={() => handleContactMethodChange("phone")}
+                    className="circle appearance-none border border-black rounded-full w-4 h-4 checked:bg-red-500 checked:border-transparent"
+                  />
+                  <label htmlFor="phone" className="mx-3 relative top-1">
+                    Phone
+                  </label>
                 </div>
                 <div className="flex justify-center items-center w-fit border">
-                <input
-                  type="checkbox"
-                  id="chat"
-                  value="chat"
-                  checked={contactMethod.includes("chat")}
-                  onChange={() => handleContactMethodChange("chat")}
-                  className="circle appearance-none border border-black rounded-full w-4 h-4 checked:bg-red-500 checked:border-transparent"
-                />
-                <label htmlFor="chat" className="mx-3 relative top-1">
-                  Chat
-                </label>
+                  <input
+                    type="checkbox"
+                    id="chat"
+                    value="chat"
+                    checked={contactMethod.includes("chat")}
+                    onChange={() => handleContactMethodChange("chat")}
+                    className="circle appearance-none border border-black rounded-full w-4 h-4 checked:bg-red-500 checked:border-transparent"
+                  />
+                  <label htmlFor="chat" className="mx-3 relative top-1">
+                    Chat
+                  </label>
                 </div>
                 <div className="flex justify-center items-center w-fit border">
-                <input
-                  type="checkbox"
-                  id="both"
-                  value="both"
-                  checked={contactMethod.includes("both")}
-                  onChange={() => handleContactMethodChange("both")}
-                  className="circle appearance-none border border-black rounded-full w-4 h-4 checked:bg-red-500 checked:border-transparent"
-                />
-                <label htmlFor="both" className="mx-3 relative top-1">
-                  Both
-                </label>
+                  <input
+                    type="checkbox"
+                    id="both"
+                    value="both"
+                    checked={contactMethod.includes("both")}
+                    onChange={() => handleContactMethodChange("both")}
+                    className="circle appearance-none border border-black rounded-full w-4 h-4 checked:bg-red-500 checked:border-transparent"
+                  />
+                  <label htmlFor="both" className="mx-3 relative top-1">
+                    Both
+                  </label>
                 </div>
               </div>
+              {isPhone && (
+                <input
+                  type="number"
+                  id="phoneNumber"
+                  value={productDetails.sellerData.phoneNumber}
+                  onChange={changeHandler}
+                  name="phoneNumber"
+                  placeholder="Phone Number"
+                  className="border rounded px-3 py-2 w-full mt-3"
+                  required
+                />
+              )}
             </div>
             <button
               type="submit"
