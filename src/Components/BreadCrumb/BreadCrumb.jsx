@@ -8,7 +8,7 @@ export const BreadCrumb = () => {
 
 
   return (
-    <nav className="flex mx-28 my-10 w-fit" aria-label="Breadcrumb">
+    <nav className="flex mx-20 my-10 w-fit" aria-label="Breadcrumb">
       <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
         <li className="inline-flex items-center">
           <a
