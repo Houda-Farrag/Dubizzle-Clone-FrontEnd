@@ -25,7 +25,7 @@ export default function Header() {
   const [isOpen1, setIsOpen1] = useState(false);
   const [facebook, setFacebook] = useState(null);
   const [google, setGoogle] = useState();
-  const { login , setEmail } = useLogin();
+  const { login } = useLogin();
   const { data , setData , registerUser } = useRegister()
   const {loginUser} = useLoginWithEmail()
   
@@ -131,7 +131,6 @@ export default function Header() {
                         login={login}
                         setFacebook={setFacebook}
                         setGoogle={setGoogle}
-                        setEmail={setEmail}
                         registerUser={registerUser}
                         setData={setData}
                         loginUser={loginUser}

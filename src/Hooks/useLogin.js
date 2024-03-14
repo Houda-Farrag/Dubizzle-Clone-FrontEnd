@@ -4,7 +4,7 @@ const useLogin = () => {
   const [token, setToken] = useState(null);
   const [email , setEmail] = useState("")
 
-  async function login() {
+  async function login(email) {
     console.log(email)
     try {
       const response = await fetch("http://localhost:3000/api/login", {

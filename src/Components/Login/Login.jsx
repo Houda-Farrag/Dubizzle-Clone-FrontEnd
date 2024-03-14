@@ -9,7 +9,6 @@ function Login({
   setFacebook,
   setGoogle,
   login,
-  setEmail,
   registerUser,
   setData,
   loginUser,
@@ -63,8 +62,7 @@ function Login({
     setIsLoggedIn(true);
     setShowLogin(false);
     await setGoogle(decoded);
-    setEmail(decoded.email);
-    login();
+    login(decoded.email);
   };
 
   const handleFacebookSuccess = async (response) => {
@@ -72,8 +70,7 @@ function Login({
     setIsLoggedIn(true);
     setShowLogin(false);
     setFacebook(response.data);
-    setEmail(response.data.email);
-    login();
+    login(response.data.email);
   };
 
   const handleSignUp = () => {
