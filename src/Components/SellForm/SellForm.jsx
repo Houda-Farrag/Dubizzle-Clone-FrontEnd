@@ -1,4 +1,3 @@
-import upload_area from "../../assets/upload_area.svg";
 import { useEffect, useState } from "react";
 import { BreadCrumb } from "../BreadCrumb/BreadCrumb";
 import { Link, useNavigate } from "react-router-dom";
@@ -6,6 +5,7 @@ import Select from "react-select";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { useMenuSelectionContext } from "../../Context/MenuSelectionContext";
+import usePostProduct from "../../Hooks/usePostProduct";
 
 const SellForm = () => {
   const { selectedCategory, selectedSubCategory } = useMenuSelectionContext();
@@ -19,7 +19,7 @@ const SellForm = () => {
   const [kitchen, setKitchen] = useState(false);
   const [garden, setGarden] = useState(false);
   const [security, setSecurity] = useState(false);
-  const [image, setImage] = useState(false);
+  const [images, setImages] = useState([]);
   const [contactMethod, setContactMethod] = useState([]);
   const [selectedBrand, setSelectedBrand] = useState(null);
   const [isDropdownLocation, setisDropdownLocation] = useState(false);
@@ -27,97 +27,88 @@ const SellForm = () => {
   const [priceType, setPriceType] = useState("");
   const [isproperty, setIsProperty] = useState(false);
   const [isVehicle, setIsVehicle] = useState(false);
-  // const [isMobile, setIsMobile] = useState(false);
   const [brands, setBrands] = useState([]);
   const [isPhone, setIsPhone] = useState(false);
+  const [propertyType, setPropertyType] = useState("");
+  const [amenities, setAmenities] = useState([]);
   const [productDetails, setProductDetails] = useState({
     name: "",
     description: "",
     price: "",
     images: [],
-    sellerData: {
-      userName: "",
-      phoneNumber: "",
-    },
     location: "",
-    category: "",
     price_type: "",
-    subCategory: "",
+    subCategoryId: "",
     contact_type: "",
+    brand: "",
+    model: "",
+    area: "",
+    bedRoom: "",
+    bathRoom: "",
+    phoneNumber: "",
   });
-
-
-  const imageHandler = (e) => {
-    setImage(e.target.files[0]);
-  };
 
   const changeHandler = (e) => {
     const { name, value } = e.target;
-    if (name == "userName" || name == "phoneNumber") {
-      setProductDetails((prevState) => ({
-        ...prevState,
-        sellerData: {
-          ...prevState.sellerData,
-          [name]: value,
-        },
-      }));
-    } else {
-      setProductDetails((prevState) => ({
-        ...prevState,
-        [name]: value,
-      }));
-    }
+    setProductDetails((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
 
-  const addProduct = async () => {
-    let responseData;
-    let product = {
-      ...productDetails,
-      price_type: priceType,
-      category: selectedCategory,
-      subCategory: selectedSubCategory,
-      contact_type: contactMethod,
-    };
-    let formData = new FormData();
-    formData.append("product", image);
+  // const addProduct = async (product, selectedSubCategory) => {
+  //   const token = localStorage.getItem("jwt");
+  //   try {
+  //     const responseSubCate = await fetch(
+  //       `http://localhost:3000/sub-category/${selectedSubCategory}`
+  //     );
 
-    await fetch("http://localhost:3000/upload", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-      },
-      body: formData,
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        responseData = data;
-      });
+  //     const resCat = await responseSubCate.json();
 
-    if (responseData) {
-      product.images.push(responseData.image_url);
-      await fetch("http://localhost:3000/products/add", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "content-Type": "application/json",
-        },
-        body: JSON.stringify(product),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-          if (data && data.success === 1) {
-            alert("Product Saved Successfully");
-            window.location.reload();
-          } else {
-            alert("There was an issue saving the product. Please try again.");
-          }
-        })
-        .catch((error) => {
-          console.error("Error saving product:", error);
-          alert("An error occurred while saving the product.");
-        });
+  //     if (resCat.ok) {
+  //       product.subCategoryId = resCat.subCategoryId;
+
+  //     const addProductResponse = await fetch(
+  //       "http://localhost:3000/products/add",
+  //       {
+  //         method: "POST",
+  //         headers: {
+  //           Accept: "application/json",
+  //           "Content-Type": "application/json",
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //         body: JSON.stringify(product),
+  //       }
+  //     );
+
+  //     const addProductData = await addProductResponse.json();
+
+  //     if (addProductData && addProductData.success === 1) {
+  //       alert("Product Saved Successfully");
+  //       navigate("/")
+  //     } else {
+  //       alert("There was an issue saving the product. Please try again.");
+  //     }
+  //   }
+  //   } catch (error) {
+  //     console.error("Error saving product:", error);
+  //     alert("An error occurred while saving the product.");
+  //   }
+  // };
+
+  const imageHandler = (e, index) => {
+    const files = e.target.files;
+    const newImages = [];
+
+    for (let i = 0; i < Math.min(files.length, 5); i++) {
+      newImages.push(URL.createObjectURL(files[i]));
     }
+
+    setImages((prevImages) => {
+      const updatedImages = [...prevImages];
+      updatedImages[index] = newImages[0];
+      return updatedImages;
+    });
   };
 
   const toggleDropdownLocation = (e) => {
@@ -125,7 +116,14 @@ const SellForm = () => {
     setisDropdownLocation((prevState) => !prevState);
   };
 
-  const dropdownItems = ["Cairo", "Alexandria", "Asuit", "Aswan", "Qena"];
+  const dropdownItems = [
+    "Cairo",
+    "Alexandria",
+    "Asuit",
+    "Aswan",
+    "Qena",
+    "Sohag",
+  ];
 
   const handleNegotiableChange = () => {
     setNegotiable(true);
@@ -147,38 +145,73 @@ const SellForm = () => {
     setFree(true);
     setPriceType("free");
   };
+
   const handleDuplex = () => {
     setDuplex(true);
     setTownHouse(false);
     setStandAlone(false);
-    setPriceType("Duplex");
+    setPropertyType("Duplex");
   };
 
   const handleTownHouse = () => {
     setDuplex(false);
     setTownHouse(true);
     setStandAlone(false);
-    setPriceType("Town House");
+    setPropertyType("Town House");
   };
 
   const handleStandAlone = () => {
     setDuplex(false);
     setTownHouse(false);
     setStandAlone(true);
-    setPriceType("Stand Alone");
+    setPropertyType("Stand Alone");
   };
 
-  const handleBalcony = () => {
-    setBalcony(!balcony);
+  const handleBalcony = (event) => {
+    setBalcony(event.target.checked);
+    if (event.target.checked) {
+      setAmenities((prevAmenities) => [...prevAmenities, "balcony"]);
+    } else {
+      setAmenities((prevAmenities) =>
+        prevAmenities.filter((amenity) => amenity !== "balcony")
+      );
+    }
   };
-  const handlekitchen = () => {
-    setKitchen(!kitchen);
+
+  const handlekitchen = (event) => {
+    setKitchen(event.target.checked);
+    if (event.target.checked) {
+      setAmenities((prevAmenities) => [
+        ...prevAmenities,
+        "Built in Kitchen Appliances",
+      ]);
+    } else {
+      setAmenities((prevAmenities) =>
+        prevAmenities.filter(
+          (amenity) => amenity !== "Built in Kitchen Appliances"
+        )
+      );
+    }
   };
-  const handleSecurity = () => {
-    setSecurity(!security);
+  const handleSecurity = (event) => {
+    setSecurity(event.target.checked);
+    if (event.target.checked) {
+      setAmenities((prevAmenities) => [...prevAmenities, "security"]);
+    } else {
+      setAmenities((prevAmenities) =>
+        prevAmenities.filter((amenity) => amenity !== "security")
+      );
+    }
   };
-  const handleGarden = () => {
-    setGarden(!garden);
+  const handleGarden = (event) => {
+    setGarden(event.target.checked);
+    if (event.target.checked) {
+      setAmenities((prevAmenities) => [...prevAmenities, "private garden"]);
+    } else {
+      setAmenities((prevAmenities) =>
+        prevAmenities.filter((amenity) => amenity !== "private garden")
+      );
+    }
   };
 
   const handleContactMethodChange = (method) => {
@@ -204,17 +237,29 @@ const SellForm = () => {
     setisDropdownLocation(false);
   };
 
+  const {addProduct} = usePostProduct()
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await addProduct();
+    let product = {
+      ...productDetails,
+      price_type: priceType,
+      propertyType: propertyType,
+      contact_type: contactMethod,
+      amenities: amenities,
+      images: images,
+      brand: selectedBrand?.value,
+    };
+    addProduct(product, selectedSubCategory);
+    console.log(product);
   };
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handlePageRefresh = () => {
       if (performance.navigation.type === 1) {
-        navigate("/sell")
+        navigate("/sell");
       }
     };
     window.addEventListener("load", handlePageRefresh);
@@ -242,9 +287,8 @@ const SellForm = () => {
         ]);
       }
     };
-    
+
     const isMobileSelected = async () => {
-      // setIsMobile(true);
       setBrands([
         { value: "Apple", label: "Apple" },
         { value: "Samsung", label: "Samsung" },
@@ -255,7 +299,7 @@ const SellForm = () => {
     isVehicleSelected();
     isPropertySelected();
     return () => window.removeEventListener("load", handlePageRefresh);
-  }, [setIsProperty, selectedCategory]);
+  }, [setIsProperty, selectedCategory, navigate, productDetails]);
 
   return (
     <>
@@ -316,6 +360,9 @@ const SellForm = () => {
                 <label className="block mb-1">Model:</label>
                 <input
                   type="text"
+                  name="model"
+                  value={productDetails.model}
+                  onChange={changeHandler}
                   className="border px-3 py-2 w-full rounded"
                   required
                 />
@@ -336,33 +383,25 @@ const SellForm = () => {
                       onChange={handleDuplex}
                       className="circle bg-white appearance-none border border-black rounded-full w-4 h-4 checked:bg-red-500 checked:border-transparent"
                     />
-                    <label htmlFor="negotiable" className="mx-3 relative top-1">
-                      Duplex
-                    </label>
+                    <label className="mx-3 relative top-1">Duplex</label>
                   </div>
                   <div className="p-2 border w-fit flex justify-center items-center">
                     <input
                       type="checkbox"
-                      id="exchange"
                       checked={standAlone}
                       onChange={handleStandAlone}
                       className="circle appearance-none border border-black rounded-full w-4 h-4 checked:bg-red-500 checked:border-transparent"
                     />
-                    <label htmlFor="exchange" className="mx-3 relative top-1">
-                      Stand Alone
-                    </label>
+                    <label className="mx-3 relative top-1">Stand Alone</label>
                   </div>
                   <div className="p-2 border w-fit flex justify-center items-center">
                     <input
                       type="checkbox"
-                      id="free"
                       checked={townHouse}
                       onChange={handleTownHouse}
                       className="circle bg-white appearance-none border border-black rounded-full w-4 h-4 checked:bg-red-500"
                     />
-                    <label htmlFor="free" className="mx-3 relative top-1">
-                      Town House
-                    </label>
+                    <label className="mx-3 relative top-1">Town House</label>
                   </div>
                 </div>
               </div>
@@ -373,8 +412,10 @@ const SellForm = () => {
                   Area (m<span className="relative text-sm bottom-1">2</span>):
                 </label>
                 <input
-                  type="number"
+                  type="text"
                   name="area"
+                  value={productDetails.area}
+                  onChange={changeHandler}
                   className="w-full border rounded px-3 py-2 mt-3"
                 />
               </div>
@@ -440,16 +481,20 @@ const SellForm = () => {
                 <div className="mb-4">
                   <label>Bedrooms:</label>
                   <input
-                    type="number"
-                    name="bedrooms"
+                    type="text"
+                    name="bedRoom"
+                    value={productDetails.bedRoom}
+                    onChange={changeHandler}
                     className="w-full border rounded px-3 py-2 mt-3"
                   />
                 </div>
                 <div className="mb-4">
                   <label>Bathrooms:</label>
                   <input
-                    type="number"
-                    name="bathrooms"
+                    type="text"
+                    name="bathRoom"
+                    value={productDetails.bathRoom}
+                    onChange={changeHandler}
                     className="w-full border rounded px-3 py-2 mt-3"
                   />
                 </div>
@@ -543,25 +588,42 @@ const SellForm = () => {
             </div>
             <hr className="mb-3 w-full" />
 
-            <div className="add-product-itemfield">
+            <div className="add-product-itemfield flex flex-col">
               <label className="text-2xl font-bold mb-5">
                 Upload Up to 5 Photos
               </label>
-              <label htmlFor="file-input">
-                <img
-                  src={image ? URL.createObjectURL(image) : upload_area}
-                  className="w-36 my-4"
-                  alt=""
-                />
-              </label>
-              <input
-                onChange={imageHandler}
-                type="file"
-                name="image"
-                id="file-input"
-                hidden
-              />
+              <div className="flex gap-4 w-fit">
+                {[...Array(5)].map((_, index) => (
+                  <div
+                    key={index}
+                    className="relative justify-center items-center "
+                  >
+                    {images[index] && (
+                      <img
+                        src={images[index]}
+                        className="w-40 h-36 object-cover my-4"
+                        alt=""
+                      />
+                    )}
+                    <input
+                      onChange={(e) => imageHandler(e, index)}
+                      type="file"
+                      name={`image-${index}`}
+                      id={`file-input-${index}`}
+                      multiple={false}
+                      className="hidden"
+                    />
+                    <label
+                      htmlFor={`file-input-${index}`}
+                      className="flex bottom-0 w-fit justify-center items-center bg-green-500 text-white px-4 py-2 text-center cursor-pointer rounded-md"
+                    >
+                      {images[index] ? "Change Image" : "Upload Image"}
+                    </label>
+                  </div>
+                ))}
+              </div>
             </div>
+
             <hr className="w-full mt-3" />
             <div className="mb-6 w-fit">
               <label
@@ -667,14 +729,12 @@ const SellForm = () => {
               </div>
               {isPhone && (
                 <input
-                  type="number"
-                  id="phoneNumber"
-                  value={productDetails.sellerData.phoneNumber}
-                  onChange={changeHandler}
+                  type="text"
                   name="phoneNumber"
+                  value={productDetails.phoneNumber}
+                  onChange={changeHandler}
                   placeholder="Phone Number"
                   className="border rounded px-3 py-2 w-full mt-3"
-                  required
                 />
               )}
             </div>

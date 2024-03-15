@@ -2,7 +2,6 @@ import { useState } from "react";
 
 const useLogin = () => {
   const [token, setToken] = useState(null);
-  const [email , setEmail] = useState("")
 
   async function login(email) {
     console.log(email)
@@ -23,7 +22,7 @@ const useLogin = () => {
       console.error("Error logging in:", error);
     }
   }
-  return { login, token , setToken , setEmail };
+  return { login, token , setToken };
 };
 
 export default useLogin;
