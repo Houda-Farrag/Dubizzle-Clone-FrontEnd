@@ -3,17 +3,40 @@ import { FaRegBell } from "react-icons/fa";
 import { FaAngleUp, FaAngleDown } from "react-icons/fa6";
 import { BsFillBuildingFill } from "react-icons/bs";
 import { IoLocation, IoHomeSharp, IoSearchSharp, IoChatbubbleOutline, IoArrowBack, IoArrowUp } from "react-icons/io5";
+import { LuEye } from "react-icons/lu";
 
 import '../CategorySubComp/CategorySub.css'
 import './Header.css'
 import DropDownList from '../DropDownListComp/DropDownList';
 import { useNavigate } from 'react-router-dom';
+import arrowDown from '../../assets/images/iconArrowDown_noinline.ec05eae7013321c193965ef15d4e2174.svg'
+import Wallet from '../../assets/images/iconWallet.svg'
+import myAds from '../../assets/images/iconMyAds.svg'
+import Heart from '../../assets/images/iconHeart.svg'
+import BusinessPackage from '../../assets/images/iconBusinessPackage.svg'
+import BoughtPackage from '../../assets/images/iconBoughtPackage.svg'
+import Blog from '../../assets/images/iconBlog.svg'
+import Help from '../../assets/images/iconHelp.svg'
+import Filters from '../../assets/images/iconFilters.svg'
+import Logout from '../../assets/images/iconLogout.svg'
+
+
 
 export default function Header() {
 
   const [isOpen, setIsOpen] = useState(false);
   const [isOpen1, setIsOpen1] = useState(false);
 
+  //////
+
+  const [showProfileList, setShowProfileList] = useState(false)
+  const [rotated, setrotated] = useState('')
+  const toggleProfileList = () => {
+    (rotated == '') ? setrotated('rotate-180') : setrotated('')
+    setShowProfileList(!showProfileList)
+  }
+
+  ///
 
   const navigate = useNavigate()
   const togglebutton = () => {
@@ -82,15 +105,98 @@ export default function Header() {
                   <FaRegBell className='h-14 text-xl' />
                 </button>
               </div>
-              <div className='relative'>
 
-                <div className='grid grid-flow-col item-center col-span-3'>
-                  <DropDownList props={<button onClick={showProfileDetials} className=' grid h-14 grid-flow-col item-center items-center w-full font-bold justify-evenly max-w-full'>
-                    <span className='bg-red-100 p-2 hover:bg-red-300 border rounded-full'>M</span>
-                    {(isOpen1) ? <FaAngleUp className='w-full text-xl' /> : < FaAngleDown className='w-full text-xl' />}
-                  </button>}></DropDownList>
-                </div>
+
+              <div onClick={toggleProfileList} className="relative mt-3 ms-2">
+                <p className="font-bold text-sm hover:cursor-pointer flex" ><span className='bg-red-50 text-red-600 w-8 h-8 flex justify-center items-center  rounded-full'>A</span>
+                  <img src={arrowDown} width={25} height={25} className={`${rotated} ms-2 transition-all`} /></p>
+
+                {showProfileList &&
+                  <div className="profile absolute right-0 bg-white text-black shadow-2xl overflow-y-scroll  top-12 rounded-sm w-vw-21/100  h-vh-80/100">
+                    <div className='border-b pb-4 border-gray-300'>
+                      <div className="name flex p-4 gap-4 items-center  relative text-sm" ><span className='bg-red-50 text-2xl font-bold text-red-600 w-16 h-16 flex justify-center items-center  rounded-full'>A</span>
+                        <div>
+                          <p className='text-md'>Hello,</p>
+                          <p className='text-xl font-bold'>Ahmed Khalifa</p>
+                        </div>
+                      </div>
+                      <div className='edit px-4'>
+                        <p className=' cursor-pointer font-semibold text-sm text-center border border-red-500
+                             p-2 hover:bg-red-50 rounded-lg' onClick={() => { navigate('/EditProfile') }}>View and edit profile
+                        </p>
+                      </div>
+                    </div>
+                    <div className='border-b border-gray-300'>
+                      <div className='flex items-center ps-4 h-12 bg-red-50 hover:bg-slate-100 cursor-pointer'>
+                        <img src={Wallet} width={23} height={21} />
+                        <div className='ms-3 h-10'>
+                          <p style={{ marginTop: "-2px" }}>Dubbizle Wallet</p>
+                          <p className='text-xs'>Balance: EGP 0</p>
+                        </div>
+                      </div>
+                      <div className='flex items-center ps-4 h-11 hover:bg-slate-100 cursor-pointer'>
+                        <div className='w-6 flex justify-center'>
+                        <img src={myAds} width={23} height={24} />                      
+                        </div>
+                        <p className='ms-3'>My Ads</p>
+                      </div>
+                      <div className='flex items-center ps-4 h-11 hover:bg-slate-100 cursor-pointer'>
+                        <div className='w-6 flex justify-center'>
+                        <img src={Heart} width={23} height={24} />                 
+                        </div>
+                        <p className='ms-3'>Favourite</p>
+                      </div>
+                      <div className='flex items-center ps-4 h-11 hover:bg-slate-100 cursor-pointer'>
+                        <div className='w-6 flex justify-center'>
+                        <LuEye className='w-6 h-5'/>                        
+                        </div>
+                        <p className='ms-3'>Public Profile</p>
+                      </div>
+                      <div className='flex items-center ps-4 h-11 hover:bg-slate-100 cursor-pointer'>
+                        <div className='w-6 flex justify-center'>
+                        <img src={BusinessPackage} width={22} height={24} />                             
+                        </div>
+                        <p className='ms-3'>Buy Discounted Packages</p>
+                      </div>
+                      <div className='flex items-center ps-4 h-11 hover:bg-slate-100 cursor-pointer'>
+                        <div className='w-6 flex justify-center'>
+                        <img src={BoughtPackage} width={23} height={24} />                               
+                        </div>
+                        <p className='ms-3'>Bought Packages & Billing</p>
+                      </div>
+
+                    </div>
+
+                    <div className='blogHelp border-b border-gray-300'>
+                      <div className='flex items-center ps-4 h-11 hover:bg-slate-100 cursor-pointer'>
+                        <div className='w-6 flex justify-center'>
+                        <img src={Blog} width={23} height={24} />                      
+                        </div>
+                        <p className='ms-3'>Blog</p>
+                      </div>
+                      <div className='flex items-center ps-4 h-11 hover:bg-slate-100 cursor-pointer'>
+                        <div className='w-6 flex justify-center'>
+                        <img src={Help} width={23} height={24} />                 
+                        </div>
+                        <p className='ms-3'>Help</p>
+                      </div>
+                      <div className='flex items-center ps-4 h-11 hover:bg-slate-100 cursor-pointer'>
+                        <div className='w-6 flex justify-center'>
+                        <img src={Filters} width={23} height={24} />                         
+                        </div>
+                        <p className='ms-3'>Setting</p>
+                      </div>
+                    </div>
+                    <div className='flex items-center ps-4 h-11 hover:bg-slate-100 cursor-pointer'>
+                        <div className='w-6 flex justify-center'>
+                        <img src={Logout} width={23} height={24} />                         
+                        </div>
+                        <p className='ms-3'>Logout</p>
+                      </div>
+                  </div>
+                }
               </div>
+
 
 
               <button className='col-span-5 h-14 border bg-red-500 hover:bg-red-600 rounded-lg text-white font-bold'>Sell</button>

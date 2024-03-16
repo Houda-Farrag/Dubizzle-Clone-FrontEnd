@@ -6,9 +6,9 @@ import arrowDown from '../../assets/images/iconArrowDown_noinline.ec05eae7013321
 import { useState } from "react";
 import stylesForm from './SubCategoryProducts.module.css'
 const SubCategoryProducts = () => {
-  const [showSortedList, setShowSortedList] = useState(false)
   const [selectSort, setSelectSort] = useState('Newly listed')
   const [sortedWay, setSortedWay] = useState([true, false, false, false, false])
+  const [showSortedList, setShowSortedList] = useState(false)
   const [rotated, setrotated] = useState('')
   const toggleSortedList = () => {
     (rotated == '') ? setrotated('rotate-180') : setrotated('')

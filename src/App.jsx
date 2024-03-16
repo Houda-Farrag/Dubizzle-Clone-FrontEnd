@@ -12,6 +12,7 @@ import Favorite from './Pages/Favorite/Favorite'
 
 
 import SubCategoryProducts from './Pages/SubCategoryProducts/SubCategoryProducts'
+import EditProfile from './Pages/EditProfile/EditProfile'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -21,7 +22,8 @@ function App() {
       { index: true, element: <Home /> },
 
       { path: 'favorite', element: <Favorite /> },
-      { path: '/subCategoryProducts', element: <SubCategoryProducts /> }
+      { path: '/subCategoryProducts', element: <SubCategoryProducts /> },
+      { path: '/EditProfile', element: <EditProfile /> }
     ]
   }, { path: '/property', element: <Property /> }])
 

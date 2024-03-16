@@ -8,6 +8,7 @@ import CategoriesCard from '../../Components/CategoriesCard/CategoriesCard'
 import ProductHomeCardComp from '../../Components/ProductHomeCardComp/ProductHomeCardComp'
 import { useEffect, useState } from 'react'
 import slideImage from '../../assets/images/dubbizleSlider.jpg'
+import EditProfile from '../EditProfile/EditProfile'
 
 export default function Home() {
 
@@ -32,7 +33,7 @@ export default function Home() {
             })
     }
     async function getProducts() {
-        await fetch("http://localhost:3000/products")
+        await fetch("http://localhost:3000/products/get")
             .then((res) => {
                 return res.json()
             })
@@ -58,9 +59,9 @@ export default function Home() {
             <CategorySub></CategorySub>
             <DubbizleSlider name="home" img= {slideImage}/>
             <PopularCategories></PopularCategories>
-
+            
             <CategoriesCard catName={"Villas For Sale"} dataProd={products}> </CategoriesCard>
-
+            
 
             <ProductHomeCardComp></ProductHomeCardComp>
         </div>
