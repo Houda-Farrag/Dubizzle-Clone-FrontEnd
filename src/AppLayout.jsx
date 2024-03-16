@@ -7,7 +7,7 @@ export default function AppLayout() {
     return <>
 
         <Header></Header>
-        <div className='container mt-32'>
+        <div className='mt-32 '>
             <Outlet />
         </div>
 
