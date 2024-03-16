@@ -10,7 +10,7 @@ export default function Favorite() {
         <div className=' grid grid-flow-col mt-5  items-center' style={{ minHeight: "50vh", margin: "19vh 0" }}>
             <div className='flex col-auto justify-between flex-wrap' >
 
-                {(true) ? <div> <Button variant="contained">Hello world</Button></div> : favorite.map((catData) => {
+                {(false) ? <div> <Button variant="contained">Hello world</Button></div> : favorite.map((catData) => {
                     return catData.images[0] && <Card key={catData._id}
                         hoverable
                         style={{ Width: 700 }}

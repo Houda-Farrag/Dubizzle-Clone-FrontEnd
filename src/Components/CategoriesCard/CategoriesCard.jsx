@@ -34,7 +34,7 @@ export default function CategoriesCard({ catName, dataProd }) {
         <a className="font-semi bold  mb-2 mt-6 text-red-500 font-bold" href="">View more </a>
       </div>
       <div className="flex col-auto justify-between flex-wrap">
-        {dataProd1.map((catData) => (
+        {dataProd.map((catData) => (
           <Link key={catData.id} to={`/product-details/${catData._id}`}>
             <Card
               onClick={(e) => {
