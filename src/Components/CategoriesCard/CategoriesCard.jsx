@@ -65,7 +65,7 @@ export default function CategoriesCard({ catName, dataProd }) {
                                     <button onClick={(e) => {
                                         e.stopPropagation()
                                         addToFav(catData)
-                                        console.log("ttt", Favorit)
+                                        
                                     }}
                                     >
                                         {(check(catData._id)) ? <FaHeart /> : <FaRegHeart />}
