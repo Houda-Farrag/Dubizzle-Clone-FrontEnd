@@ -25,6 +25,7 @@ export default function CategoriesCard({ catName, dataProd }) {
       dispatch(removeFromFavorite(obj));
     }
   };
+  let dataProd1=[]
 
   return (
     <div className="">
@@ -33,12 +34,12 @@ export default function CategoriesCard({ catName, dataProd }) {
         <a className="font-semi bold  mb-2 mt-6 text-red-500 font-bold" href="">View more </a>
       </div>
       <div className="flex col-auto justify-between flex-wrap">
-        {dataProd.map((catData) => (
+        {dataProd1.map((catData) => (
           <Link key={catData.id} to={`/product-details/${catData._id}`}>
             <Card
               onClick={(e) => {
                 e.stopPropagation();
-                setId(catData._id); 
+                setId(catData._id);
               }}
               hoverable
               style={{ Width: 700 }}
