@@ -18,7 +18,12 @@ export default function Home() {
     async function getProducts() {
         await fetch("http://localhost:3000/products/get").then((res) => {
             return res.json()
-        }).then((data) => setProducts(data.slice(0,4)))
+        }).then((data) => {
+
+            setProducts(data.slice(0, 4))
+            console.log(Products)
+        }
+        )
             .catch((err) => { console.log(err) })
     }
 
