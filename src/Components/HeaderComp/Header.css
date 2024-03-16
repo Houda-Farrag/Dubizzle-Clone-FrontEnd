@@ -19,3 +19,37 @@
 
     border-color: aqua !important;
 }
+
+.tt1 {}
+
+.hidecontent {}
+
+.dis-flex {}
+
+.show-input-responsive {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .tt1 {
+        position: fixed;
+        bottom: 4%;
+        left: 40%;
+        width: 25%;
+        height: 40px;
+        background: red;
+    }
+
+    .hidecontent {
+        display: none;
+    }
+
+    .dis-flex {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .show-input-responsive {
+        display: block;
+    }
+}

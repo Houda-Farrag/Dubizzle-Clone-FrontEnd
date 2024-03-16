@@ -1,10 +1,17 @@
-export const Details = () => {
+import { useEffect, useState } from "react";
+
+export const Details = ({ product }) => {
+  const [productData, setProductDate] = useState(null);
+
+  useEffect(() => {
+    setProductDate(product);
+  }, [product]);
   return (
-    <div className="my-10">
-      <div className="relative left-28 flex flex-col rounded-xlspace-y-6 w-5/12 col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow">
+    <div className="w-[650px] my-10">
+      <div className="relative left-28 flex flex-col rounded-xlspace-y-6 col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow">
         <div className="p-6">
           <h1 className="mb-2 block font-sans text-3xl font-bold leading-snug tracking-normal text-red-600 antialiased">
-            EGP 22,000
+            EGP {productData?.price}
           </h1>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -17,7 +24,7 @@ export const Details = () => {
           </svg>
 
           <p className="block font-sans text-base font-semibold leading-relaxed text-inherit antialiased">
-            Town house for rent 245m
+            {productData?.description}
           </p>
           <span className="my-5 mb-4 block font-sans text-base leading-relaxed text-inherit antialiased">
             <span>
@@ -28,12 +35,12 @@ export const Details = () => {
                 src="https://img.icons8.com/ios/50/marker--v1.png"
                 alt="marker--v1"
               />
-              <span className="absolute left-14">El-Shorouk City</span>
+              <span className="absolute left-14">{productData?.location}</span>
             </span>
           </span>
         </div>
       </div>
-      <div className="relative left-28 top-10 flex flex-col rounded-xlspace-y-6 w-5/12 col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow">
+      <div className="relative left-28 top-10 flex flex-col rounded-xlspace-y-6 col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow">
         <div className="p-6">
           <h1 className="mb-2 block font-sans text-3xl font-bold leading-snug tracking-normal text-black antialiased">
             Details
@@ -45,7 +52,7 @@ export const Details = () => {
               <p className="my-5">Bathrooms</p>
             </div>
             <div>
-              <p className="font-semibold my-5">22,000</p>
+              <p className="font-semibold my-5">{productData?.price}</p>
               <p className="font-semibold my-5">245m</p>
               <p className="font-semibold my-5">4</p>
             </div>
@@ -60,24 +67,18 @@ export const Details = () => {
           </div>
         </div>
       </div>
-      <div className="relative left-28 top-12 flex flex-col rounded-xlspace-y-6 w-5/12 col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow">
+      <div className="relative left-28 top-12 flex flex-col rounded-xlspace-y-6 col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow">
         <div className="p-6">
           <h1 className="mb-2 block font-sans text-3xl font-bold leading-snug tracking-normal text-black antialiased">
             Description
           </h1>
-          <p>
-            تاون هاوس للايجار 245 م في كمبوند البروج في الشروق . ارضى و اول و
-            روف . ارضى : ريسبشن + حمام +مطبخ + مخزن . الدور الأول : ٣ غرف نوم +
-            ٢ حمام . الروف : غرفة نوم بالحمام . كما يوجد لدينا كافة المساحات
-            المختلفة . للمعاينة والاستفسار : 01017955591 - 01004900298 . كود
-            الاعلان : 13 .
-          </p>
+          <p>{productData?.description}</p>
         </div>
       </div>
-      <div className="relative left-28 top-16 flex flex-col rounded-xlspace-y-6 w-5/12 col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow">
-      <h1 className="mb-2 block font-sans text-3xl font-bold leading-snug tracking-normal text-black antialiased">
-            Location
-          </h1>
+      <div className="relative left-28 top-16 flex flex-col rounded-xlspace-y-6 col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow">
+        <h1 className="mb-2 block font-sans text-3xl font-bold leading-snug tracking-normal text-black antialiased">
+          Location
+        </h1>
         <div style={{ width: "100%" }}>
           <iframe
             width="100%"
@@ -86,17 +87,19 @@ export const Details = () => {
             scrolling="no"
             marginHeight={0}
             marginWidth={0}
-            src="https://maps.google.com/maps?width=100%25&height=600&hl=en&q=El-shorouk%20city%20,egypt+(Dubizzle)&t=&z=14&ie=UTF8&iwloc=B&output=embed"
+            src={`https://maps.google.com/maps?width=100%25&height=600&hl=en&q=${productData?.location},egypt+(Dubizzle)&t=&z=14&ie=UTF8&iwloc=B&output=embed`}
           >
-            &lt;a href="https://www.gps.ie/"&gt;gps vehicle tracker&lt;/a&gt;
+            <a href="https://www.gps.ie/">gps vehicle tracker</a>
           </iframe>
         </div>
       </div>
-      <div className="relative left-28 top-24 rounded-xlspace-y-6 w-5/12 col-span-1 ">
-        <p>AD ID 654545</p>
-        <p className="font-bold absolute right-0 top-0 hover:underline cursor-pointer ">Report this ad</p>
+      <div className="relative left-28 top-24 rounded-xlspace-y-6 col-span-1 ">
+        <p>AD ID {productData?.id}</p>
+        <p className="font-bold absolute right-0 top-0 hover:underline cursor-pointer ">
+          Report this ad
+        </p>
       </div>
-      <hr className="relative left-28 top-24 w-5/12 border-1 border-black" />
+      <hr className="relative left-28 top-24 border-1 border-black" />
     </div>
   );
 };

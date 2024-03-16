@@ -5,14 +5,14 @@ import CategorySub from '../../Components/CategorySubComp/CategorySub'
 import DubbizleSlider from '../../Components/DubbizleSlider/DubbizleSlider'
 import PopularCategories from '../../Components/popularCategories/PopularCategories'
 import CategoriesCard from '../../Components/CategoriesCard/CategoriesCard'
-import ProductHomeCardComp from '../../Components/ProductHomeCardComp/ProductHomeCardComp'
 import { useEffect, useState } from 'react'
 import slideImage from '../../assets/images/dubbizleSlider.jpg'
+import UseGetAllProducts from '../../Hooks/UseGetAllProducts'
 
 export default function Home() {
+    const { products } = UseGetAllProducts()
 
     const [Category, setCategory] = useState([])
-    const [products, setProducts] = useState([])
 
 
     // http://localhost:3000/categories
@@ -31,36 +31,24 @@ export default function Home() {
                 console.log(err)
             })
     }
-    async function getProducts() {
-        await fetch("http://localhost:3000/products")
-            .then((res) => {
-                return res.json()
-            })
-            .then(({ products }) => {
-                console.log(products)
-                setProducts(products)
 
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-    }
     useEffect(() => {
         getCategory()
-        getProducts()
     }, [])
-    const aut = 'autoplay'
+
     return <>
 
-        <div style={{ position: 'relative', marginBottom: '200px' }} className='mt-36'  >
+        <div style={{ position: 'relative', marginBottom: '200px' }} className='sm:mt-36 md:container '  >
 
             <CategorySub></CategorySub>
-            <DubbizleSlider name="home" img= {slideImage}/>
+            <DubbizleSlider name="home" img={slideImage} />
             <PopularCategories></PopularCategories>
 
-            <CategoriesCard catName={"Villas For Sale"} dataProd={products}> </CategoriesCard>
+            {/* <CategoriesCard catName={"Cars For Sale"} dataProd={products}></CategoriesCard>
+            <CategoriesCard catName={"Cars For Rent"} dataProd={products}></CategoriesCard>
+            <CategoriesCard catName={"Property For Rent"} dataProd={products}></CategoriesCard>
+            <CategoriesCard catName={"Property For Sale"} dataProd={products}></CategoriesCard> */}
 
-            <ProductHomeCardComp></ProductHomeCardComp>
         </div>
 
     </>

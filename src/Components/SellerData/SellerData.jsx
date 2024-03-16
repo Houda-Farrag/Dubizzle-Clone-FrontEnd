@@ -1,16 +1,24 @@
 import { NavLink } from "react-router-dom";
 import img_6 from "../../assets/6.jpg";
 import icon from "../../assets/7.png";
+import { useEffect, useState } from "react";
 
-export const SellerData = () => {
+export const SellerData = ({product}) => {
+  const [sellerData , setSellerDate] = useState(null)
+  const [productData , setProductDate] = useState(null)
+
+  useEffect(()=>{
+    setSellerDate(product?.sellerData)
+    setProductDate(product)
+  },[product])
   return (
-    <div className="flex-col absolute right-48 top-28 space-y-6 w-2/6 col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow">
+    <div className="flex-col absolute right-48 w-[512px] top-28 space-y-6 col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow">
       <div className="flex w-full items-center justify-between space-x-6 p-6">
         <NavLink to="/property">
           <div className="flex-1 truncate">
             <div className="flex items-center space-x-3">
               <h3 className="mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
-                DRE
+                {sellerData?.userName}
               </h3>
               <span className="inline-flex flex-shrink-0 items-center rounded-full bg-green-50 px-1.5 py-0.5 text-xs font-medium text-red-600 ring-1 ring-inset ring-green-600/20">
                 member
@@ -18,7 +26,7 @@ export const SellerData = () => {
             </div>
             <p className="mt-1 truncate text-sm text-gray-500">since 2016</p>
             <p className="mt-1 truncate text-sm text-gray-500">
-              Comm.ID: 87456312
+              Comm.ID: {productData?._id}
             </p>
             <h2 className="mt-4 text-sm text-red-600">
               See Profile{" "}
@@ -40,7 +48,7 @@ export const SellerData = () => {
         <div className="-mt-px flex divide-x divide-gray-200 ">
           <div className="flex w-0 flex-1  bg-red-200 rounded-2xl hover:bg-red-400">
             <a
-              href="mailto:howpossible17@example.com"
+              href="/chat"
               className="relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-900"
             >
               <svg
@@ -72,7 +80,7 @@ export const SellerData = () => {
                   clipRule="evenodd"
                 />
               </svg>
-              Show Phone Number
+              {sellerData?.phoneNumber}
             </a>
           </div>
         </div>

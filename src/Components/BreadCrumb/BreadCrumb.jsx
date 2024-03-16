@@ -1,19 +1,14 @@
-import { useEffect } from "react";
 import { useMenuSelectionContext } from "../../Context/MenuSelectionContext";
 
 export const BreadCrumb = () => {
   const {
-    selectedMenuItem,
-    selectedSubMenu1,
-    selectedSubMenu2,
+    selectedCategory,
+    selectedSubCategory,
   } = useMenuSelectionContext();
 
-  useEffect(()=>{
-    console.log(selectedMenuItem, selectedSubMenu1, selectedSubMenu2);
-  },[selectedMenuItem, selectedSubMenu1, selectedSubMenu2])
 
   return (
-    <nav className="flex mx-28 my-10 w-fit" aria-label="Breadcrumb">
+    <nav className="flex mx-20 my-10 w-fit" aria-label="Breadcrumb">
       <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
         <li className="inline-flex items-center">
           <a
@@ -53,7 +48,7 @@ export const BreadCrumb = () => {
               href="#"
               className="inline-flex items-center text-sm font-medium text-red-400 hover:text-red-600 dark:text-red-400 dark:hover:text-white"
             >
-              {selectedMenuItem}
+              {selectedCategory}
             </a>
           </div>
         </li>
@@ -75,34 +70,10 @@ export const BreadCrumb = () => {
               />
             </svg>
             <span className="inline-flex items-center text-sm font-medium text-red-400 hover:text-red-600 dark:text-red-400 dark:hover:text-white">
-              {selectedSubMenu1}
+              {selectedSubCategory}
             </span>
           </div>
         </li>
-        {selectedSubMenu2 && (
-          <li aria-current="page">
-            <div className="flex items-center">
-              <svg
-                className="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 6 10"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="m1 9 4-4-4-4"
-                />
-              </svg>
-              <span className="inline-flex items-center text-sm font-medium text-red-400 hover:text-red-600 dark:text-red-400 dark:hover:text-white">
-                {selectedSubMenu2}
-              </span>
-            </div>
-          </li>
-        )}
       </ol>
     </nav>
   );
