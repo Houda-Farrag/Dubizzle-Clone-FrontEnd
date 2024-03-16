@@ -7,11 +7,10 @@ export default function AppLayout() {
     return <>
 
         <Header></Header>
-        <div className='container mt-32'>
+        <div className='md:mt-32 mt-34 '>
             <Outlet />
             <Toaster/>
         </div>
-
         <Footer></Footer>
 
     </>

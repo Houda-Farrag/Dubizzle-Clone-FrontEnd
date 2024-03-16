@@ -10,7 +10,7 @@ import slideImage from '../../assets/images/dubbizleSlider.jpg'
 import UseGetAllProducts from '../../Hooks/UseGetAllProducts'
 
 export default function Home() {
-    const {products} = UseGetAllProducts()
+    const { products } = UseGetAllProducts()
 
     const [Category, setCategory] = useState([])
 
@@ -31,17 +31,17 @@ export default function Home() {
                 console.log(err)
             })
     }
-    
+
     useEffect(() => {
         getCategory()
     }, [])
 
     return <>
 
-        <div style={{ position: 'relative', marginBottom: '200px' }} className='mt-36'  >
+        <div style={{ position: 'relative', marginBottom: '200px' }} className='sm:mt-36 md:container '  >
 
             <CategorySub></CategorySub>
-            <DubbizleSlider name="home" img= {slideImage}/>
+            <DubbizleSlider name="home" img={slideImage} />
             <PopularCategories></PopularCategories>
 
             {/* <CategoriesCard catName={"Cars For Sale"} dataProd={products}></CategoriesCard>

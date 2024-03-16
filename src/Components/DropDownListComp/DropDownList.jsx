@@ -9,8 +9,8 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function DropDownList({ props, setGoogle , setFacebook , setData}) {
-  const {logout} = useLogout()
+export default function DropDownList({ props, setGoogle, setFacebook, setData }) {
+  const { logout } = useLogout()
   const [isOpen, setIsOpen] = useState(false);
   const [isOpen1, setIsOpen1] = useState(false);
 
@@ -22,7 +22,7 @@ export default function DropDownList({ props, setGoogle , setFacebook , setData}
     setIsOpen1(!isOpen1);
   };
 
-  const handleLogout = async() => {
+  const handleLogout = async () => {
     await logout()
     setGoogle(null);
     setFacebook(null);
@@ -30,12 +30,12 @@ export default function DropDownList({ props, setGoogle , setFacebook , setData}
   };
 
   return (
-    <div className="w-full">
-      <Menu as="div" className="relative inline-block text-left w-full ">
+    <div className="md:w-full w-80">
+      <Menu as="div" className=" relative inline-block text-left w-full ">
         <div>
           <Menu.Button
             onClick={showProfileDetials}
-            className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3  text-sm font-semibold text-gray-900   ring-inset ring-gray-300 hover:bg-gray-50"
+            className="inline-flex w-full justify-center gap-x-1.5 rounded-md   text-sm font-semibold text-gray-900   ring-inset ring-gray-300 hover:bg-gray-50"
           >
             {props}
           </Menu.Button>
@@ -84,12 +84,12 @@ export default function DropDownList({ props, setGoogle , setFacebook , setData}
               </Menu.Item>
 
               <Menu.Item className="w-full">
-                  <button
-                    onClick={handleLogout}
-                    className="text-gray-700 black px-4 py-2 text-sm "
-                    >
-                    logout
-                  </button>
+                <button
+                  onClick={handleLogout}
+                  className="text-gray-700 black px-4 py-2 text-sm "
+                >
+                  logout
+                </button>
               </Menu.Item>
             </div>
           </Menu.Items>
