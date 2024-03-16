@@ -18,10 +18,7 @@ import SubCategoryProducts from "./Pages/SubCategoryProducts/SubCategoryProducts
 
 
 function App() {
-  
-  // const { token } = useLogin();
 
-  // const token = localStorage.getItem('jwt');
 
   const routesPage = createBrowserRouter([
     {

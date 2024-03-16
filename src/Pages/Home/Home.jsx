@@ -44,10 +44,10 @@ export default function Home() {
             <DubbizleSlider name="home" img= {slideImage}/>
             <PopularCategories></PopularCategories>
 
-            <CategoriesCard catName={"Cars For Sale"} dataProd={products}></CategoriesCard>
+            {/* <CategoriesCard catName={"Cars For Sale"} dataProd={products}></CategoriesCard>
             <CategoriesCard catName={"Cars For Rent"} dataProd={products}></CategoriesCard>
             <CategoriesCard catName={"Property For Rent"} dataProd={products}></CategoriesCard>
-            <CategoriesCard catName={"Property For Sale"} dataProd={products}></CategoriesCard>
+            <CategoriesCard catName={"Property For Sale"} dataProd={products}></CategoriesCard> */}
 
         </div>
 
