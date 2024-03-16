@@ -43,9 +43,9 @@ export default function Header() {
   return (
     <>
       <div className="relative w-full">
-        <div className="bg-white shadow  z-10 fixed top-0 pt-3 w-full ">
-          <div className="mx-2">
-            <div className="md:container  flex justify-start ">
+        <div className="bg-white shadow  z-10 sm:fixed relative  top-0 pt-3 w-full ">
+          <div className="sm:border-none border-b-2">
+            <div className="md:container mx-2   flex justify-start ">
               <button className="text-3xl me-2 md:hidden visible text-red-600"><BsList /></button>
               <a href="#">
                 <svg fill="none" viewBox="0 0 64 35" alt="Logo" className="edf25a1c" width={82}>
@@ -73,9 +73,6 @@ export default function Header() {
                 >
                   <span
                     className="text-x flex  hover:underline"
-                    onMouseOver={(e) => {
-                      console.log(e);
-                    }}
                   >
                     <BsFillBuildingFill className="text-3xl mx-2 rounded-xl bg-red-200 p-1" />
                     Properties
@@ -192,7 +189,7 @@ export default function Header() {
                   <IoSearchSharp />
                 </div>
                 <input
-                  class=" appearance-none  w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none "
+                  class="appearance-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none "
                   id="username"
                   type="text"
                   placeholder={"What are you looking for?"}

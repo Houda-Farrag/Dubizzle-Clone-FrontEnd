@@ -38,7 +38,7 @@ export default function Home() {
 
     return <>
 
-        <div style={{ position: 'relative', marginBottom: '200px' }} className='mt-36 md:container '  >
+        <div style={{ position: 'relative', marginBottom: '200px' }} className='sm:mt-36 md:container '  >
 
             <CategorySub></CategorySub>
             <DubbizleSlider name="home" img={slideImage} />
