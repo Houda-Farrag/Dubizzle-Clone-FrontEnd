@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 const usePostProduct = () => {
@@ -5,7 +6,10 @@ const usePostProduct = () => {
 
   const addProduct = async (product, selectedSubCategory) => {
     const token = localStorage.getItem("jwt");
-    console.log(token, selectedSubCategory);
+    if (!token) {
+      navigate("/");
+      toast.error("please login first")
+    }
     try {
       const responseSubCate = await fetch(
         `http://localhost:3000/sub-category/${selectedSubCategory}`
@@ -33,14 +37,13 @@ const usePostProduct = () => {
       const addProductData = await addProductResponse.json();
 
       if (addProductData && addProductData.success === 1) {
-        alert("Product Saved Successfully");
+        toast.success("Product Saved Successfully");
         navigate("/");
       } else {
-        alert("There was an issue saving the product. Please try again.");
+        toast.error("There was an issue saving the product. Please try again.");
       }
     } catch (error) {
       console.error("Error saving product:", error);
-      alert("An error occurred while saving the product.");
     }
   };
 

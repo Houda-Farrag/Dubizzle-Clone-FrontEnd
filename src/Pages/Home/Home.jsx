@@ -10,10 +10,22 @@ import slideImage from '../../assets/images/dubbizleSlider.jpg'
 import UseGetAllProducts from '../../Hooks/UseGetAllProducts'
 
 export default function Home() {
-    const { products } = UseGetAllProducts()
+
 
     const [Category, setCategory] = useState([])
+    const [Products, setProducts] = useState([])
 
+    async function getProducts() {
+        await fetch("http://localhost:3000/products/get").then((res) => {
+            return res.json()
+        }).then((data) => {
+
+            setProducts(data.slice(0, 4))
+            console.log(Products)
+        }
+        )
+            .catch((err) => { console.log(err) })
+    }
 
     // http://localhost:3000/categories
     async function getCategory() {
@@ -23,9 +35,8 @@ export default function Home() {
             })
             .then(({ AllCategories }) => {
 
-
-                setCategory(AllCategories)
-
+                console.log(AllCategories.slice(1, 4))
+                setCategory(AllCategories.slice(1, 4))
             })
             .catch((err) => {
                 console.log(err)
@@ -33,8 +44,9 @@ export default function Home() {
     }
 
     useEffect(() => {
-        getCategory()
-    }, [])
+
+        getProducts()
+    }, [Products])
 
     return <>
 
@@ -44,10 +56,8 @@ export default function Home() {
             <DubbizleSlider name="home" img={slideImage} />
             <PopularCategories></PopularCategories>
 
-            {/* <CategoriesCard catName={"Cars For Sale"} dataProd={products}></CategoriesCard>
-            <CategoriesCard catName={"Cars For Rent"} dataProd={products}></CategoriesCard>
-            <CategoriesCard catName={"Property For Rent"} dataProd={products}></CategoriesCard>
-            <CategoriesCard catName={"Property For Sale"} dataProd={products}></CategoriesCard> */}
+
+            <CategoriesCard catName={"Cars For Sale"} dataProd={Products}></CategoriesCard>
 
         </div>
 

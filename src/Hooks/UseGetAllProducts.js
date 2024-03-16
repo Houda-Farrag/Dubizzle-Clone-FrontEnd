@@ -11,16 +11,17 @@ const UseGetAllProducts = () => {
             })
             .then(({ products }) => {
                 setProducts(products)
+                console.log(products)
             })
             .catch((err) => {
                 console.log(err)
             })
     }
-    useEffect(()=>{
+    useEffect(() => {
         getProducts()
-    },[])
+    }, [])
 
-    return {products}
+    return { products }
 }
 
 export default UseGetAllProducts
