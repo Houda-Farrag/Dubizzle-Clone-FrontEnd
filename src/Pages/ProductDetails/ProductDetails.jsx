@@ -8,17 +8,19 @@ import { SellerData } from "../../Components/SellerData/SellerData";
 import UseGetProduct from "../../Hooks/UseGetProduct";
 import { useEffect } from "react";
 export const ProductDetails = () => {
-  const { product, setId , userData} = UseGetProduct();
+  const { product, setId, userData , subcategoryName } = UseGetProduct();
   let { id } = useParams();
-
 
   useEffect(() => {
     setId(id);
-  }, [id, setId]);
+    console.log(subcategoryName)
+  }, [id, setId , subcategoryName]);
 
   return (
-    <div className="container mx-auto">
-      <BreadCrumb />
+    <div className="container mx-auto lg:flex-col">
+      <div className="hidden">
+        <BreadCrumb />
+      </div>
       <div className="w-[742px]">
         <ProductDisplay product={product} />
       </div>
@@ -29,7 +31,7 @@ export const ProductDetails = () => {
         <Safety />
       </div>
       <Details product={product} />
-      {/* <RelatedProducts /> */}
+      <RelatedProducts subcategoryName={subcategoryName} productId={product?._id} />
     </div>
   );
 };

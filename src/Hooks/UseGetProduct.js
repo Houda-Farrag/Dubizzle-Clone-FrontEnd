@@ -4,6 +4,8 @@ const UseGetProduct = () => {
   const [product, setProduct] = useState(null);
   const [id, setId] = useState("");
   const [userData, setUserData] = useState(null);
+  const [subcategoryID, setSubcategoryID] = useState(null);
+  const [subcategoryName, setSubcategoryName] = useState(null);
 
   async function getProduct() {
     try {
@@ -14,19 +16,32 @@ const UseGetProduct = () => {
       const { product } = await response.json();
       setProduct(product);
       setUserData(product?.sellerId);
+      setSubcategoryID(product?.subCategoryId);
+
+      const responseSubcategory = await fetch(
+        `http://localhost:3000/sub-category/getId/${subcategoryID}`
+      );
+
+      if (!responseSubcategory.ok) {
+        throw new Error("Failed to fetch subcategory");
+      }
+
+      const { subCategoryName } = await responseSubcategory.json();
+
+      setSubcategoryName(subCategoryName);
     } catch (err) {
       console.error(err);
     }
   }
 
-
   useEffect(() => {
     if (id !== "") {
       getProduct();
     }
-  }, [id , userData]);
+    console.log(subcategoryID , subcategoryName )
+  }, [id, userData, subcategoryID , subcategoryName]);
 
-  return { product, setId, userData };
+  return { product, setId, userData, subcategoryName };
 };
 
 export default UseGetProduct;

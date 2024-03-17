@@ -67,7 +67,7 @@ export default function CategoriesCard({ subcatName }) {
   return (
     <>
       <div className="">
-        <div className="grid grid-flow-col text-center justify-between  box-border ">
+        <div className="grid grid-flow-col text-center justify-between box-border ">
           <h1 className=" font-semi bold text-2xl mb-2 mt-6  "> {subcatName}</h1>
 
           <a

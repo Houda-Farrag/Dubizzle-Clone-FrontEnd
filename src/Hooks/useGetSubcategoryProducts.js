@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 const useGetSubcategoryProducts = () => {
     const [subcatProducts , setSubcatProducts] = useState([])
@@ -32,6 +32,10 @@ const useGetSubcategoryProducts = () => {
             console.log(error.message)
         }
     } 
+
+    useEffect(() => {
+
+    },[subcatProducts])
 
   return {getSubCategoryProducts , subcatProducts }
 }
