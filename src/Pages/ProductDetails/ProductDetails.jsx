@@ -5,15 +5,13 @@ import { ProductDisplay } from "../../Components/ProductDisplay/ProductDisplay";
 import { RelatedProducts } from "../../Components/RelatedProducts/RelatedProducts";
 import { Safety } from "../../Components/Safety/Safety";
 import { SellerData } from "../../Components/SellerData/SellerData";
-import UseGetAllProducts from "../../Hooks/UseGetAllProducts";
 import UseGetProduct from "../../Hooks/UseGetProduct";
 import { useEffect } from "react";
-import Login from "../../Components/Login/Login";
 export const ProductDetails = () => {
   const { product, setId } = UseGetProduct();
   let { id } = useParams();
   console.log(id);
-  const { products } = UseGetAllProducts();
+
 
   useEffect(() => {
     setId(id);
@@ -21,7 +19,6 @@ export const ProductDetails = () => {
 
   return (
     <div className="container mx-auto">
-      <Login />
       <BreadCrumb />
       <div className="w-[742px]">
         <ProductDisplay product={product} />
@@ -33,7 +30,7 @@ export const ProductDetails = () => {
         <Safety />
       </div>
       <Details product={product} />
-      <RelatedProducts products={products} />
+      {/* <RelatedProducts /> */}
     </div>
   );
 };
