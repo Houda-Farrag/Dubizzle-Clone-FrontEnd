@@ -8,9 +8,8 @@ import { SellerData } from "../../Components/SellerData/SellerData";
 import UseGetProduct from "../../Hooks/UseGetProduct";
 import { useEffect } from "react";
 export const ProductDetails = () => {
-  const { product, setId } = UseGetProduct();
+  const { product, setId , userData} = UseGetProduct();
   let { id } = useParams();
-  console.log(id);
 
 
   useEffect(() => {
@@ -24,7 +23,7 @@ export const ProductDetails = () => {
         <ProductDisplay product={product} />
       </div>
       <div className="lg:flex hidden">
-        <SellerData product={product} />
+        <SellerData userData={userData} product={product} />
       </div>
       <div className="lg:flex hidden">
         <Safety />
