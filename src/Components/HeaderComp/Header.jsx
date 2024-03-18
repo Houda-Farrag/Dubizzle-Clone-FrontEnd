@@ -43,9 +43,9 @@ export default function Header() {
   return (
     <>
       <div className="relative w-full">
-        <div className="bg-white shadow  z-10 sm:fixed relative  top-0 pt-3 w-full ">
+        <div className="bg-white shadow  z-10 md:fixed   sm:top-0 pt-3 w-full ">
           <div className="sm:border-none border-b-2">
-            <div className="md:container mx-2   flex justify-start ">
+            <div className="md:container mx-2  flex justify-start ">
               <button className="text-3xl me-2 md:hidden visible text-red-600"><BsList /></button>
               <a href="#">
                 <svg fill="none" viewBox="0 0 64 35" alt="Logo" className="edf25a1c" width={82}>
@@ -183,22 +183,23 @@ export default function Header() {
                 </button>
               </div>
             </div>
-            <div className="show-input-responsive">
-              <div class="mb-4 flex align-baseline border-gray-400 border-2 rounded p-1">
-                <div className="text-gray-400 text-3xl pt-1">
-                  <IoSearchSharp />
-                </div>
-                <input
-                  class="appearance-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none "
-                  id="username"
-                  type="text"
-                  placeholder={"What are you looking for?"}
-                />
-
-              </div>
-            </div>
           </div>
 
+        </div>
+      </div>
+      <div className="show-input-responsive ">
+        <div className="px-2 " style={{paddingTop:"5px"}}>
+          <div className="mb-4 flex align-baseline border-gray-400 border-2 rounded p-1 mt-3 ">
+            <div className="text-gray-400 text-3xl pt-1">
+              <IoSearchSharp />
+            </div>
+            <input
+              class="appearance-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none "
+              id="username"
+              type="text"
+              placeholder={"What are you looking for?"}
+            />
+          </div>
         </div>
       </div>
     </>
