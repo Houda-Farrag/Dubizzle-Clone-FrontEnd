@@ -46,7 +46,12 @@ export default function Header() {
         <div className="bg-white shadow  z-10 md:fixed   sm:top-0 pt-3 w-full ">
           <div className="sm:border-none border-b-2">
             <div className="md:container mx-2  flex justify-start ">
-              <button className="text-3xl me-2 md:hidden visible text-red-600"><BsList /></button>
+              <button
+                className="text-3xl me-2 md:hidden visible text-red-600"
+                onClick={()=>{console.log("show the dropdoen")}}
+              >
+                <BsList />
+              </button>
               <a href="/">
                 <svg fill="none" viewBox="0 0 64 35" alt="Logo" className="edf25a1c" width={82}>
                   <path fill="#212223" d="M37.04 33.28c.13.06.32.09.45.09.37 0 .6-.12.78-.52l.3-.71-2.2-5.43h1.06l1.68 4.21 1.68-4.2h1.08l-2.65 6.38c-.34.85-.93 1.15-1.7 1.16a2.9 2.9 0 0 1-.63-.08l.15-.9zm-2.3-1.2v-7.4h1v7.4h-1zm-3.57 0v-5.37h1v.87a2.28 2.28 0 0 1 1.75-.95v1l-.34-.02c-.5 0-1.18.38-1.41.78v3.73h-1zM24.8 29.4c0-1.56 1.12-2.82 2.68-2.82 1.61 0 2.61 1.26 2.61 2.9v.25h-4.24c.08.9.74 1.66 1.82 1.66.57 0 1.2-.22 1.6-.63l.46.65c-.54.53-1.3.8-2.16.8a2.68 2.68 0 0 1-2.78-2.82zm2.68-2c-1.07 0-1.6.87-1.64 1.6h3.28c-.03-.7-.5-1.6-1.64-1.6zm-4.77 4.68V28.5c0-.62-.27-1.03-.93-1.03-.54 0-1.08.38-1.33.77v3.84h-1V28.5c0-.62-.27-1.03-.95-1.03-.52 0-1.04.4-1.3.78v3.83h-1v-5.37h1v.8c.22-.33.93-.89 1.73-.89.8 0 1.29.42 1.45 1 .31-.5 1.02-1 1.81-1 1 0 1.52.55 1.52 1.62v3.88h-1zm-10.1 0v-5.37h1v.87a2.28 2.28 0 0 1 1.76-.95v1l-.34-.02c-.5 0-1.18.38-1.41.78v3.73h-1zm-3.8.13c-1.63 0-2.67-1.26-2.67-2.82 0-1.54 1.04-2.8 2.7-2.8 1.68 0 2.72 1.26 2.72 2.8 0 1.56-1.04 2.82-2.7 2.82zm.04-.9c1.07 0 1.66-.89 1.66-1.92 0-1-.6-1.92-1.66-1.92-1.07 0-1.67.9-1.67 1.92s.6 1.93 1.67 1.93zm-5.25.77V27.6h-.9v-.88h.88v-.35c0-1.16.68-1.8 1.64-1.8.34 0 .64.07.88.2l-.24.74a.95.95 0 0 0-.48-.1c-.5 0-.8.34-.8.99v.35h1.1v.88h-1.1v4.5h-1z" />
@@ -188,7 +193,7 @@ export default function Header() {
         </div>
       </div>
       <div className="show-input-responsive ">
-        <div className="px-2 " style={{paddingTop:"5px"}}>
+        <div className="px-2 " style={{ paddingTop: "5px" }}>
           <div className="mb-4 flex align-baseline border-gray-400 border-2 rounded p-1 mt-3 ">
             <div className="text-gray-400 text-3xl pt-1">
               <IoSearchSharp />

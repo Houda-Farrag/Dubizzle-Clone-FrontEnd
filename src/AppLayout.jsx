@@ -9,7 +9,7 @@ export default function AppLayout() {
         <Header></Header>
         <div className='md:mt-32 mt-34 '>
             <Outlet />
-            <Toaster/>
+            <Toaster />
         </div>
         <Footer></Footer>
 

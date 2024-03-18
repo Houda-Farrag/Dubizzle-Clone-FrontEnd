@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 const { Meta } = Card;
 
 export default function CategoriesCard({ subcatName }) {
-    const navigate = useNavigate()
+  const navigate = useNavigate()
   const { subcatProducts, getSubCategoryProducts } =
     useGetSubcategoryProducts();
 
@@ -23,12 +23,10 @@ export default function CategoriesCard({ subcatName }) {
 
   const dispatch = useDispatch();
 
-  let idFav = Favorit.map((prod) => {
-    return prod._id;
-  });
+  let idFav = Favorit.map(prod => prod._id);
 
   function check(id) {
-    return idFav.find((idmov) => idmov == id);
+    return idFav.find(idmov => idmov == id);
   }
 
   const goToDetailsPage = (id) => {
@@ -77,71 +75,77 @@ export default function CategoriesCard({ subcatName }) {
             Veiw more
           </a>
         </div>
-        <div className="flex justify-between overflow-x-auto ">
-          {subcatProducts.slice(0, 4).map((catData) => {
-            return (
-              catData.images[0] && (
-                <div
-                  key={catData.id}
-                  className=" border card-category rounded-t-xl cursor-pointer"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    goToDetailsPage(catData._id);
-                  }}
-                >
-                  <img
-                    alt="example"
-                    className="w-full h-40 rounded-t-xl object-cover "
-                    src={catData.images[0]}
-                  />
-                  <div className="p-3">
-                    <div className="grid grid-flow-col justify-between mt-2">
-                      <p className="font-sans text-red-600 font-bold">
-                        EGP {catData.price}{" "}
-                      </p>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          addToFav(catData);
-                        }}
-                      >
-                        {check(catData._id) ? <FaHeart /> : <FaRegHeart />}
-                      </button>
-                    </div>
-                    <div className="my-1 grid items-center min-h-12 ">
-                      <p className="min-w-full max-h-12 overflow-hidden">
-                        {catData.name}
-                      </p>
-                    </div>
-                    {subcatName.includes("Apartments") || subcatName.includes("Villas") &&(
-                    <div className="flex gap-2 py-1">
-                      <p className="text-sm text-gray-700">
-                        <PiBedDuotone />
-                      </p>
-                      <p className="text-sm text-gray-700">
-                        <LuBath />
-                      </p>
-                      <p className="text-sm text-gray-700">
-                        <PiBedDuotone />
-                      </p>
-                    </div>
-                    )}
-                    <div className="flex py-1">
-                      <p className="text-sm font-sans text-gray-700">
-                        {catData.location}
-                      </p>
-                    </div>
-                    <div className="flex py-1">
-                      <p className="text-sm text-gray-700">
-                        {formatDateDifference(catData.updatedAt)}
-                      </p>
+        
+        <div className="">
+
+          <div className="flex md:justify-between gap-3 hide-scroll overflow-x-auto ">
+            {subcatProducts.slice(0, 4).map((catData) => {
+              return (
+                catData.images[0] && (
+                  <div
+                    key={catData.id}
+                    className=" border card-category rounded-t-xl cursor-pointer"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      goToDetailsPage(catData._id);
+                    }}
+                  >
+                    <img
+                      alt="example"
+                      className="w-full h-40 rounded-t-xl object-cover"
+                      src={catData.images[0]}
+                    />
+                    <div className="p-3">
+                      <div className="grid grid-flow-col justify-between mt-2">
+                        <p className="font-sans text-red-600 font-bold">
+                          EGP {catData.price}{" "}
+                        </p>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            addToFav(catData);
+                            console.log('hello')
+                          }}
+                        >
+                          {check(catData._id)? <FaHeart /> : <FaRegHeart />}
+                        </button>
+                      </div>
+                      <div className="my-1 grid items-center min-h-12 ">
+                        <p className="min-w-full max-h-12 overflow-hidden">
+                          {catData.name}
+                        </p>
+                      </div>
+                      {subcatName.includes("Apartments") || subcatName.includes("Villas") && (
+                        <div className="flex gap-2 py-1">
+                          <p className="text-sm text-gray-700">
+                            <PiBedDuotone />
+                          </p>
+                          <p className="text-sm text-gray-700">
+                            <LuBath />
+                          </p>
+                          <p className="text-sm text-gray-700">
+                            <PiBedDuotone />
+                          </p>
+                        </div>
+                      )}
+                      <div className="flex py-1">
+                        <p className="text-sm font-sans text-gray-700">
+                          {catData.location}
+                        </p>
+                      </div>
+                      <div className="flex py-1">
+                        <p className="text-sm text-gray-700">
+                          {formatDateDifference(catData.updatedAt)}
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              )
-            );
-          })}
+                )
+              );
+            })}
+          </div>
         </div>
+
       </div>
     </>
   );

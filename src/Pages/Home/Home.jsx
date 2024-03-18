@@ -51,12 +51,13 @@ export default function Home() {
             <DubbizleSlider name="home" img={slideImage} />
             <PopularCategories></PopularCategories>
 
-
-            <CategoriesCard subcatName={"Cars for sale"} ></CategoriesCard>
-            <CategoriesCard subcatName={"Cars for Rent"} ></CategoriesCard>
-            <CategoriesCard subcatName={"Apartments for Rent"}></CategoriesCard>
-            <CategoriesCard subcatName={"Villas For Sale"} ></CategoriesCard>
-            <CategoriesCard subcatName={"Villas For Rent"}></CategoriesCard>
+            <div className='md:p-0 px-3'>
+                <CategoriesCard subcatName={"Cars for sale"} ></CategoriesCard>
+                <CategoriesCard subcatName={"Cars for Rent"} ></CategoriesCard>
+                <CategoriesCard subcatName={"Apartments for Rent"}></CategoriesCard>
+                <CategoriesCard subcatName={"Villas For Sale"} ></CategoriesCard>
+                <CategoriesCard subcatName={"Villas For Rent"}></CategoriesCard>
+            </div>
 
         </div>
 
