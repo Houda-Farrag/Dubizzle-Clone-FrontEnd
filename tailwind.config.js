@@ -126,9 +126,9 @@ export default {
       }
     },
     container: {
-      center: true, padding: '8vh',
+      center: true, padding: '14vh',
     },
-    
+
   },
   plugins: [
     // require('@tailwindcss/aspect-ratio'),
