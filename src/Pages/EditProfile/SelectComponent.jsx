@@ -14,21 +14,15 @@ function SelectComponent(props) {
     }
     
     return (
-        <div className={selectWidth}>
-            <div onClick={toggleSortedList} className="relative">
-                <p className="text-md  px-3 py-3 rounded-lg border flex justify-between"><span>{selectSort}</span> <img src={arrowDown} width={22} height={22} className={`${rotated} ms-4 transition-all`} /></p>
-
-                {showSortedList &&
-                    <ul className={`${maxHeight} absolute left-0 py-2 h-vh-57/100 bg-white w-full shadow-xl text-black z-10  top-14 overflow-y-auto`}>
+     
+                       <select>
                         {selectedOptions.map((element, index) => (
-                            <li key={index} value={element} className="hover:cursor-pointer w-full ps-2 hover:bg-slate-100  py-1  text-sm" onClick={() => { handleSelect(element) }} >
-                                {element} </li>
+                            <option key={index} value={element} className="hover:cursor-pointer w-full ps-2 hover:bg-slate-100  py-1  text-sm" onClick={() => { handleSelect(element) }} >
+                                {element} </option>
                         ))}
-                    </ul>
-                }
-            </div>
-
-        </div>
+                        </select>
+                
+          
     )
 }
 

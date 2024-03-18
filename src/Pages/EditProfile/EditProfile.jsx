@@ -1,7 +1,8 @@
 
 import SelectComponent from './SelectComponent'
+import { useForm } from 'react-hook-form'
 
-// import Select from 'react-select'
+import arrowDown from '../../assets/images/iconArrowDown_noinline.ec05eae7013321c193965ef15d4e2174.svg'
 function EditProfile() {
 
   const yearOptions = []
@@ -19,30 +20,58 @@ function EditProfile() {
     dayoptions.push(i)
   }
 
+  const { register, handleSubmit, formState: { errors } } = useForm();
+
+  const submitData = (data) => {
+    console.log("submitted data is ", data);
+  };
   return (<>
     <div className="w-vw-74/100 flex mx-auto mb-12 mt-5 py-4 px-6 rounded-md border border-gray-300">
-      <form>
+      <form onSubmit={handleSubmit(submitData)}>
         <p className='text-xl font-bold border-0 border-b pb-4 mb-4'>Edit profile</p>
         <div className='personal-info flex gap-1 pb-10 border-b border-gray-200'>
           <div className="w-1/2">
             <div className='flex flex-col'>
               <label htmlFor="name">Name</label>
-              <input type='text' id='name' className='border mt-2 p-3 rounded-lg border-gray-300 hover:outline-none' />
+              <input type='text' {...register("name", { required: true })} id='name' className='border mt-2 p-3 rounded-lg border-gray-300 hover:outline-none' />
             </div>
             <div className='flex flex-col mt-4'>
               <p className='mb-2'>Date of birth</p>
               <div className='flex w-full justify-between gap-2'>
-                <SelectComponent name="DD" selectedOptions={dayoptions} selectWidth="w-2/6" maxHeight="h-vh-57/100" />
-                <SelectComponent name="MM" selectedOptions={monthOptions} selectWidth="w-2/6" maxHeight="h-vh-57/100" />
-                <SelectComponent name="YYYY" selectedOptions={yearOptions} selectWidth="w-2/6" maxHeight="h-vh-57/100" />
-              </div>
+                <select {...register("day")} className="text-md w-1/3  px-3 py-3 rounded-lg border flex justify-between">
+                <img src={arrowDown} width={22} height={22} className={` ms-4 transition-all`} />
+                  {dayoptions.map((element, index) => (
+                    <option key={index} className="hover:cursor-pointer w-full ps-2 hover:bg-slate-100  py-1  text-sm"  >
+                      {element} </option>
+                  ))}
+                </select>
+                <select {...register("month")} className="text-md w-1/3 px-3 py-3 rounded-lg border flex justify-between">
+                  {monthOptions.map((element, index) => (
+                    <option key={index}  className="hover:cursor-pointer border-none w-full ps-2 hover:bg-slate-100  py-1  text-sm"  >
+                      {element} </option>
+                  ))}
+                </select>
+                <select {...register("year")} className="text-md w-1/3 px-3 py-3 rounded-lg border flex justify-between">
+                  {yearOptions.map((element, index) => (
+                    <option key={index}  className="hover:cursor-pointer w-full ps-2 hover:bg-slate-100  py-1  text-sm"  >
+                      {element} </option>
+                  ))}
+                </select>
+               
+                 </div>
             </div>
             <div className='flex flex-col mt-4'>
               <label htmlFor="name" className='mb-2'>Gender</label>
-              <SelectComponent name="Select your gender" selectedOptions={genderoptions} selectWidth="full" maxHeight="h-vh-17/100" />
+              <select {...register("gender")} className="text-md  px-3 py-3 rounded-lg border flex justify-between">
+                  {genderoptions.map((element, index) => (
+                    <option key={index}  className="hover:cursor-pointer w-full ps-2 hover:bg-slate-100  py-1  text-sm" onClick={() => { handleSelect(element) }} >
+                      {element} </option>
+                  ))}
+                </select>
+              {/* <SelectComponent name="Select your gender"  selectedOptions={genderoptions} selectWidth="full" maxHeight="h-vh-17/100" /> */}
             </div>
             <div className='mt-5'>
-              <textarea rows={7} className='p-2  w-full border outline-none rounded-md'>About me(optional)</textarea>
+              <textarea rows={7} {...register("about")} className='p-2  w-full border outline-none rounded-md'>About me(optional)</textarea>
             </div>
           </div>
           <div className='p-4 w-1/2 mt-3'>
@@ -64,7 +93,7 @@ function EditProfile() {
           <div className='flex gap-4 mb-8'>
             <div className='w-1/2 border rounded-lg p-3 flex'>
               <span className='pr-3 border-r border-gray-400 mr-2 text-xs mt-1'>+20</span>
-              <input type='text' placeholder='Phone number' className='w-full outline-none' />
+              <input type='text' {...register("phone")} placeholder='Phone number' className='w-full outline-none' />
             </div>
             <div className='w-1/2'>
               <p className='text-xs'>This is the number for buyers contacts, reminders, and other notifications.</p>
@@ -72,14 +101,14 @@ function EditProfile() {
           </div>
           <div className='flex gap-4'>
             <div className='w-1/2 border rounded-lg p-3 flex'>
-              <input type='text' placeholder='hjgjgy@gmail.com' className='w-full outline-none' />
+              <input type='text'{...register("email", { required: true })} placeholder='hjgjgy@gmail.com' className='w-full outline-none' />
             </div>
             <div className='w-1/2'>
               <p className='text-xs'>We won&apos;t reveal your email to anyone else nor use it to send you spam.</p>
             </div>
           </div>
         </div>
-        <div className='Optional-info pb-2 border-b border-gray-200'>
+        {/* <div className='Optional-info pb-2 border-b border-gray-200'>
           <p className='text-md font-bold  mt-4 mb-2'>Optional information</p>
           <div className='flex mb-2'>
             <div className='w-1/2'>
@@ -99,19 +128,19 @@ function EditProfile() {
               <div className='p-3 text-center font-bold rounded-lg border border-red-400 w-2/3'>Contact</div>
             </div>
           </div>
-        </div>
+        </div> */}
         <div className="flex justify-between mt-4">
           <a href='Home.jsx'><div className='font-bold border-b border-black'>Discard</div></a>
-          <div className='p-3 h-fit text-center font-bold bg-red-600 hover:bg-red-700 rounded-lg text-white'>
-            Save changes</div>
+          <button type='submit' className='p-3 h-fit text-center font-bold bg-red-600 hover:bg-red-700 rounded-lg text-white'>
+            Save changes</button>
         </div>
       </form>
     </div>
     <div className="w-vw-74/100 mx-auto my-5 py-4 px-6 rounded-md border border-gray-300">
-    <p className='text-xl font-bold w-full border-0 border-b pb-4 mb-4'>Delete this account</p>
-    <p className='text-xl font-bold mb-1'>Are you sure you want to delete your account?</p>
-    <p className='text-sm'>Fill the form and your request will be directed to our Customer Support Team</p>
-    <p className='mt-5 font-bold border-b inline-block border-black'>Submit request</p>
+      <p className='text-xl font-bold w-full border-0 border-b pb-4 mb-4'>Delete this account</p>
+      <p className='text-xl font-bold mb-1'>Are you sure you want to delete your account?</p>
+      <p className='text-sm'>Fill the form and your request will be directed to our Customer Support Team</p>
+      <p className='mt-5 font-bold border-b inline-block border-black'>Submit request</p>
     </div>
   </>)
 }
