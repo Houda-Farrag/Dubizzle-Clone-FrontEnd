@@ -7,7 +7,7 @@ import PopularCategories from '../../Components/popularCategories/PopularCategor
 import CategoriesCard from '../../Components/CategoriesCard/CategoriesCard'
 import { useEffect, useState } from 'react'
 import slideImage from '../../assets/images/dubbizleSlider.jpg'
-import UseGetAllProducts from '../../Hooks/UseGetAllProducts'
+
 
 export default function Home() {
 
@@ -15,17 +15,17 @@ export default function Home() {
     const [Category, setCategory] = useState([])
     const [Products, setProducts] = useState([])
 
-    async function getProducts() {
-        await fetch("http://localhost:3000/products/get").then((res) => {
-            return res.json()
-        }).then((data) => {
+    // async function getProducts() {
+    //     await fetch("http://localhost:3000/products/get").then((res) => {
+    //         return res.json()
+    //     }).then((data) => {
 
-            setProducts(data.slice(0, 4))
-            console.log(Products)
-        }
-        )
-            .catch((err) => { console.log(err) })
-    }
+    //         setProducts(data.slice(0, 4))
+    //         console.log(Products)
+    //     }
+    //     )
+    //         .catch((err) => { console.log(err) })
+    // }
 
     // http://localhost:3000/categories
     async function getCategory() {
@@ -43,11 +43,6 @@ export default function Home() {
             })
     }
 
-    useEffect(() => {
-
-        getProducts()
-    }, [Products])
-
     return <>
 
         <div style={{ position: 'relative', marginBottom: '200px' }} className='md:mt-36 md:container '  >
@@ -57,7 +52,11 @@ export default function Home() {
             <PopularCategories></PopularCategories>
 
 
-            <CategoriesCard catName={"Cars For Sale"} dataProd={Products}></CategoriesCard>
+            <CategoriesCard subcatName={"Cars for sale"} ></CategoriesCard>
+            <CategoriesCard subcatName={"Cars for Rent"} ></CategoriesCard>
+            <CategoriesCard subcatName={"Apartments for Rent"}></CategoriesCard>
+            <CategoriesCard subcatName={"Villas For Sale"} ></CategoriesCard>
+            <CategoriesCard subcatName={"Villas For Rent"}></CategoriesCard>
 
         </div>
 

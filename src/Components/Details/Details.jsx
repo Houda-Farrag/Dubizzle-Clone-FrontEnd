@@ -7,7 +7,7 @@ export const Details = ({ product }) => {
     setProductDate(product);
   }, [product]);
   return (
-    <div className="w-[650px] my-10">
+    <div className="w-[650px] mt-8 mb-32">
       <div className="relative left-28 flex flex-col rounded-xlspace-y-6 col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow">
         <div className="p-6">
           <h1 className="mb-2 block font-sans text-3xl font-bold leading-snug tracking-normal text-red-600 antialiased">

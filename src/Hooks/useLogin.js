@@ -4,7 +4,6 @@ const useLogin = () => {
   const [token, setToken] = useState(null);
 
   async function login(email) {
-    console.log(email)
     try {
       const response = await fetch("http://localhost:3000/api/login", {
         method: "POST",

@@ -1,16 +1,13 @@
 import { NavLink } from "react-router-dom";
-import img_6 from "../../assets/6.jpg";
 import icon from "../../assets/7.png";
-import { useEffect, useState } from "react";
 
-export const SellerData = ({product}) => {
-  const [sellerData , setSellerDate] = useState(null)
-  const [productData , setProductDate] = useState(null)
+export const SellerData = ({ userData, product }) => {
 
-  useEffect(()=>{
-    setSellerDate(product?.sellerData)
-    setProductDate(product)
-  },[product])
+  function getYearFromDate(dateString) {
+    const date = new Date(dateString);
+    return date.getFullYear();
+}
+
   return (
     <div className="flex-col absolute right-48 w-[512px] top-28 space-y-6 col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow">
       <div className="flex w-full items-center justify-between space-x-6 p-6">
@@ -18,30 +15,34 @@ export const SellerData = ({product}) => {
           <div className="flex-1 truncate">
             <div className="flex items-center space-x-3">
               <h3 className="mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
-                {sellerData?.userName}
+                {userData?.profile.name}
               </h3>
               <span className="inline-flex flex-shrink-0 items-center rounded-full bg-green-50 px-1.5 py-0.5 text-xs font-medium text-red-600 ring-1 ring-inset ring-green-600/20">
                 member
               </span>
             </div>
-            <p className="mt-1 truncate text-sm text-gray-500">since 2016</p>
+            <p className="mt-1 truncate text-sm text-gray-500">since {userData &&getYearFromDate(userData.createdAt)}</p>
             <p className="mt-1 truncate text-sm text-gray-500">
-              Comm.ID: {productData?._id}
+              Comm.ID: {userData?._id}
             </p>
             <h2 className="mt-4 text-sm text-red-600">
-              See Profile{" "}
+              See Profile
               <img
                 src={icon}
                 className="absolute top-32 left-28 text-red-600"
                 alt=""
-              />{" "}
+              />
             </h2>
           </div>
         </NavLink>
         <img
-          className="h-20 w-28 flex-shrink-0 rounded-full bg-gray-300"
-          src={img_6}
-          alt="Profile"
+          className="h-20 w-28 flex-shrink-0 rounded-full"
+          src={
+            userData?.profile.avatar !== ""
+              ? userData?.profile.avatar
+              : `https://ui-avatars.com/api/?name=${userData.profile.name}&background=FF9C9C&color=fff`
+          }
+          alt=""
         />
       </div>
       <div>
@@ -80,7 +81,7 @@ export const SellerData = ({product}) => {
                   clipRule="evenodd"
                 />
               </svg>
-              {sellerData?.phoneNumber}
+              {product?.phoneNumber}
             </a>
           </div>
         </div>
