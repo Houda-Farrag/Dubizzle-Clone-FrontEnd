@@ -52,11 +52,11 @@ export default function Home() {
             <PopularCategories></PopularCategories>
 
 
-            <CategoriesCard subcatName={"Cars for sale"} ></CategoriesCard>
-            <CategoriesCard subcatName={"Cars for Rent"} ></CategoriesCard>
-            <CategoriesCard subcatName={"Apartments for Rent"}></CategoriesCard>
-            <CategoriesCard subcatName={"Villas For Sale"} ></CategoriesCard>
-            <CategoriesCard subcatName={"Villas For Rent"}></CategoriesCard>
+            <CategoriesCard subcatName={"Cars for sale"} hidden={""} ></CategoriesCard>
+            <CategoriesCard subcatName={"Cars for Rent"} hidden={""}></CategoriesCard>
+            <CategoriesCard subcatName={"Apartments for Rent"} hidden={""}></CategoriesCard>
+            <CategoriesCard subcatName={"Villas For Sale"} hidden={""} ></CategoriesCard>
+            <CategoriesCard subcatName={"Villas For Rent"} hidden={""}></CategoriesCard>
 
         </div>
 

@@ -38,7 +38,6 @@ const UseGetProduct = () => {
     if (id !== "") {
       getProduct();
     }
-    console.log(subcategoryID , subcategoryName )
   }, [id, userData, subcategoryID , subcategoryName]);
 
   return { product, setId, userData, subcategoryName };

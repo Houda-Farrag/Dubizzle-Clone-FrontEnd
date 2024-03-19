@@ -31,10 +31,10 @@ function App() {
         { path: "/sell", element:<SellPage /> },
         { path: "/sellform", element: <SellFormPage /> },
         { path: "/product-details/:id", element: <ProductDetails /> },
+        { path: "/property-details", element: <PropertyDetails /> },
       ],
     },
     { path: "/property", element: <Property /> },
-    { path: "/property-details", element: <PropertyDetails /> },
   ]);
 
   return (

@@ -56,59 +56,34 @@ const SellForm = () => {
     }));
   };
 
-  // const addProduct = async (product, selectedSubCategory) => {
-  //   const token = localStorage.getItem("jwt");
-  //   try {
-  //     const responseSubCate = await fetch(
-  //       `http://localhost:3000/sub-category/${selectedSubCategory}`
-  //     );
-
-  //     const resCat = await responseSubCate.json();
-
-  //     if (resCat.ok) {
-  //       product.subCategoryId = resCat.subCategoryId;
-
-  //     const addProductResponse = await fetch(
-  //       "http://localhost:3000/products/add",
-  //       {
-  //         method: "POST",
-  //         headers: {
-  //           Accept: "application/json",
-  //           "Content-Type": "application/json",
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //         body: JSON.stringify(product),
-  //       }
-  //     );
-
-  //     const addProductData = await addProductResponse.json();
-
-  //     if (addProductData && addProductData.success === 1) {
-  //       alert("Product Saved Successfully");
-  //       navigate("/")
-  //     } else {
-  //       alert("There was an issue saving the product. Please try again.");
-  //     }
-  //   }
-  //   } catch (error) {
-  //     console.error("Error saving product:", error);
-  //     alert("An error occurred while saving the product.");
-  //   }
-  // };
-
-  const imageHandler = (e, index) => {
+  const imageHandler = async (e, index) => {
     const files = e.target.files;
-    const newImages = [];
-
+    const formData = new FormData();
+  
     for (let i = 0; i < Math.min(files.length, 5); i++) {
-      newImages.push(URL.createObjectURL(files[i]));
+      formData.append("images", files[i]);
     }
-
-    setImages((prevImages) => {
-      const updatedImages = [...prevImages];
-      updatedImages[index] = newImages[0];
-      return updatedImages;
-    });
+  
+    try {
+      const response = await fetch("http://localhost:3000/upload", {
+        method: "POST",
+        body: formData,
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        const imageUrls = data.image_urls;
+        setImages((prevImages) => {
+          const updatedImages = [...prevImages];
+          updatedImages[index] = imageUrls[0];
+          return updatedImages;
+        });
+      } else {
+        console.error("Error uploading images:", response.status);
+      }
+    } catch (error) {
+      console.error("Error uploading images:", error);
+    }
   };
 
   const toggleDropdownLocation = (e) => {

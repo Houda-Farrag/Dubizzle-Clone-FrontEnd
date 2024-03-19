@@ -15,12 +15,12 @@ export const PropertyAds = () => {
   let cards = [];
   for (let index = 0; index < 65; index++) {
     cards.push(
-      <div key={index} className="max-w-xl mt-10 mb-2">
+      <div key={index} className="container max-w-xl mt-10 mb-2">
         <div className="flex items-center justify-center">
           <div className="max-w-sm w-72 py-2 px-1">
             <div className="bg-white shadow-xl rounded-lg overflow-hidden">
               <div
-                className="bg-cover bg-center h-56 p-4"
+                className="bg-cover bg-center h-40 p-4"
                 style={{
                   backgroundImage:
                     "url(https://images.unsplash.com/photo-1475855581690-80accde3ae2b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80)",
@@ -99,7 +99,7 @@ export const PropertyAds = () => {
 
   return (
     <>
-      <div className="absolute right-2/4 top-32">
+      <div className="container absolute right-2/4 top-32">
         <h1 className="relative right-20 font-bold text-5xl w-28">DRE</h1>
       </div>
       <div className="relative left-40 w-4/5">

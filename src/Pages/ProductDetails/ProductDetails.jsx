@@ -21,7 +21,7 @@ export const ProductDetails = () => {
       <div className="hidden">
         <BreadCrumb />
       </div>
-      <div className="w-[742px]">
+      <div className="">
         <ProductDisplay product={product} />
       </div>
       <div className="lg:flex hidden">
