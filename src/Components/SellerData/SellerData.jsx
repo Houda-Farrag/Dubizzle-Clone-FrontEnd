@@ -1,10 +1,18 @@
 import { NavLink } from "react-router-dom";
 import icon from "../../assets/7.png";
+import { useState } from "react";
 
 export const SellerData = ({ userData, product }) => {
+
+  const [isShow , setIsShow] = useState(false)
+
   function getYearFromDate(dateString) {
     const date = new Date(dateString);
     return date.getFullYear();
+  }
+
+  const handleShowPhone = () => {
+    setIsShow(!isShow);
   }
 
   return (
@@ -52,7 +60,7 @@ export const SellerData = ({ userData, product }) => {
             product?.contact_type.includes("chat")) && (
             <div className="flex w-0 flex-1  bg-red-200 rounded-2xl hover:bg-red-400">
               <a
-                href="/chat"
+                href={`tel:${product?.phoneNumber}`}
                 className="relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-900"
               >
                 <svg
@@ -71,9 +79,9 @@ export const SellerData = ({ userData, product }) => {
           {(product?.contact_type.includes("both") ||
             product?.contact_type.includes("phone")) && (
             <div className="-ml-px flex w-0 flex-1 rounded-2xl bg-red-200 hover:bg-red-400">
-              <a
-                href={`tel:${product?.phoneNumber}`}
-                className="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-gray-900"
+              <span
+                className="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 cursor-pointer rounded-br-lg border border-transparent py-4 text-sm font-semibold text-gray-900"
+                onClick={handleShowPhone}
               >
                 <svg
                   className="h-5 w-5 text-red-600"
@@ -87,8 +95,9 @@ export const SellerData = ({ userData, product }) => {
                     clipRule="evenodd"
                   />
                 </svg>
-                {product?.phoneNumber}
-              </a>
+                {isShow ? product?.phoneNumber : "Show Phone Number" }
+                
+              </span>
             </div>
           )}
         </div>

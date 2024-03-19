@@ -14,13 +14,8 @@ import { useNavigate } from "react-router-dom";
 
 const { Meta } = Card;
 
-<<<<<<< HEAD
 export default function CategoriesCard({ subcatName , hidden }) {
     const navigate = useNavigate()
-=======
-export default function CategoriesCard({ subcatName }) {
-  const navigate = useNavigate()
->>>>>>> f0e3250a4f902d433dd53e070f31f86f60d3e186
   const { subcatProducts, getSubCategoryProducts } =
     useGetSubcategoryProducts();
 
