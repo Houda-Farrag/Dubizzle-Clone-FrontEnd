@@ -8,7 +8,8 @@ import { FaFacebook } from "react-icons/fa";
 import { BiLogoYoutube } from "react-icons/bi";
 import { FaInstagram } from "react-icons/fa";
 const Footer = () => {
-    return (
+    return <>
+        <div className='md:block hidden'>
         <div className='bg-slate-50 mt-8  '>
             <div className='border-b flex justify-between max-[992px]:justify-center min-w-full container'>
                 <div className='my-auto max-[992px]:hidden'>
@@ -85,7 +86,8 @@ const Footer = () => {
                 </div>
             </div>
         </div>
-    );
+        </div>
+    </>
 }
 
 export default Footer;

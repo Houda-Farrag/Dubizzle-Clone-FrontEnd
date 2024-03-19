@@ -16,7 +16,7 @@ import OneProperty from '../OneProperty/OneProperty'
 export default function PopularCategories() {
 
     return (
-        <div className=' mt-5 '>
+        <div className=' mt-5 md:block hidden'>
             <h1 className=' font-semi bold text-2xl mb-2 mt-6 max-[667px]:text-center'>Popular Categories</h1>
             <div className='pt-3 grid justify-items-start max-[667px]:justify-items-center gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4'>
                 <OneProperty category="Vehicles" subCategories1="Cars for Sale" subCategories2="Cars for Rent" image={vehicle} />
