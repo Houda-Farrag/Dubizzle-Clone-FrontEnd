@@ -1,15 +1,19 @@
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import icon from "../../assets/7.png";
 import { useState } from "react";
 
 export const SellerData = ({ userData, product }) => {
-
+  const navigate = useNavigate()
   const [isShow , setIsShow] = useState(false)
 
   function getYearFromDate(dateString) {
     const date = new Date(dateString);
     return date.getFullYear();
   }
+
+  const goToUserADs = (id) => {
+    navigate(`/sellerADs/${id}`)
+  };
 
   const handleShowPhone = () => {
     setIsShow(!isShow);
@@ -18,8 +22,7 @@ export const SellerData = ({ userData, product }) => {
   return (
     <div className="flex-col absolute right-48 w-[512px] top-28 space-y-6 col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow">
       <div className="flex w-full items-center justify-between space-x-6 p-6">
-        <NavLink to="/property-details">
-          <div className="flex-1 truncate">
+          <div className="flex-1 truncate cursor-pointer" onClick={()=>{goToUserADs(userData?._id)}}>
             <div className="flex items-center space-x-3">
               <h3 className="mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
                 {userData?.profile.name}
@@ -43,7 +46,7 @@ export const SellerData = ({ userData, product }) => {
               />
             </h2>
           </div>
-        </NavLink>
+        
         <img
           className="h-20 w-28 flex-shrink-0 rounded-full"
           src={

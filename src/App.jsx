@@ -13,8 +13,8 @@ import { SellPage } from "./Pages/Sell/SellPage";
 import { SellFormPage } from "./Pages/SellForm/SellFormPage";
 import { MenuSelectionProvider } from "./Context/MenuSelectionContext";
 import { ProductDetails } from "./Pages/ProductDetails/ProductDetails";
-import { PropertyDetails } from "./Pages/PropertyDetails/PropertyDetails";
 import SubCategoryProducts from "./Pages/SubCategoryProducts/SubCategoryProducts";
+import SellerDetails from "./Pages/SellerDetails/SellerDetails";
 
 
 function App() {
@@ -31,7 +31,7 @@ function App() {
         { path: "/sell", element:<SellPage /> },
         { path: "/sellform", element: <SellFormPage /> },
         { path: "/product-details/:id", element: <ProductDetails /> },
-        { path: "/property-details", element: <PropertyDetails /> },
+        { path: "/sellerADs/:id", element: <SellerDetails /> },
       ],
     },
     { path: "/property", element: <Property /> },
