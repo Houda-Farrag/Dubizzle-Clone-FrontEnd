@@ -1,7 +1,7 @@
 export const Safety = () => {
   return (
     <div>
-      <div className="absolute right-48 top-96 flex flex-col rounded-xlspace-y-6 w-[512px] col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow">
+      <div className="relative flex flex-col mt-5 rounded-xlspace-y-6 w-[517px] col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow">
         <div className="p-6">
           <h5 className="mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
             Your safety matters to us!

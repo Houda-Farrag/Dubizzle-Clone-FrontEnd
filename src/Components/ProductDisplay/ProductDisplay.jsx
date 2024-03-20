@@ -11,9 +11,9 @@ export const ProductDisplay = ({ product }) => {
   };
 
   return (
-    <div className="mx-28 relative w-[650px]">
+    <div className="relative w-[740px] h-[550px] md:h-[650px] mt-6">
       <div id="default-carousel" className="relative" data-carousel="static">
-        <div className="overflow-hidden relative h-96 rounded-lg sm:h-64 xl:h-80 2xl:h-96">
+        <div className="overflow-hidden h-[600px] md:h-[600px] w-[740px] relative rounded-lg">
           <div className="duration-700 ease-in-out z-50" data-carousel-item>
             {product?.images.map((image, index) => (
               <div
@@ -25,7 +25,7 @@ export const ProductDisplay = ({ product }) => {
               >
                 <img
                   src={image}
-                  className="block absolute top-1/2 left-1/2 h-[600px] w-[650px] -translate-x-1/2 -translate-y-1/2"
+                  className="block absolute top-1/2 left-1/2 h-[600px] md:h-[700px] w-[740px] -translate-x-1/2 -translate-y-1/2"
                   alt={`Slide ${index + 1}`}
                 />
               </div>

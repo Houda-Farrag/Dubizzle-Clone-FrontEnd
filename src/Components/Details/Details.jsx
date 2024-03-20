@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import UseGetProduct from "../../Hooks/UseGetProduct";
 import { useParams } from "react-router-dom";
+import { SellerData } from "../SellerData/SellerData";
 
 export const Details = ({ product }) => {
-  const { subcategoryName, setId } = UseGetProduct();
+  const { subcategoryName, setId , userData } = UseGetProduct();
   const [productData, setProductDate] = useState(null);
   const { id } = useParams();
   useEffect(() => {
@@ -11,8 +12,8 @@ export const Details = ({ product }) => {
     setProductDate(product);
   }, [product]);
   return (
-    <div className="w-[650px] mt-8 mb-32">
-      <div className="relative left-28 flex flex-col rounded-xlspace-y-6 col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow">
+    <div className="w-[740px] relative">
+      <div className="relative flex flex-col mb-5 h-[230px] rounded-xlspace-y-6 col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow">
         <div className="relative p-6">
           <h1 className="mb-2 block font-sans text-3xl font-bold leading-snug tracking-normal text-red-500 antialiased">
             EGP {productData?.price}
@@ -44,7 +45,7 @@ export const Details = ({ product }) => {
           </span>
         </div>
       </div>
-      <div className="relative left-28 top-10 flex flex-col rounded-xlspace-y-6 col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow">
+      <div className="relative flex flex-col mb-5 rounded-xlspace-y-6 col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow">
         <div className="p-6">
           <h1 className="mb-2 block font-sans text-3xl font-bold leading-snug tracking-normal text-black antialiased">
             Details
@@ -119,7 +120,7 @@ export const Details = ({ product }) => {
           </div>
         </div>
       </div>
-      <div className="relative left-28 top-12 flex flex-col rounded-xlspace-y-6 col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow">
+      <div className="relative flex flex-col mb-5 rounded-xlspace-y-6 col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow">
         <div className="p-6">
           <h1 className="mb-2 block font-sans text-3xl font-bold leading-snug tracking-normal text-black antialiased">
             Description
@@ -127,8 +128,11 @@ export const Details = ({ product }) => {
           <p style={{ whiteSpace: "pre-wrap" }}>{productData?.description}</p>
         </div>
       </div>
-      <div className="relative left-28 top-16 flex flex-col rounded-xlspace-y-6 col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow">
-        <h1 className="mb-2 block font-sans text-3xl font-bold leading-snug tracking-normal text-black antialiased">
+      <div className="xl:hidden mb-5 flex-col w-[740px]">
+        <SellerData userData={userData} product={product}/>
+      </div>
+      <div className="relative flex flex-col mb-5 rounded-xlspace-y-6 col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow">
+        <h1 className="p-6 mb-2 block font-sans text-3xl font-bold leading-snug tracking-normal text-black antialiased">
           Location
         </h1>
         <div style={{ width: "100%" }}>
@@ -145,13 +149,13 @@ export const Details = ({ product }) => {
           </iframe>
         </div>
       </div>
-      <div className="relative left-28 top-24 rounded-xlspace-y-6 col-span-1 ">
+      <div className="relative mt-3 rounded-xlspace-y-6 col-span-1 ">
         <p>AD ID {productData?.id}</p>
         <p className="font-bold absolute right-0 top-0 hover:underline cursor-pointer ">
           Report this ad
         </p>
       </div>
-      <hr className="relative left-28 top-24 border-1 border-black" />
+      <hr className="relative mb-1 border-1 border-black" />
     </div>
   );
 };

@@ -56,7 +56,7 @@ export const RelatedProducts = ({ subcategoryName, productId }) => {
   // };
 
   return (
-    <div className="w-[650px] relative left-28">
+    <div className="w-[740px] relative">
     {subcatProducts.length !==0 && (
       <CategoriesCard subcatName={subcategoryName} hidden={"hidden"}/>
     )}
