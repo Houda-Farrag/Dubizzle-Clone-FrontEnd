@@ -19,7 +19,6 @@ import SellerDetails from "./Pages/SellerDetails/SellerDetails";
 
 function App() {
 
-
   const routesPage = createBrowserRouter([
     {
       path: "/",
