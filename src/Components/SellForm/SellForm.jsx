@@ -59,17 +59,17 @@ const SellForm = () => {
   const imageHandler = async (e, index) => {
     const files = e.target.files;
     const formData = new FormData();
-  
+
     for (let i = 0; i < Math.min(files.length, 5); i++) {
       formData.append("images", files[i]);
     }
-  
+
     try {
       const response = await fetch("http://localhost:3000/upload", {
         method: "POST",
         body: formData,
       });
-  
+
       if (response.ok) {
         const data = await response.json();
         const imageUrls = data.image_urls;
@@ -212,7 +212,7 @@ const SellForm = () => {
     setisDropdownLocation(false);
   };
 
-  const {addProduct} = usePostProduct()
+  const { addProduct } = usePostProduct();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -325,7 +325,22 @@ const SellForm = () => {
                   }
                   placeholder="Select a brand"
                   isSearchable
-                  className="w-full bg-gray-50"
+                  className="w-full bg-gray-50 border"
+                  styles={{
+                    control: (provided, state) => ({
+                      ...provided,
+                      borderColor: state.isFocused
+                        ? "black"
+                        : provided.borderColor,
+                    }),
+                    option: (provided, state) => ({
+                      ...provided,
+                      backgroundColor: state.isHovered
+                        ? "red-200"
+                        : provided.backgroundColor,
+                      color: "black",
+                    }),
+                  }}
                   required
                 />
               </div>
@@ -519,7 +534,7 @@ const SellForm = () => {
               </div>
             </div>
 
-            <div className="mb-6 flex gap-5">
+            <div className="mb-6 flex gap-5 max-md:flex-col">
               <div className="p-2 border w-fit flex justify-center items-center">
                 <input
                   type="checkbox"
@@ -567,7 +582,7 @@ const SellForm = () => {
               <label className="text-2xl font-bold mb-5">
                 Upload Up to 5 Photos
               </label>
-              <div className="flex gap-4 w-fit">
+              <div className="flex gap-4 w-fit max-lg:flex-col">
                 {[...Array(5)].map((_, index) => (
                   <div
                     key={index}
@@ -660,7 +675,7 @@ const SellForm = () => {
             </div>
 
             <div className="mb-4">
-              <div className="mt-2 gap-5 flex">
+              <div className="mt-2 gap-5 flex max-md:flex-col">
                 <label className="text-lg">Contact Type:</label>
                 <div className="flex justify-center items-center w-fit border">
                   <input

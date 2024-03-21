@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const useGetUserWithAds = () => {
   const [userData, setUserData] = useState(null);
@@ -31,8 +31,6 @@ const useGetUserWithAds = () => {
     }
   };
 
-  useEffect(() => {
-  }, [userData, userAds]);
 
   return { userData, getUserWithAds, userAds };
 };
