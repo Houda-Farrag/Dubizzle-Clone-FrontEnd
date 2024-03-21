@@ -15,6 +15,7 @@ import { MenuSelectionProvider } from "./Context/MenuSelectionContext";
 import { ProductDetails } from "./Pages/ProductDetails/ProductDetails";
 import { PropertyDetails } from "./Pages/PropertyDetails/PropertyDetails";
 import SubCategoryProducts from "./Pages/SubCategoryProducts/SubCategoryProducts";
+import DropDownTogleDiv from "./Components/DropDwonTogleDiv/DropDownTogleDiv";
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
     },
     { path: "/property", element: <Property /> },
     { path: "/property-details", element: <PropertyDetails /> },
+    { path: "/togle", element:<DropDownTogleDiv togleV={true} /> },
   ]);
 
   return (

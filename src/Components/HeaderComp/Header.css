@@ -35,9 +35,9 @@
         position: fixed;
         bottom: 4%;
         left: 40%;
-        width: 25%;
+        width: 15%;
         height: 40px;
-        background: red;
+        background: #e00000;
         z-index: 88;
     }
 

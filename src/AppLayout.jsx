@@ -3,6 +3,7 @@ import Header from './Components/HeaderComp/Header'
 import Footer from './Components/FooterComp/Footer'
 import { Toaster } from 'react-hot-toast'
 
+
 export default function AppLayout() {
     return <>
 
@@ -15,3 +16,5 @@ export default function AppLayout() {
 
     </>
 }
+
+

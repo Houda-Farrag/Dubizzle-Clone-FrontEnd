@@ -7,6 +7,7 @@ import PopularCategories from '../../Components/popularCategories/PopularCategor
 import CategoriesCard from '../../Components/CategoriesCard/CategoriesCard'
 import { useEffect, useState } from 'react'
 import slideImage from '../../assets/images/dubbizleSlider.jpg'
+import DropDwonCategoryResponsive from '../../Components/DropDownCategoryResponsive/DropDwonCategoryResponsive'
 
 
 export default function Home() {
@@ -15,19 +16,7 @@ export default function Home() {
     const [Category, setCategory] = useState([])
     const [Products, setProducts] = useState([])
 
-    // async function getProducts() {
-    //     await fetch("http://localhost:3000/products/get").then((res) => {
-    //         return res.json()
-    //     }).then((data) => {
 
-    //         setProducts(data.slice(0, 4))
-    //         console.log(Products)
-    //     }
-    //     )
-    //         .catch((err) => { console.log(err) })
-    // }
-
-    // http://localhost:3000/categories
     async function getCategory() {
         await fetch("http://localhost:3000/categories")
             .then((res) => {
@@ -44,11 +33,11 @@ export default function Home() {
     }
 
     return <>
-
-        <div style={{ position: 'relative', marginBottom: '200px' }} className='md:mt-36 md:container '  >
+        
+        <div style={{ position: 'relative', marginBottom: '0px' }} className='md:mt-36 md:container '  >
 
             <CategorySub></CategorySub>
-            <DubbizleSlider name="home" img={slideImage} />
+            <DubbizleSlider name="home" img={[slideImage]} />
             <PopularCategories></PopularCategories>
 
             <div className='md:p-0 px-3'>
@@ -56,9 +45,9 @@ export default function Home() {
                 <CategoriesCard subcatName={"Cars for Rent"} ></CategoriesCard>
                 <CategoriesCard subcatName={"Apartments for Rent"}></CategoriesCard>
                 <CategoriesCard subcatName={"Villas For Sale"} ></CategoriesCard>
-                <CategoriesCard subcatName={"Villas For Rent"}></CategoriesCard>
+  
             </div>
-
+            <DropDwonCategoryResponsive></DropDwonCategoryResponsive>
         </div>
 
     </>
