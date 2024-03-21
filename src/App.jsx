@@ -14,6 +14,7 @@ import { SellFormPage } from "./Pages/SellForm/SellFormPage";
 import { MenuSelectionProvider } from "./Context/MenuSelectionContext";
 import { ProductDetails } from "./Pages/ProductDetails/ProductDetails";
 import SubCategoryProducts from "./Pages/SubCategoryProducts/SubCategoryProducts";
+import DropDownTogleDiv from "./Components/DropDwonTogleDiv/DropDownTogleDiv";
 import SellerDetails from "./Pages/SellerDetails/SellerDetails";
 
 
@@ -34,6 +35,8 @@ function App() {
       ],
     },
     { path: "/property", element: <Property /> },
+   
+    { path: "/togle", element:<DropDownTogleDiv togleV={true} /> },
   ]);
 
   return (

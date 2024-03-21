@@ -29,8 +29,8 @@ export default function DropDownList({ props, setGoogle, setFacebook, setData })
     setData(null)
   };
 
-  return (
-    <div className="md:w-full w-80">
+  return <>
+    <div className="md:w-full w-80 ">
       <Menu as="div" className=" relative inline-block text-left w-full ">
         <div>
           <Menu.Button
@@ -96,5 +96,6 @@ export default function DropDownList({ props, setGoogle, setFacebook, setData })
         </Transition>
       </Menu>
     </div>
-  );
+   
+  </>
 }

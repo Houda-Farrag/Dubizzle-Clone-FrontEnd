@@ -5,6 +5,7 @@ import { Toaster } from "react-hot-toast";
 import useCheckingForToken from "./Hooks/useCheckingForToken";
 import { useEffect, useState } from "react";
 
+
 export default function AppLayout() {
   const { getMyProfileFromToken, profile } = useCheckingForToken();
   const [token , setToken] = useState(null)
@@ -27,3 +28,5 @@ export default function AppLayout() {
     </>
   );
 }
+
+
