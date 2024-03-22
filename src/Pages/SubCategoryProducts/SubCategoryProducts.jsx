@@ -12,6 +12,8 @@ const SubCategoryProducts = () => {
   const {searchForProducts , foundProducts} = useSearchForProducts()
   const [showSortedList, setShowSortedList] = useState(false);
   const [selectSort, setSelectSort] = useState("Newly listed");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage] = useState(12);
   const [sortedWay, setSortedWay] = useState([
     true,
     false,
@@ -34,6 +36,12 @@ const SubCategoryProducts = () => {
     newArray[index] = true;
     setSortedWay(newArray);
   };
+
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = foundProducts?.slice(indexOfFirstProduct, indexOfLastProduct);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   useEffect(() => {
     if (name) {
@@ -206,8 +214,8 @@ const SubCategoryProducts = () => {
               </div>
             </div>
             <div>
-              {foundProducts && foundProducts.length > 0 ? (
-                foundProducts.map(product => (
+              {currentProducts && currentProducts.length > 0 ? (
+                currentProducts.map(product => (
                   <ProductCardHorizontal product={product} key={product._id} />
                 ))
               ) : (
@@ -216,6 +224,21 @@ const SubCategoryProducts = () => {
                 </p>
               )}
             </div>
+            <ul className="flex justify-center items-center mt-4 font-medium text-gray-600 hover:text-white">
+          {Array.from({ length: Math.ceil(foundProducts?.length / productsPerPage) }).map(
+            (_, index) => (
+              <li
+                key={index}
+                onClick={() => paginate(index + 1)}
+                className={`cursor-pointer mx-1 border border-red-200 p-3 rounded-lg hover:text-white hover:bg-red-400 ${
+                  currentPage === index + 1 ? "font-bold" : ""
+                }`}
+              >
+                {index + 1}
+              </li>
+            )
+          )}
+        </ul>
           </div>
         </div>
       </div>
