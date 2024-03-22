@@ -18,6 +18,7 @@ import Login from "../Login/Login";
 import useLogin from "../../Hooks/useLogin";
 import useRegister from "../../Hooks/useRegister";
 import useLoginWithEmail from "../../Hooks/useLoginWithEmail";
+import useSearchForProducts from "../../Hooks/useSearchForProducts";
 
 export default function Header({ profile }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,8 +28,16 @@ export default function Header({ profile }) {
   const { login } = useLogin();
   const { data, setData, registerUser } = useRegister();
   const { loginUser } = useLoginWithEmail();
-
+  const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
+
+  const handleSearch = () => {
+    navigate(`/search/${searchQuery}`)
+  };
+
+  const handleChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
 
   const togglebutton = () => {
     setIsOpen(!isOpen);
@@ -128,10 +137,15 @@ export default function Header({ profile }) {
 
               <div className="flex col-span-2 hidecontent">
                 <input
+                className="h-14 px-4 w-full border rounded-xl rounded-e-none "
                   type="text"
-                  className="h-14 w-full border rounded-xl rounded-e-none "
+                  value={searchQuery}
+                  onChange={handleChange}
                 />
-                <button className="bg-red-500 p-4 h-14 rounded-e-lg ">
+                <button
+                  className="bg-red-500 p-4 h-14 rounded-e-lg"
+                  onClick={handleSearch}
+                >
                   <IoSearchSharp />
                 </button>
               </div>

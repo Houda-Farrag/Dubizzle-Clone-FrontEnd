@@ -26,7 +26,7 @@ function App() {
       children: [
         { index: true, element: <Home /> },
         { path: "favorite", element: <Favorite /> },
-        { path: "/subCategoryProducts", element: <SubCategoryProducts /> },
+        { path: "/search/:name?", element: <SubCategoryProducts /> },
         { path: "/sell", element:<SellPage /> },
         { path: "/sellform", element: <SellFormPage /> },
         { path: "/product-details/:id", element: <ProductDetails /> },
