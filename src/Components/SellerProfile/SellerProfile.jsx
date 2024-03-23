@@ -2,32 +2,47 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShareNodes } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import {
-  addToFavorite,
-  removeFromFavorite,
+  likedProductAction,
 } from "../../Store/Slices/Favorites";
 import { useDispatch, useSelector } from "react-redux";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { useEffect } from "react";
+import useAddToFavourite from "../../Hooks/useAddToFavourite"
+import useRemoveFromFavourite from "../../Hooks/useRemoveFromFavourite"
 
 const SellerProfile = ({ userData, userAds }) => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const Favorit = useSelector((favorite) => favorite.favorite.fav);
-  let idFav = Favorit.map((prod) => prod._id);
+  const { addProductToFavourite } = useAddToFavourite();
+  const { RemoveProductFromFavourite } = useRemoveFromFavourite();
 
-  function check(id) {
-    return idFav.find((idmov) => idmov === id);
+  const favourites = useSelector((state) => state.favourite.favourite);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(likedProductAction());
+  }, []);
+
+  let favouritesIds = [];
+  if (favourites !== undefined) {
+    favouritesIds = favourites.map((product) => {
+      return product._id;
+    });
   }
 
+  function check(id) {
+    return favouritesIds.find((prdId) => prdId == id);
+  }
+
+  const addOrRemoveFavourite = (producId) => {
+    if (!check(producId)) {
+      addProductToFavourite(producId);
+    } else {
+      RemoveProductFromFavourite(producId);
+    }
+  };
+  
   const goToDetailsPage = (id) => {
     navigate(`/product-details/${id}`);
-  };
-
-  const addToFav = (obj) => {
-    if (!check(obj._id)) {
-      dispatch(addToFavorite(obj));
-    } else {
-      dispatch(removeFromFavorite(obj));
-    }
   };
 
   const formatDateDifference = (updatedAt) => {
@@ -105,8 +120,7 @@ const SellerProfile = ({ userData, userAds }) => {
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
-                        addToFav(product);
-                        console.log("hello");
+                        addOrRemoveFavourite(product);
                       }}
                     >
                       {check(product._id) ? <FaHeart /> : <FaRegHeart />}

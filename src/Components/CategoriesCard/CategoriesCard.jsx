@@ -5,40 +5,51 @@ import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { PiBedDuotone } from "react-icons/pi";
 import { LuBath } from "react-icons/lu";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addToFavorite,
-  removeFromFavorite,
-} from "../../Store/Slices/Favorites";
 import useGetSubcategoryProducts from "../../Hooks/useGetSubcategoryProducts";
 import { useNavigate } from "react-router-dom";
+import { likedProductAction } from "../../Store/Slices/Favorites";
+import useAddToFavourite from "../../Hooks/useAddToFavourite";
+import useRemoveFromFavourite from "../../Hooks/useRemoveFromFavourite";
 
 const { Meta } = Card;
 
-export default function CategoriesCard({ subcatName , hidden }) {
-    const navigate = useNavigate()
+export default function CategoriesCard({ subcatName, hidden }) {
+  const navigate = useNavigate();
   const { subcatProducts, getSubCategoryProducts } =
     useGetSubcategoryProducts();
 
-  const Favorit = useSelector((favorite) => favorite.favorite.fav);
+  const { addProductToFavourite } = useAddToFavourite();
+  const { RemoveProductFromFavourite } = useRemoveFromFavourite();
 
+  const favourites = useSelector((state) => state.favourite.favourite);
   const dispatch = useDispatch();
 
-  let idFav = Favorit.map(prod => prod._id);
+  useEffect(() => {
+    getSubCategoryProducts(subcatName);
+    dispatch(likedProductAction());
+  }, [subcatName, subcatProducts]);
 
-  function check(id) {
-    return idFav.find(idmov => idmov == id);
+  let favouritesIds = [];
+  if (favourites !== undefined) {
+    favouritesIds = favourites.map((product) => {
+      return product._id;
+    });
   }
 
-  const goToDetailsPage = (id) => {
-    navigate(`/product-details/${id}`)
+  function check(id) {
+    return favouritesIds.find((prdId) => prdId == id);
+  }
+
+  const addOrRemoveFavourite = (producId) => {
+    if (!check(producId)) {
+      addProductToFavourite(producId);
+    } else {
+      RemoveProductFromFavourite(producId);
+    }
   };
 
-  const addToFav = (obj) => {
-    if (!check(obj._id)) {
-      dispatch(addToFavorite(obj));
-    } else {
-      dispatch(removeFromFavorite(obj));
-    }
+  const goToDetailsPage = (id) => {
+    navigate(`/product-details/${id}`);
   };
 
   const formatDateDifference = (updatedAt) => {
@@ -58,15 +69,16 @@ export default function CategoriesCard({ subcatName , hidden }) {
     }
   };
 
-  useEffect(() => {
-    getSubCategoryProducts(subcatName);
-  }, [subcatName, subcatProducts]);
-
   return (
     <>
       <div className="">
-        <div className={`${hidden} grid grid-flow-col text-center justify-between box-border`}>
-          <h1 className=" font-semi bold text-2xl mb-2 mt-6  "> {subcatName}</h1>
+        <div
+          className={`${hidden} grid grid-flow-col text-center justify-between box-border`}
+        >
+          <h1 className=" font-semi bold text-2xl mb-2 mt-6  ">
+            {" "}
+            {subcatName}
+          </h1>
 
           <a
             className="font-semi bold  mb-2 mt-6 text-red-500 font-bold"
@@ -75,9 +87,8 @@ export default function CategoriesCard({ subcatName , hidden }) {
             Veiw more
           </a>
         </div>
-        
-        <div className="">
 
+        <div className="">
           <div className="flex md:justify-between gap-3 hide-scroll overflow-x-auto ">
             {subcatProducts.slice(0, 4).map((catData) => {
               return (
@@ -101,33 +112,37 @@ export default function CategoriesCard({ subcatName , hidden }) {
                           EGP {catData.price}{" "}
                         </p>
                         <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            addToFav(catData);
-                            console.log('hello')
-                          }}
-                        >
-                          {check(catData._id)? <FaHeart /> : <FaRegHeart />}
-                        </button>
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          addOrRemoveFavourite(catData._id);
+                        }}
+                      >
+                        {check(catData._id) ? (
+                          <FaHeart className="text-red-500" />
+                        ) : (
+                          <FaRegHeart />
+                        )}
+                      </button>
                       </div>
                       <div className="my-1 grid items-center min-h-12 ">
                         <p className="min-w-full max-h-12 overflow-hidden">
                           {catData.name}
                         </p>
                       </div>
-                      {subcatName.includes("Apartments") || subcatName.includes("Villas") && (
-                        <div className="flex gap-2 py-1">
-                          <p className="text-sm text-gray-700">
-                            <PiBedDuotone />
-                          </p>
-                          <p className="text-sm text-gray-700">
-                            <LuBath />
-                          </p>
-                          <p className="text-sm text-gray-700">
-                            <PiBedDuotone />
-                          </p>
-                        </div>
-                      )}
+                      {subcatName.includes("Apartments") ||
+                        (subcatName.includes("Villas") && (
+                          <div className="flex gap-2 py-1">
+                            <p className="text-sm text-gray-700">
+                              <PiBedDuotone />
+                            </p>
+                            <p className="text-sm text-gray-700">
+                              <LuBath />
+                            </p>
+                            <p className="text-sm text-gray-700">
+                              <PiBedDuotone />
+                            </p>
+                          </div>
+                        ))}
                       <div className="flex py-1">
                         <p className="text-sm font-sans text-gray-700">
                           {catData.location}
@@ -145,7 +160,6 @@ export default function CategoriesCard({ subcatName , hidden }) {
             })}
           </div>
         </div>
-
       </div>
     </>
   );

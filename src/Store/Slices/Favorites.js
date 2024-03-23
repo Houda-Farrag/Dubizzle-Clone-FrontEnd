@@ -1,25 +1,38 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
+
+
+export const likedProductAction = createAsyncThunk('get/likedProducts', async () => {
+    try {
+        const token = localStorage.getItem('jwt')
+        const likedProductResponse = await fetch('http://localhost:3000/users/favourites',
+            {
+                method:"GET",
+                headers:{
+                    'Content-Type': 'application/json' , 
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            if(!likedProductResponse){
+                console.log("there no data fetch")
+            }
+            const likedProducts = await likedProductResponse.json()
+            return likedProducts.favourites
+    } catch (error) {
+        console.log("error in getting user favourite")
+    }
+}
+)
 
 const FavoritesSlice = createSlice({
-    name: "fav",
-    initialState: { fav: [] },
-    reducers: {
-        addToFavorite: (state, action) => {
-            if (state.fav.length == 0) {
-                console.log('you are in slice add to fav')
-                state.fav = [action.payload]
-            } else {
-                state.fav = [...state.fav, action.payload]
-            }
-        },
-        removeFromFavorite: (state, action) => {
-            state.fav = state.fav.filter((product) => product._id != action.payload._id)
-        }
+    name: "favourite",
+    initialState: { favourite: [] },
+    extraReducers:(builder)=>{
+        builder.addCase(likedProductAction.fulfilled,(state,action)=> {
+            state.favourite = action.payload
+        })
     }
 })
-
-export const { addToFavorite, removeFromFavorite } = FavoritesSlice.actions
 
 export default FavoritesSlice.reducer
 

@@ -58,7 +58,7 @@ function Login({
 
   const handleGoogleSuccess = async (credentialResponse) => {
     const decoded = jwtDecode(credentialResponse?.credential);
-    setGoogleProfile(decoded);
+    // setGoogleProfile(decoded);
     setIsLoggedIn(true);
     setShowLogin(false);
     await setGoogle(decoded);

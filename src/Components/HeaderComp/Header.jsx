@@ -18,11 +18,10 @@ import Login from "../Login/Login";
 import useLogin from "../../Hooks/useLogin";
 import useRegister from "../../Hooks/useRegister";
 import useLoginWithEmail from "../../Hooks/useLoginWithEmail";
-import useSearchForProducts from "../../Hooks/useSearchForProducts";
+import ProfileToggle from "./ProfileToggle";
 
 export default function Header({ profile }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [isOpen1, setIsOpen1] = useState(false);
   const [facebook, setFacebook] = useState(null);
   const [google, setGoogle] = useState();
   const { login } = useLogin();
@@ -41,10 +40,6 @@ export default function Header({ profile }) {
 
   const togglebutton = () => {
     setIsOpen(!isOpen);
-  };
-
-  const showProfileDetials = () => {
-    setIsOpen1(!isOpen1);
   };
 
   useEffect(() => {}, [profile]);
@@ -178,35 +173,7 @@ export default function Header({ profile }) {
                         loginUser={loginUser}
                       />
                     ) : (
-                      <DropDownList
-                        setFacebook={setFacebook}
-                        setGoogle={setGoogle}
-                        setData={setData}
-                        props={
-                          <button
-                            onClick={showProfileDetials}
-                            className=" grid h-14 grid-flow-col item-center items-center w-full font-bold justify-evenly max-w-full"
-                          >
-                            <span className="bg-red-100 p-2 hover:bg-red-300 border rounded-full">
-                              {profile && (
-                                <img
-                                  className="w-[32px] text-white rounded-3xl"
-                                  src={
-                                    profile?.profile.avatar !== ""
-                                      ? profile?.profile.avatar
-                                      : `https://ui-avatars.com/api/?name=${profile.profile.name}&background=FF9C9C&color=fff`
-                                  }
-                                />
-                              )}
-                            </span>
-                            {isOpen1 ? (
-                              <FaAngleUp className="w-full text-xl" />
-                            ) : (
-                              <FaAngleDown className="w-full text-xl" />
-                            )}
-                          </button>
-                        }
-                      ></DropDownList>
+                      <ProfileToggle setData={setData} setFacebook={setFacebook} setGoogle={setGoogle} profile={profile} />
                     )}
                   </div>
                 </div>
