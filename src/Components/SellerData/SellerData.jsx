@@ -48,7 +48,7 @@ export const SellerData = ({ userData, product }) => {
           </div>
         
         <img
-          className="h-20 w-28 flex-shrink-0 rounded-full"
+          className="h-24 relative -top-3 w-28 flex-shrink-0"
           src={
             userData?.profile.avatar !== ""
               ? userData?.profile.avatar
@@ -61,7 +61,7 @@ export const SellerData = ({ userData, product }) => {
         <div className="-mt-px flex h-fit w-full flex-col items-center ">
           {(product?.contact_type.includes("both") ||
             product?.contact_type.includes("chat")) && (
-            <div className="flex my-2 h-[50px] justify-center items-center bg-red-300 rounded-2xl hover:bg-red-400">
+            <div className="flex my-2 h-[50px] justify-center items-center cursor-pointer bg-red-300 rounded-2xl hover:bg-red-400">
               <a
                 href={`tel:${product?.phoneNumber}`}
                 className="relative -mr-px inline-flex w-[480px] flex-1 items-center justify-center gap-x-1 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-900"
@@ -81,7 +81,7 @@ export const SellerData = ({ userData, product }) => {
           )}
           {(product?.contact_type.includes("both") ||
             product?.contact_type.includes("phone")) && (
-            <div className="flex my-2 h-[50px] justify-center items-center bg-red-300 rounded-2xl hover:bg-red-400">
+            <div className="flex my-2 h-[50px] justify-center cursor-pointer items-center bg-red-300 rounded-2xl hover:bg-red-400">
               <span
                 className="relative -mr-px inline-flex w-[480px] flex-1 items-center justify-center gap-x-1 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-900"
                 onClick={handleShowPhone}

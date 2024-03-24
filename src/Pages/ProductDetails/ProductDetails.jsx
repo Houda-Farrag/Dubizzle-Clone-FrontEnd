@@ -18,7 +18,7 @@ export const ProductDetails = () => {
 
   return (
     <>
-      <div className="container">
+      <div className="container pt-4">
         <CategorySub />
       </div>
       <div className="container max-xl:container max-xl:justify-center max-xl:items-center flex flex-col xl:flex-row ">

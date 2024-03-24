@@ -36,8 +36,8 @@ export const ProductDisplay = ({ product }) => {
               <button
                 key={index}
                 type="button"
-                className={`w-2 h-2 rounded-full ${
-                  index === activeSlide ? "bg-red-500" : ""
+                className={`w-2 h-2 rounded-full z-0 ${
+                  index === activeSlide ? "bg-white" : ""
                 }`}
                 aria-current={index === activeSlide ? "true" : "false"}
                 aria-label={`Slide ${index + 1}`}
@@ -52,8 +52,8 @@ export const ProductDisplay = ({ product }) => {
             <button
               key={index}
               type="button"
-              className={`w-2 h-2 rounded-full ${
-                index === activeSlide ? "bg-red-500" : ""
+              className={`w-2 h-2 rounded-full z-0 ${
+                index === activeSlide ? "bg-white" : ""
               }`}
               aria-current={index === activeSlide ? "true" : "false"}
               aria-label={`Slide ${index + 1}`}
