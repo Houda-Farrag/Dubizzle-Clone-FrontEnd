@@ -8,12 +8,15 @@ import { useEffect, useState } from "react";
 import stylesForm from "./SubCategoryProducts.module.css";
 import useSearchForProducts from "../../Hooks/useSearchForProducts";
 const SubCategoryProducts = () => {
-  const {name} = useParams()
-  const {searchForProducts , foundProducts} = useSearchForProducts()
+  const { name } = useParams();
+  const { searchForProducts, foundProducts } = useSearchForProducts();
   const [showSortedList, setShowSortedList] = useState(false);
   const [selectSort, setSelectSort] = useState("Newly listed");
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage] = useState(12);
+  const [location, setLocation] = useState("");
+  const [startPrice, setStartPrice] = useState("0");
+  const [endPrice, setEndPrice] = useState("0");
   const [sortedWay, setSortedWay] = useState([
     true,
     false,
@@ -39,18 +42,25 @@ const SubCategoryProducts = () => {
 
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = foundProducts?.slice(indexOfFirstProduct, indexOfLastProduct);
+  const currentProducts = foundProducts?.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+  const handleLocationClick = (selectedLocation) => {
+    setLocation(selectedLocation);
+  };
+
   useEffect(() => {
-    if (name) {
-      searchForProducts(name)
+    if (name || location || startPrice || endPrice) {
+      searchForProducts(name || '', location || '', `${startPrice}-${endPrice}`);
+    } else {
+      searchForProducts('', '', '');
     }
-    if (!name) {
-      searchForProducts("")
-    }
-  }, [foundProducts , name]);
+  }, [name, location, startPrice, endPrice]);
+
   return (
     <>
       <div className="container">
@@ -88,11 +98,30 @@ const SubCategoryProducts = () => {
               <div className="mt-4">
                 <p className="font-bold text-sm ms-4">Egypt</p>
                 <div className="ms-7">
-                  <p className="my-4 text-sm">Cairo</p>
-                  <p className="my-4 text-sm">Giza</p>
-                  <p className="my-4 text-sm">Alexandria</p>
-                  <p className="my-4 text-sm">Sharqia</p>
-                  <p className="my-4 text-sm">Sharqia</p>
+                  <p
+                    className="my-4 text-sm cursor-pointer"
+                    onClick={() => handleLocationClick("Cairo")}
+                  >
+                    Cairo
+                  </p>
+                  <p
+                    className="my-4 text-sm cursor-pointer"
+                    onClick={() => handleLocationClick("Giza")}
+                  >
+                    Giza
+                  </p>
+                  <p
+                    className="my-4 text-sm cursor-pointer"
+                    onClick={() => handleLocationClick("Alexanderia")}
+                  >
+                    Alexandria
+                  </p>
+                  <p
+                    className="my-4 text-sm cursor-pointer"
+                    onClick={() => handleLocationClick("Sharqia")}
+                  >
+                    Sharqia
+                  </p>
                 </div>
               </div>
               <div className="mt-7 p-3 pb-8 border-b border-slate-200">
@@ -100,13 +129,15 @@ const SubCategoryProducts = () => {
                 <div className="flex gap-2 px-4">
                   <input
                     type="number"
-                    defaultValue={0}
+                    value={startPrice}
+                    onChange={(e) => setStartPrice(e.target.value)}
                     className="outline-none w-2/4 p-2 border-b border-gray-400"
                   />
                   <input
                     type="number"
-                    defaultValue={250000}
-                    className="outline-none  w-2/4 p-2 border-b border-gray-400"
+                    value={endPrice}
+                    onChange={(e) => setEndPrice(e.target.value)}
+                    className="outline-none w-2/4 p-2 border-b border-gray-400"
                   />
                 </div>
               </div>
@@ -215,7 +246,7 @@ const SubCategoryProducts = () => {
             </div>
             <div>
               {currentProducts && currentProducts.length > 0 ? (
-                currentProducts.map(product => (
+                currentProducts.map((product) => (
                   <ProductCardHorizontal product={product} key={product._id} />
                 ))
               ) : (
@@ -225,20 +256,20 @@ const SubCategoryProducts = () => {
               )}
             </div>
             <ul className="flex justify-center items-center mt-4 font-medium text-gray-600 hover:text-white">
-          {Array.from({ length: Math.ceil(foundProducts?.length / productsPerPage) }).map(
-            (_, index) => (
-              <li
-                key={index}
-                onClick={() => paginate(index + 1)}
-                className={`cursor-pointer mx-1 border border-red-200 p-3 rounded-lg hover:text-white hover:bg-red-400 ${
-                  currentPage === index + 1 ? "font-bold" : ""
-                }`}
-              >
-                {index + 1}
-              </li>
-            )
-          )}
-        </ul>
+              {Array.from({
+                length: Math.ceil(foundProducts?.length / productsPerPage),
+              }).map((_, index) => (
+                <li
+                  key={index}
+                  onClick={() => paginate(index + 1)}
+                  className={`cursor-pointer mx-1 border border-red-200 p-3 rounded-lg hover:text-white hover:bg-red-400 ${
+                    currentPage === index + 1 ? "font-bold" : ""
+                  }`}
+                >
+                  {index + 1}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>
