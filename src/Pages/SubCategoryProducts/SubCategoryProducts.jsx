@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { FaRegHeart } from "react-icons/fa";
 import styles from "./SubCategoryProducts.module.css";
 import { MdOutlineCheck } from "react-icons/md";
@@ -7,8 +7,11 @@ import arrowDown from "../../assets/images/iconArrowDown_noinline.ec05eae7013321
 import { useEffect, useState } from "react";
 import stylesForm from "./SubCategoryProducts.module.css";
 import useSearchForProducts from "../../Hooks/useSearchForProducts";
+import useSearchForProperties from "../../Hooks/useSearchForProperties";
 const SubCategoryProducts = () => {
   const { name } = useParams();
+  const usLocation = useLocation();
+  const { foundProperties, searchForProperties } = useSearchForProperties();
   const { searchForProducts, foundProducts } = useSearchForProducts();
   const [showSortedList, setShowSortedList] = useState(false);
   const [selectSort, setSelectSort] = useState("Newly listed");
@@ -52,14 +55,30 @@ const SubCategoryProducts = () => {
   const handleLocationClick = (selectedLocation) => {
     setLocation(selectedLocation);
   };
-
+  
+  const queryParams = new URLSearchParams(usLocation.search);
   useEffect(() => {
-    if (name || location || startPrice || endPrice) {
-      searchForProducts(name || '', location || '', `${startPrice}-${endPrice}`);
-    } else {
-      searchForProducts('', '', '');
+    if (usLocation.pathname.startsWith("/search/")) {
+      if (name || location || startPrice || endPrice) {
+        searchForProducts(
+          name || "",
+          location || "",
+          `${startPrice}-${endPrice}`
+        );
+      } else {
+        searchForProducts("", "", "");
+      }
     }
-  }, [name, location, startPrice, endPrice]);
+    if (usLocation.pathname.startsWith("/searchforproperties")) {
+    const propertyType = queryParams.get("propertyType");
+    const locationParam = queryParams.get("location");
+    const priceRange = queryParams.get("Price");
+    const bedBath = queryParams.get("BedBath");
+    const area = queryParams.get("Area");
+      searchForProperties(propertyType , locationParam , priceRange , bedBath , area );
+    }
+  }, [name, location, useLocation, startPrice, endPrice , queryParams ]);
+
 
   return (
     <>
@@ -250,9 +269,9 @@ const SubCategoryProducts = () => {
                   <ProductCardHorizontal product={product} key={product._id} />
                 ))
               ) : (
-                <p className="flex justify-center items-center h-32">
-                  No Products Found
-                </p>
+                foundProperties?.map((property) => (
+                  <ProductCardHorizontal product={property} key={property._id} />
+                ))
               )}
             </div>
             <ul className="flex justify-center items-center mt-4 font-medium text-gray-600 hover:text-white">

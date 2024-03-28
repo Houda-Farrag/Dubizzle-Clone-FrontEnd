@@ -22,15 +22,16 @@ function App() {
       children: [
         { index: true, element: <Home /> },
         { path: "/search/:name?", element: <SubCategoryProducts /> },
+        { path: "/searchforproperties", element: <SubCategoryProducts /> },
         { path: "/sell", element: <SellPage /> },
         { path: "/sellform", element: <SellFormPage /> },
         { path: "/product-details/:id", element: <ProductDetails /> },
         { path: "/sellerADs/:id", element: <SellerDetails /> },
-        { path: "favorite", element: <Favorite /> }, //add favourite page
+        { path: "favorite", element: <Favorite /> }, 
         { path: "/EditProfile", element: <EditProfile /> },
+        { path: "/property", element: <Property /> },
       ],
     },
-    { path: "/property", element: <Property /> },
   ]);
 
   return (

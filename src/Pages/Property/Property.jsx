@@ -1,13 +1,11 @@
 import FeaturedAgencies from '../../Components/FeaturedAgencies/FeaturedAgencies';
 import Footer from '../../Components/FooterComp/Footer';
-import Header from '../../Components/HeaderComp/Header';
 import PropertyForm from '../../Components/PropertyForm/PropertyForm';
 import styles from './Property.module.css'
 // import banner from '../../assets/images/propertiesVerticalBanner.png'
 const Property = () => {
     return (
         <>
-            <Header></Header>
             <div className='container mt-24'>
                 <div className={styles.banner} style={{ marginBottom: '50px' }}>
                     <div className='z-50 mb-5'>
