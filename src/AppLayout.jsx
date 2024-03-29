@@ -3,19 +3,13 @@ import Header from "./Components/HeaderComp/Header";
 import Footer from "./Components/FooterComp/Footer";
 import { Toaster } from "react-hot-toast";
 import useCheckingForToken from "./Hooks/useCheckingForToken";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export default function AppLayout() {
   const { getMyProfileFromToken, profile } = useCheckingForToken();
-  const [token , setToken] = useState(null)
-  const getToken = () => {
-    const token = localStorage.getItem("jwt");
-    setToken(token);
-};
   useEffect(() => {
-    getMyProfileFromToken(token);
-    getToken();
-  }, [profile , getMyProfileFromToken , token , getToken]);
+    getMyProfileFromToken();
+  }, []);
   return (
     <>
       <Header profile={profile}></Header>

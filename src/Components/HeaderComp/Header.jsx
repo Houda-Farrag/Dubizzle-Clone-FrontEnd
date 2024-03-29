@@ -13,7 +13,7 @@ import {
 import "../CategorySubComp/CategorySub.css";
 import "./Header.css";
 import DropDownList from "../DropDownListComp/DropDownList";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Login from "../Login/Login";
 import useLogin from "../../Hooks/useLogin";
 import useRegister from "../../Hooks/useRegister";
@@ -150,9 +150,11 @@ export default function Header({ profile }) {
                   <button>English</button>
                 </div>
                 <div className="text-center hidecontent">
+                  <Link to={"/chat"}>
                   <button className=" text-center ">
                     <IoChatbubbleOutline className="h-14 font-bold text-xl" />
                   </button>
+                  </Link>
                 </div>
                 <div className=" md:text-center ">
                   <button className="text-center">
