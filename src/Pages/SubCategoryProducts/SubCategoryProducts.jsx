@@ -131,7 +131,7 @@ const SubCategoryProducts = () => {
                   </p>
                   <p
                     className="my-4 text-sm cursor-pointer"
-                    onClick={() => handleLocationClick("Alexanderia")}
+                    onClick={() => handleLocationClick("Alexandria")}
                   >
                     Alexandria
                   </p>

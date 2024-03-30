@@ -10,7 +10,7 @@ export const Details = ({ product }) => {
   useEffect(() => {
     setId(id);
     setProductDate(product);
-  }, [product]);
+  }, [product , productData]);
   return (
     <div className="w-[740px] relative">
       <div className="relative flex flex-col mb-5 h-[230px] rounded-xlspace-y-6 col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow">
@@ -69,9 +69,9 @@ export const Details = ({ product }) => {
               {(subcategoryName?.includes("Villas") ||
                 subcategoryName?.includes("Apartments")) && (
                 <>
-                  <p className="font-semibold my-5">{productData?.area}</p>
                   <p className="font-semibold my-5">{productData?.bathRooms}</p>
                   <p className="font-semibold my-5">{productData?.bedRooms}</p>
+                  <p className="font-semibold my-5">{productData?.area}</p>
                 </>
               )}
             </div>

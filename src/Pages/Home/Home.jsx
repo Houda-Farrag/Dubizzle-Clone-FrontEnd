@@ -55,6 +55,7 @@ export default function Home() {
             <CategoriesCard subcatName={"Cars for sale"} hidden={""} ></CategoriesCard>
             <CategoriesCard subcatName={"Cars for Rent"} hidden={""}></CategoriesCard>
             <CategoriesCard subcatName={"Apartments for Rent"} hidden={""}></CategoriesCard>
+            <CategoriesCard subcatName={"Apartments for Sale"} hidden={""}></CategoriesCard>
             <CategoriesCard subcatName={"Villas For Sale"} hidden={""} ></CategoriesCard>
             <CategoriesCard subcatName={"Villas For Rent"} hidden={""}></CategoriesCard>
 

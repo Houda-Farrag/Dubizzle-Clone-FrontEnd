@@ -43,8 +43,8 @@ const SellForm = () => {
     brand: "",
     model: "",
     area: "",
-    bedRoom: "",
-    bathRoom: "",
+    bedRooms: "",
+    bathRooms: "",
     phoneNumber: "",
   });
 
@@ -472,8 +472,8 @@ const SellForm = () => {
                   <label>Bedrooms:</label>
                   <input
                     type="text"
-                    name="bedRoom"
-                    value={productDetails.bedRoom}
+                    name="bedRooms"
+                    value={productDetails.bedRooms}
                     onChange={changeHandler}
                     className="w-full border rounded px-3 py-2 mt-3"
                   />
@@ -482,8 +482,8 @@ const SellForm = () => {
                   <label>Bathrooms:</label>
                   <input
                     type="text"
-                    name="bathRoom"
-                    value={productDetails.bathRoom}
+                    name="bathRooms"
+                    value={productDetails.bathRooms}
                     onChange={changeHandler}
                     className="w-full border rounded px-3 py-2 mt-3"
                   />
