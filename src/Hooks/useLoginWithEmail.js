@@ -27,6 +27,7 @@ const useLoginWithEmail = () => {
 
           setToken(accessToken);
           localStorage.setItem("jwt", accessToken )
+          window.location.reload();
         } catch (error) {
           throw new Error(error.message);
         }

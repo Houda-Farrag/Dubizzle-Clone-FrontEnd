@@ -13,10 +13,14 @@ const useLogin = () => {
         body: JSON.stringify({ email }), 
       });
 
-      const { accessToken } = await response.json();
-      setToken(accessToken);
-      
-      localStorage.setItem('jwt', accessToken);
+      if (response.ok) {
+        const { accessToken } = await response.json();
+        setToken(accessToken);
+        
+        localStorage.setItem('jwt', accessToken); 
+        window.location.reload();
+      }
+
     } catch (error) {
       console.error("Error logging in:", error);
     }

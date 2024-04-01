@@ -28,7 +28,7 @@ const useLogout = () => {
         localStorage.removeItem("jwt");
         setToken(null);
         setData(null);
-        console.log(token);
+        window.location.reload();
       } else {
         console.error("Logout failed:", response.statusText);
       }
