@@ -115,7 +115,7 @@ const PropertyForm = () => {
                 <label className='form-label text-left'>Location</label>
                 <select {...register('location')} className={styles.formControl} >
                     <option value={'cairo'}>Cairo</option>
-                    <option value={'alexaneria'}>Alexaneria</option>
+                    <option value={'alexandria'}>Alexandria</option>
                     <option value={'sohag'}>Sohag</option>
                     <option value={'asuit'}>Asuit</option>
                 </select>

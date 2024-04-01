@@ -59,24 +59,24 @@ const SellForm = () => {
   const imageHandler = async (e, index) => {
     const files = e.target.files;
     const formData = new FormData();
-
+  
     for (let i = 0; i < Math.min(files.length, 5); i++) {
       formData.append("images", files[i]);
     }
-
+  
     try {
       const response = await fetch("http://localhost:3000/upload", {
         method: "POST",
         body: formData,
       });
-
+  
       if (response.ok) {
         const data = await response.json();
-        const imageUrls = data.image_urls;
+        const imageUrls = data.image_urls; 
         setImages((prevImages) => {
           const updatedImages = [...prevImages];
-          updatedImages[index] = imageUrls[0];
-          return updatedImages;
+          updatedImages[index] = imageUrls;
+          return updatedImages.flat();
         });
       } else {
         console.error("Error uploading images:", response.status);
@@ -85,6 +85,9 @@ const SellForm = () => {
       console.error("Error uploading images:", error);
     }
   };
+  
+  
+  
 
   const toggleDropdownLocation = (e) => {
     e.preventDefault();
