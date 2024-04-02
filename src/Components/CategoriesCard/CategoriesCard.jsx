@@ -22,11 +22,9 @@ export default function CategoriesCard({ subcatName, hidden }) {
   const { RemoveProductFromFavourite } = useRemoveFromFavourite();
 
   const favourites = useSelector((state) => state.favourite.favourite);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     getSubCategoryProducts(subcatName);
-    dispatch(likedProductAction());
   }, [subcatName, subcatProducts]);
 
   let favouritesIds = [];

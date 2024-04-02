@@ -82,19 +82,21 @@ const SubCategoryProducts = () => {
 
   return (
     <>
-      <div className="container">
-        <div className="flex justify-between w-full mb-3">
+      <div className="px-7">
+        <div className="hidden">
+        <div className="flex justify-between w-full   mb-3">
           <p className="text-2xl font-bold">Furniture & Decor</p>
           <div className={`${styles.btnSaveSearch}`}>
-            <FaRegHeart className="mr-2 text-xl text-red-600" /> Save Search
+            <FaRegHeart className="mr-2 w-48 text-xl text-red-600" /> Save Search
           </div>
         </div>
-        <div className="flex">
-          <div className="w-1/4 mr-2 ps-2">
+        </div>
+        <div className="flex flex-wrap mt-32 xl:mt-44 ">
+          <div className="w-full xl:w-1/4 pr-2 ps-2">
             <p className=" border-b pb-5 pl-4 border-slate-200 font-bold">
               Filters
             </p>
-            <div className="p-3 pb-8 border-b border-slate-300">
+            <div className="hidden xl-block p-3 pb-8 border-b border-slate-300">
               <div className="text-md font-bold ">CATEGORIES</div>
               <a href="#">
                 <div className="my-4 text-sm">All categories</div>
@@ -110,7 +112,7 @@ const SubCategoryProducts = () => {
             </div>
             <div>
               <div className="text-lg mt-2 font-bold ms-4">Locations</div>
-              <select className={stylesForm.formControl}>
+              <select className={`${stylesForm.formControl} hidden xl:block`}>
                 <option>Egypt</option>
                 <option>see all ads in all Egypt</option>
               </select>
@@ -143,7 +145,7 @@ const SubCategoryProducts = () => {
                   </p>
                 </div>
               </div>
-              <div className="mt-7 p-3 pb-8 border-b border-slate-200">
+              <div className="mt-4 p-3 mb-2 border-slate-200">
                 <p className="font-bold text-md ms-4 mb-2">Price</p>
                 <div className="flex gap-2 px-4">
                   <input
@@ -161,7 +163,7 @@ const SubCategoryProducts = () => {
                 </div>
               </div>
               <div className="ms-2">
-                <p className="font-bold text-md ms-4 my-4">CONDITION</p>
+                <p className="font-bold text-md mb-2 ms-4">CONDITION</p>
                 <div className="ms-4">
                   <div className="flex">
                     <div className="inline-flex">
@@ -203,8 +205,9 @@ const SubCategoryProducts = () => {
               </div>
             </div>
           </div>
-          <div className="w-3/4">
+          <div className=" w-full xl:w-3/4">
             <div className="flex justify-between mt-5 mb-4 pb-4 border-b border-gray-300">
+              <div className="hidden xl:block">
               <div className="flex">
                 <div className="inline-flex">
                   <label
@@ -221,9 +224,10 @@ const SubCategoryProducts = () => {
                     </div>
                   </label>
                 </div>
-                <p>Show Verified Accounts first</p>
+                <p >Show Verified Accounts first</p>
               </div>
-              <div onClick={toggleSortedList} className="relative">
+              </div>
+              <div onClick={toggleSortedList} className="relative hidden  xl:block">
                 <p className="font-bold text-sm hover:cursor-pointer flex">
                   SORT BY:{" "}
                   <span className="text-sm font-thin ps-4 flex">

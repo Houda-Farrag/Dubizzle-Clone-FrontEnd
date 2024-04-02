@@ -57,7 +57,6 @@ function a11yProps(index) {
 export default function Favorite() {
   const favorite = useSelector((state) => state.favourite.favourite);
   let search = favorite;
-  const dispatch = useDispatch();
 
   const [value, setValue] = useState(0);
 
@@ -70,9 +69,7 @@ export default function Favorite() {
       RemoveProductFromFavourite(productId)
   }
 
-  useEffect(() => {
-    dispatch(likedProductAction());
-  }, [favorite]);
+ 
 
   return (
     <div className="container">
@@ -99,19 +96,19 @@ export default function Favorite() {
               />
             </Tabs>
           </Box>
-          <CustomTabPanel value={value} index={0}>
-            <div className="flex gap-2 flex-wrap">
+          <CustomTabPanel  value={value} index={0}>
+            <div className="flex gap-3 flex-wrap justify-center">
               {favorite?.length > 0 &&
                 favorite.map((prod, i) => {
                   return (
-                    <Card1 sx={{ maxWidth: 400, minWidth: 300 }} key={i}>
-                      <CardMedia sx={{ height: 140 }} image={prod?.images[0]} />
+                    <Card1 className="w-full md:w-80 lg:w-72 p-0" key={i}>
+                      <CardMedia className="h-40 m-0" image={prod?.images[0]} />
                       <CardContent>
                         <Typography gutterBottom variant="h5" component="div">
                           
                           
                           <div className="flex justify-between">
-                            <span>{prod.price} EGP</span>
+                            <span className="font-sans text-lg text-red-600 font-semibold">EGP {prod.price}</span>
                             <button
                               onClick={(e) => {
                                 e.stopPropagation();
@@ -121,10 +118,14 @@ export default function Favorite() {
                               <FaHeart className="text-red-500" />
                             </button>
                           </div>
-                          {prod?.name}
+                          
                         </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                          {prod?.description}
+                        <Typography className=" h-14 pb-2">
+                          <span className="text-sm font-semibold">{prod?.name}</span>
+                        </Typography>
+                        <Typography className="text-lg">
+                        <span className="text-sm">{prod?.location}</span>
+                          
                         </Typography>
                       </CardContent>
                       <CardActions></CardActions>
