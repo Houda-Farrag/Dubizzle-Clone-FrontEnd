@@ -105,8 +105,8 @@ export const Details = ({ product }) => {
                 subcategoryName?.includes("Tablets")) && (
                 <p className="font-semibold my-5">{productData?.brand}</p>
               )}
-              {subcategoryName?.includes("Villas") ||
-                (subcategoryName?.includes("Apartments") && (
+              {(subcategoryName?.includes("Villas") ||
+                subcategoryName?.includes("Apartments")) && (
                   <>
                     <p className="font-semibold my-5">
                       {productData?.propertyType}
@@ -115,7 +115,7 @@ export const Details = ({ product }) => {
                       {productData?.amenities}
                     </p>
                   </>
-                ))}
+                )}
             </div>
           </div>
         </div>
