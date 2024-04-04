@@ -7,6 +7,15 @@ export const Details = ({ product }) => {
   const { subcategoryName, setId , userData } = UseGetProduct();
   const [productData, setProductDate] = useState(null);
   const { id } = useParams();
+  const showPrice = (number) => {
+    const formattedNumber = new Intl.NumberFormat("en-EG", {
+      style: "currency",
+      currency: "EGP",
+      minimumFractionDigits: 0, // Specifies the minimum number of fraction digits
+      maximumFractionDigits: 2,
+    }).format(number);
+    return formattedNumber.replace(/\.00$/, "");
+  };
   useEffect(() => {
     setId(id);
     setProductDate(product);
@@ -16,7 +25,7 @@ export const Details = ({ product }) => {
       <div className="relative flex flex-col mb-5 h-[230px] rounded-xlspace-y-6 col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow">
         <div className="relative p-6">
           <h1 className="mb-2 block font-sans text-3xl font-bold leading-snug tracking-normal text-red-500 antialiased">
-            EGP {productData?.price}
+            {showPrice(productData?.price)}
           </h1>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -64,7 +73,7 @@ export const Details = ({ product }) => {
               )}
             </div>
             <div>
-              <p className="font-semibold my-5">{productData?.price}</p>
+              <p className="font-semibold my-5">{showPrice(productData?.price)}</p>
               <p className="font-semibold my-5">{productData?.price_type}</p>
               {(subcategoryName?.includes("Villas") ||
                 subcategoryName?.includes("Apartments")) && (
