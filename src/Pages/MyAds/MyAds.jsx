@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import useRemoveFromFavourite from "../../Hooks/useRemoveFromFavourite";
 
@@ -7,17 +7,15 @@ import { useNavigate } from "react-router-dom";
 import { LuBath } from "react-icons/lu";
 import { PiBedDuotone } from "react-icons/pi";
 import CategorySub from "../../Components/CategorySubComp/CategorySub";
+import useGetMyAdds from "../../Hooks/useGetMyAdds";
+import useDeleteProduct from "../../Hooks/useDeleteProduct";
 
  
 
 function MyAds() {
-  const favorite = useSelector((state) => state.favourite.favourite);
   const navigate = useNavigate()
-
-  const {RemoveProductFromFavourite} = useRemoveFromFavourite()
-  const RemoveFavourite =(productId)=>{
-      RemoveProductFromFavourite(productId)
-  }
+  const {adds , getMyAdds} = useGetMyAdds()
+  const {deleteProduct} = useDeleteProduct()
 
     const showPrice = (number)=>{
     const formattedNumber = new Intl.NumberFormat('en-EG', {
@@ -50,6 +48,10 @@ function MyAds() {
     }
   };
 
+  useEffect(()=>{
+    getMyAdds();
+  },[])
+
   return (
     <>
     <div className="container w-full">
@@ -60,7 +62,7 @@ function MyAds() {
     </div>
       <div className="">
         <div className=" flex flex-wrap gap-3">
-          {favorite.map((catData) => {
+          {adds?.map((catData) => {
             return (
               catData.images[0] && (
                 <div
@@ -84,7 +86,8 @@ function MyAds() {
                       <button
                       onClick={(e) => {
                         e.stopPropagation();
-                        RemoveFavourite(catData._id);
+                        deleteProduct(catData._id);
+                        window.location.reload();
                       }}
                     >
                       <FaRegTrashAlt className="text-red-600 hover:text-red-700"/>
@@ -95,20 +98,6 @@ function MyAds() {
                         {catData.name}
                       </p>
                     </div>
-                    {/* {subcatName.includes("Apartments") ||
-                      (subcatName.includes("Villas") && (
-                        <div className="flex gap-2 py-1">
-                          <p className="text-sm text-gray-700">
-                            <PiBedDuotone />
-                          </p>
-                          <p className="text-sm text-gray-700">
-                            <LuBath />
-                          </p>
-                          <p className="text-sm text-gray-700">
-                            <PiBedDuotone />
-                          </p>
-                        </div>
-                      ))} */}
                     <div className="flex py-1">
                       <p className="text-sm font-sans text-gray-700">
                         {catData.location}

@@ -17,6 +17,7 @@ const useDeleteProduct = () => {
                 if (deleteResponse.ok) {
                     toast.success("Product Deleted Successfully");
                     getMyAdds()
+                    window.location.reload();
                 }
             }
         } catch (error) {
