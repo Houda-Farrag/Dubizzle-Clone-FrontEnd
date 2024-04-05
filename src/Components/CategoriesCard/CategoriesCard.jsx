@@ -109,7 +109,7 @@ const showPrice = (number) => {
                 catData.images[0] && (
                   <div
                     key={catData.id}
-                    className=" border card-category rounded-t-xl cursor-pointer"
+                    className=" border w-1/4 card-category rounded-t-xl cursor-pointer"
                     onClick={(e) => {
                       e.stopPropagation();
                       goToDetailsPage(catData._id);
