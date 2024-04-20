@@ -113,7 +113,7 @@ export default function Header({ profile }) {
                         </button>
                       </Link>
                     </div>
-                    <div className=" md:text-center ">
+                    <div className=" md:text-center max-md:hidden ">
                       <button className="text-center">
                         <FaRegBell className="h-12 text-xl" />
                       </button>
