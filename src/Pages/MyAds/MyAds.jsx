@@ -40,13 +40,20 @@ function MyAds() {
     const hoursDifference = Math.floor(
       (timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
     );
+    const minutesDifference = Math.floor(
+      (timeDifference % (1000 * 60 * 60)) / (1000 * 60)
+    );
 
     if (daysDifference > 0) {
       return `${daysDifference} day${daysDifference > 1 ? "s" : ""} ago`;
-    } else {
+    } else if (hoursDifference > 0) {
       return `${hoursDifference} hour${hoursDifference > 1 ? "s" : ""} ago`;
+    } else if (minutesDifference > 0) {
+      return `${minutesDifference} minute${minutesDifference > 1 ? "s" : ""} ago`;
+    } else {
+      return 'just now';
     }
-  };
+};
 
   useEffect(()=>{
     getMyAdds();
@@ -55,9 +62,9 @@ function MyAds() {
   return (
     <>
     <div className="container w-full">
-    <CategorySub></CategorySub>
+    {/* <CategorySub></CategorySub> */}
     <div>
-      <p className="text-gray-500">Profile</p>
+      <p className="text-gray-500 pt-7">Profile</p>
       <p className="text-2xl font-semibold pb-2 border-b mt-3 mb-6">Manage and view your Ads</p>
     </div>
       <div className="">
