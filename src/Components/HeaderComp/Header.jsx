@@ -101,9 +101,9 @@ export default function Header({ profile }) {
               </div>
 
               <div className=" grid grid-flow-col ">
-                <div className="md:grid md:h-12 md:font-bold text-xl md:text-center items-center sm:visible hidden">
+                {/* <div className="md:grid md:h-12 md:font-bold text-xl md:text-center items-center sm:visible hidden">
                   <button>English</button>
-                </div>
+                </div> */}
                 {profile && (
                   <>
                     <div className="text-center hidecontent">
@@ -113,14 +113,14 @@ export default function Header({ profile }) {
                         </button>
                       </Link>
                     </div>
-                    <div className=" md:text-center max-md:hidden ">
+                    {/* <div className=" md:text-center max-md:hidden ">
                       <button className="text-center">
                         <FaRegBell className="h-12 text-xl" />
                       </button>
-                    </div>
+                    </div> */}
                   </>
                 )}
-                <div className="md:relative hidecontent">
+                <div className="md:relative hidecontent flex justify-center">
                   <div className="flex item-center h-3 font-bold">
                     {!facebook && !google && !data && !profile ? (
                       <Login
