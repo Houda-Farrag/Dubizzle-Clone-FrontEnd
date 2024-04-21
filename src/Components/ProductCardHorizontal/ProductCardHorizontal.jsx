@@ -30,30 +30,39 @@ const ProductCardHorizontal = ({ product }) => {
         return 'just now';
       }
   };
+  const showPrice = (number) => {
+    const formattedNumber = new Intl.NumberFormat("en-EG", {
+      style: "currency",
+      currency: "EGP",
+      minimumFractionDigits: 0, // Specifies the minimum number of fraction digits
+      maximumFractionDigits: 2,
+    }).format(number);
+    return formattedNumber.replace(/\.00$/, "");
+  };
 
   return (
     <>
       <div className="flex items-center justify-center mb-3">
-        <div className="relative flex w-[1000px]  flex-row h-[300px] rounded-xl bg-white text-gray-700 ">
+        <div className="relative flex w-[1000px]  flex-row h-[250px] rounded-xl bg-white text-gray-700 ">
           <Link to={`/product-details/${product._id}`}>
           <div className="relative m-0 w-vw-23/100 shrink-0 overflow-hidden rounded-lg rounded-r-none bg-white bg-clip-border text-gray-700">
             <img
               src={product?.images[0]}
               alt="image"
-              className="h-[300px] w-full object-cover"
+              className="h-[250px] w-full object-cover"
               />
           </div>
           </Link>
           <div className="p-4 w-full border border-slate-20 border-l-0 rounded-r-lg">
             <div className="flex justify-between  w-full">
               <h3 className=" block font-sans text-2xl font-bold uppercase leading-relaxed tracking-normal text-red-600 antialiased">
-                EGP {product?.price}
+                 {showPrice(product?.price)}
               </h3>
               <span>
                 <FaRegHeart className="text-red-600 text-xl" />
               </span>
             </div>
-            <h5 className="pt-2 h-vh-10/100 block font-sans text-lg font-semibold text-black">
+            <h5 className="pt-2 h-vh-15/100 block font-sans text-lg font-semibold text-black">
               {product?.name && product.name.length > 80
                 ? `${product.name.slice(0, 80)}...`
                 : product?.name}
@@ -70,7 +79,7 @@ const ProductCardHorizontal = ({ product }) => {
                                 hover:cursor-pointer text-black bg-red-100 rounded-md font-bold text-sm"
                 >
                   <FiPhone className="mr-2 mt-0.5 text-red-600" />
-                  call
+                  Call
                 </div>
               </a>
               <a href="#">
@@ -79,7 +88,7 @@ const ProductCardHorizontal = ({ product }) => {
                                 hover:cursor-pointer bg-red-100 rounded-md font-bold text-sm text-black"
                 >
                   <BsChatDots className="mr-2 mt-0.5 text-red-600" />
-                  chat
+                  Chat
                 </div>
               </a>
             </div>
